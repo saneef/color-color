@@ -3,17 +3,12 @@
 	import eases from "eases";
 	const hsluvToHex = hsluv.hsluvToHex;
 
-	const water = {
-		100: "#FFF5F5",
-200: "#FED7D7",
-300: "#FEB2B2",
-400: "#FC8181",
-500: "#F56565",
-600: "#E53E3E",
-700: "#C53030",
-800: "#9B2C2C",
-900: "#742A2A",
-	};
+	let reference ="#FFF5F5,#FED7D7,#FEB2B2,#FC8181,#F56565,#E53E3E,#C53030,#9B2C2C,#742A2A";
+	let referenceColors =
+		[]
+
+	$: referenceColors = reference === "" ? [] : reference.split(",").map(c => c.trim());
+
 
 	let hMin = 230; //204;
 	let hMax = 240;
@@ -30,7 +25,7 @@
 	let lUnit;
 	let waterUv = [];
 
-	let length = 10;
+	let length =9;
 
 	const easeOptions = Object.keys(eases);
 
@@ -56,18 +51,35 @@
 
 <main>
 	<div class="controls">
-		<div class="control-set control-set--full-width">
+		<div class="control-set control-set--half-width">
 			<h2>Steps</h2>
 			<div class="control-group">
 				<label for="steps">Steps</label>
-				{length}
+
+				<div class="range-set">
+					<input
+						id="steps"
+						type="range"
+						bind:value="{length}"
+						min="3"
+						max="15"
+					/>
+					<span class="range-set__value">{length}</span>
+				</div>
+			</div>
+		</div>
+		<div class="control-set control-set--half-width">
+			<h2>Reference colors</h2>
+			<div class="control-group">
+				<label for="reference">Colors</label>
+
 				<input
-					id="steps"
-					type="range"
-					bind:value="{length}"
-					min="3"
-					max="15"
-				/>
+						class="w-100"
+						id="reference"
+						type="text"
+						bind:value="{reference}"
+					/>
+					<p class="font-sm">Comma separated color codes (hex, rgb(), hsl(),...)</p>
 			</div>
 		</div>
 		<div class="control-set">
@@ -168,19 +180,26 @@
 	</div>
 	<div class="palettes">
 		<ul class="palette">
-			{#each Object.keys(water) as code}
-			<li class="swatch" style="background-color:{water[code]};">
-				water-{code}
-			</li>
-			{/each}
-		</ul>
-		<ul class="palette">
 			{#each waterUv as color, i}
-			<li class="swatch" class:swatch--light="{color.l < 40}" style="background-color:{color.hex};">
-				{color.hex} · ({color.h}, {color.s.toFixed(2)}%, {color.l.toFixed(2)}%)
+			<li
+				class="swatch"
+				class:swatch--light="{color.l < 40}"
+				style="background-color:{color.hex};"
+			>
+				{color.hex} · ({color.h.toFixed(2)}, {color.s.toFixed(2)}%, {color.l.toFixed(2)}%)
 			</li>
 			{/each}
 		</ul>
+
+		{#if referenceColors.length }
+			<ul class="palette">
+				{#each referenceColors as code}
+				<li class="swatch" style="background-color:{code};">
+					{code}
+				</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 </main>
 
@@ -191,13 +210,26 @@
 	}
 
 	.control-set {
-		flex-basis: max-content;
+		flex-basis: calc(100% / 3);
 		flex-shrink: 0;
 		padding: 0.5rem 1rem;
 	}
 
 	.control-set--full-width {
 		flex-basis: 100%;
+	}
+
+	.control-set--half-width {
+		flex-basis: 50%;
+	}
+
+	.range-set {
+		display: flex;
+		align-items: center;
+	}
+
+	.range-set__value {
+		margin-left: 0.5rem;
 	}
 
 	.palettes {

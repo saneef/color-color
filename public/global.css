@@ -7,6 +7,7 @@ body {
 
 * {
 	box-sizing: border-box;
+	margin-top: 0;
 }
 
 body {
@@ -41,7 +42,6 @@ textarea {
 	font-family: inherit;
 	font-size: inherit;
 	padding: 0.4em;
-	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	border-radius: 2px;
@@ -49,10 +49,6 @@ textarea {
 
 input:disabled {
 	color: #ccc;
-}
-
-input[type="range"] {
-	height: 0;
 }
 
 button {
@@ -72,3 +68,12 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.w-100 {
+	width: 100%;
+}
+
+.font-sm {
+	font-size: 0.75rem;
+}
+

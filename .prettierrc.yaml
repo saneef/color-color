@@ -1,0 +1,4 @@
+trailingComma: "es5"
+useTabs: true
+svelteSortOrder: styles-scripts-markup
+svelteStrictMode: true

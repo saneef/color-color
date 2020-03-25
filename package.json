@@ -9,6 +9,12 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^1.19.1",
+    "prettier-plugin-svelte": "^0.7.0",
     "rollup": "^1.20.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
@@ -19,5 +25,14 @@
     "eases": "^1.0.8",
     "hsluv": "^0.1.0",
     "sirv-cli": "^0.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,svelte}": "eslint --cache --fix",
+    "*.{js,svelte,css,md}": "prettier --write"
   }
 }

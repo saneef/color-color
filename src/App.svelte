@@ -45,16 +45,11 @@
 
 <script>
 	import "./global.css";
-	import hsluv from "hsluv";
 	import eases from "eases";
+	import hsluv from "hsluv";
+	import Swatch from "./Swatch.svelte";
+
 	const hsluvToHex = hsluv.hsluvToHex;
-
-	let reference =
-		"#FFF5F5,#FED7D7,#FEB2B2,#FC8181,#F56565,#E53E3E,#C53030,#9B2C2C,#742A2A";
-	let referenceColors = [];
-
-	$: referenceColors =
-		reference === "" ? [] : reference.split(",").map(c => c.trim());
 
 	let hMin = 230; //204;
 	let hMax = 240;
@@ -90,7 +85,7 @@
 			h,
 			s,
 			l,
-			hex: hsluvToHex([h, s, l]),
+			isUv: true,
 		};
 	});
 </script>
@@ -113,21 +108,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="control-set control-set--half-width">
-			<h2>Reference colors</h2>
-			<div class="control-group">
-				<label for="reference">Colors</label>
 
-				<input
-					class="w-100"
-					id="reference"
-					type="text"
-					bind:value="{reference}" />
-				<p class="font-sm">
-					Comma separated color codes (hex, rgb(), hsl(),...)
-				</p>
-			</div>
-		</div>
 		<div class="control-set">
 			<h2>Hue</h2>
 			<div class="control-group">
@@ -221,21 +202,10 @@
 	<div class="palettes">
 		<ul class="palette">
 			{#each waterUv as color, i}
-				<li
-					class="swatch"
-					class:swatch--light="{color.l < 40}"
-					style="background-color:{color.hex};">
-					{color.hex} · ({color.h.toFixed(2)}, {color.s.toFixed(2)}%, {color.l.toFixed(2)}%)
-				</li>
+				<Swatch
+					hexCode="{hsluvToHex([color.h, color.s, color.l])}"
+					label="{i}" />
 			{/each}
 		</ul>
-
-		{#if referenceColors.length}
-			<ul class="palette">
-				{#each referenceColors as code}
-					<li class="swatch" style="background-color:{code};">{code}</li>
-				{/each}
-			</ul>
-		{/if}
 	</div>
 </main>

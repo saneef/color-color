@@ -2,17 +2,19 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "autoprefixer": "^9.7.5",
     "eslint": "^6.8.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.9",
+    "postcss-load-config": "^2.1.0",
     "prettier": "^1.19.1",
     "prettier-plugin-svelte": "^0.7.0",
     "rollup": "^1.20.0",
@@ -20,11 +22,17 @@
     "rollup-plugin-postcss": "^2.5.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.5.0",
+    "tailwindcss": "^1.2.0"
   },
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "cssnano": "^4.1.10",
     "eases": "^1.0.8",
     "hsluv": "^0.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nesting": "^7.0.1",
     "sirv-cli": "^0.4.4"
   },
   "husky": {

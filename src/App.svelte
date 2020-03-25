@@ -44,6 +44,7 @@
 </style>
 
 <script>
+	import "./global.css";
 	import hsluv from "hsluv";
 	import eases from "eases";
 	const hsluvToHex = hsluv.hsluvToHex;

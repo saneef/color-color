@@ -11,14 +11,14 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
 	defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
 });
 
+const production = !process.env.ROLLUP_WATCH;
+
 module.exports = {
 	plugins: [
 		require("postcss-import")(),
 		require("tailwindcss"),
 		require("autoprefixer"),
 		require("postcss-nesting"),
-		...(process.env.NODE_ENV === "production"
-			? [purgecss, require("cssnano")]
-			: []),
+		...(production ? [purgecss, require("cssnano")] : []),
 	],
 };

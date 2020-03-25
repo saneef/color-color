@@ -1,45 +1,40 @@
 <style>
+	.chrome {
+		@apply w-screen h-screen grid;
+		grid-template-rows: 4rem 1fr;
+		grid-template-columns: 1fr 3fr 2fr;
+		grid-template-areas:
+			"header		palettes	graphs"
+			"controls	palettes	graphs";
+	}
+
+	.header {
+		@apply p-4 bg-gray-900;
+		grid-area: header;
+	}
+
 	.controls {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.control-set {
-		flex-basis: calc(100% / 3);
-		flex-shrink: 0;
-		padding: 0.5rem 1rem;
-	}
-
-	.control-set--half-width {
-		flex-basis: 50%;
-	}
-
-	.range-set {
-		display: flex;
-		align-items: center;
-	}
-
-	.range-set__value {
-		margin-left: 0.5rem;
+		@apply p-2;
+		grid-area: controls;
 	}
 
 	.palettes {
-		display: flex;
+		@apply grid;
+		grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+		grid-area: palettes / span 2;
 	}
 
-	.palette {
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
-		width: 100%;
+	.controls,
+	.palettes {
+		@apply overflow-y-auto;
 	}
 
-	.swatch {
-		padding: 3rem 1rem 1rem;
+	.controls {
+		@apply border-r-4 border-gray-900;
 	}
 
-	.swatch--light {
-		color: white;
+	.title {
+		@apply text-2xl font-bold text-gray-100 text-center;
 	}
 </style>
 
@@ -47,6 +42,7 @@
 	import "./global.css";
 	import eases from "eases";
 	import hsluv from "hsluv";
+	import Palette from "./Palette.svelte";
 	import Swatch from "./Swatch.svelte";
 
 	const hsluvToHex = hsluv.hsluvToHex;
@@ -90,7 +86,14 @@
 	});
 </script>
 
-<main>
+<main class="chrome">
+	<header class="header">
+		<h1 class="title">
+			color
+			<span aria-hidden="true">×</span>
+			color
+		</h1>
+	</header>
 	<div class="controls">
 		<div class="control-set control-set--half-width">
 			<h2>Steps</h2>
@@ -103,7 +106,7 @@
 						type="range"
 						bind:value="{length}"
 						min="3"
-						max="15" />
+						max="21" />
 					<span class="range-set__value">{length}</span>
 				</div>
 			</div>
@@ -200,12 +203,13 @@
 		</div>
 	</div>
 	<div class="palettes">
-		<ul class="palette">
+		<Palette>
 			{#each waterUv as color, i}
 				<Swatch
+					fillHeight
 					hexCode="{hsluvToHex([color.h, color.s, color.l])}"
 					label="{i}" />
 			{/each}
-		</ul>
+		</Palette>
 	</div>
 </main>

@@ -1,10 +1,14 @@
 <style>
 	.swatch {
-		@apply flex justify-end py-4 text-gray-300;
+		@apply flex flex-wrap justify-end py-4 text-gray-300;
 	}
 
-	.swatch--light {
+	.isLight {
 		@apply text-gray-700;
+	}
+
+	.fillHeight {
+		@apply flex-auto;
 	}
 
 	.label,
@@ -31,6 +35,7 @@
 	import chroma from "chroma-js";
 	export let hexCode = "#000";
 	export let label = "";
+	export let fillHeight = false;
 
 	let isLight = false;
 	let whiteContrast = 0;
@@ -43,7 +48,8 @@
 
 <div
 	class="swatch"
-	class:swatch--light="{isLight}"
+	class:fillHeight
+	class:isLight
 	style="background-color:{hexCode}">
 	<span class="label">{label}</span>
 	<span class="b-contrast">{blackContrast.toFixed(2)}b</span>

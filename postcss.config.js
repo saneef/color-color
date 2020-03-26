@@ -12,6 +12,20 @@ module.exports = {
     require("tailwindcss"),
     require("autoprefixer"),
     require("postcss-nesting"),
-    ...(production ? [purgecss, require("cssnano")] : []),
+    ...(production
+      ? [
+          purgecss,
+          require("cssnano")({
+            preset: [
+              "default",
+              {
+                discardComments: {
+                  removeAll: true,
+                },
+              },
+            ],
+          }),
+        ]
+      : []),
   ],
 };

@@ -18,9 +18,9 @@ export default {
     dir: "public",
     ...(production
       ? {
-          entryFileNames: "build/[name].[hash].js",
-          chunkFileNames: "build/[name].[hash].js",
-          assetFileNames: "build/[name].[hash][extname]",
+          entryFileNames: "[name].[hash].js",
+          chunkFileNames: "[name].[hash].js",
+          assetFileNames: "[name].[hash][extname]",
         }
       : {}),
   },
@@ -60,7 +60,12 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser(),
+    production &&
+      terser({
+        output: {
+          comments: false,
+        },
+      }),
 
     html({
       title: "color × color",

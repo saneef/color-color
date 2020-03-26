@@ -9,7 +9,7 @@
   }
 
   .title a {
-    @apply block p-4;
+    @apply block px-2 py-4;
   }
 
   .title a:hover,

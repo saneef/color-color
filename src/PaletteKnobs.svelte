@@ -1,7 +1,10 @@
 <script>
   import eases from "eases";
   const easeOptions = Object.keys(eases);
-  import { currentPalette, paletteParams } from "./store";
+  import { paletteParams } from "./store";
+  let current = 0;
+
+  $: current = $paletteParams.current;
 </script>
 
 <div class="control-set">
@@ -11,7 +14,7 @@
     <input
       id="hue-start"
       type="range"
-      bind:value="{$paletteParams[$currentPalette].hue.start}"
+      bind:value="{$paletteParams.params[current].hue.start}"
       min="0"
       max="360" />
   </div>
@@ -20,7 +23,7 @@
     <input
       id="hue-end"
       type="range"
-      bind:value="{$paletteParams[$currentPalette].hue.end}"
+      bind:value="{$paletteParams.params[current].hue.end}"
       min="0"
       max="360" />
   </div>
@@ -28,7 +31,7 @@
     <label for="hue-ease">Easing</label>
     <select
       id="hue-ease"
-      bind:value="{$paletteParams[$currentPalette].hue.ease}">
+      bind:value="{$paletteParams.params[current].hue.ease}">
       {#each easeOptions as ease}
         <option value="{ease}">{ease}</option>
       {/each}
@@ -43,7 +46,7 @@
     <input
       id="sat-start"
       type="range"
-      bind:value="{$paletteParams[$currentPalette].sat.start}"
+      bind:value="{$paletteParams.params[current].sat.start}"
       min="0"
       max="100" />
   </div>
@@ -54,13 +57,13 @@
       type="range"
       min="0"
       max="100"
-      bind:value="{$paletteParams[$currentPalette].sat.end}" />
+      bind:value="{$paletteParams.params[current].sat.end}" />
   </div>
   <div class="control-group">
     <label for="sat-ease">Easing</label>
     <select
       id="sat-ease"
-      bind:value="{$paletteParams[$currentPalette].sat.ease}">
+      bind:value="{$paletteParams.params[current].sat.ease}">
       {#each easeOptions as ease}
         <option value="{ease}">{ease}</option>
       {/each}
@@ -77,7 +80,7 @@
       type="range"
       min="0"
       max="100"
-      bind:value="{$paletteParams[$currentPalette].lig.start}" />
+      bind:value="{$paletteParams.params[current].lig.start}" />
   </div>
   <div class="control-group">
     <label for="light-end">End</label>
@@ -86,13 +89,13 @@
       type="range"
       min="0"
       max="100"
-      bind:value="{$paletteParams[$currentPalette].lig.end}" />
+      bind:value="{$paletteParams.params[current].lig.end}" />
   </div>
   <div class="control-group">
     <label for="light-ease">Easing</label>
     <select
       id="light-ease"
-      bind:value="{$paletteParams[$currentPalette].lig.ease}">
+      bind:value="{$paletteParams.params[current].lig.ease}">
       {#each easeOptions as ease}
         <option value="{ease}">{ease}</option>
       {/each}

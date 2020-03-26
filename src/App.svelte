@@ -36,6 +36,20 @@
   .title {
     @apply text-2xl font-bold text-center leading-none;
   }
+
+  .button-set {
+    @apply flex -mx-3 -mt-3 mb-4;
+  }
+
+  button {
+    @apply flex-auto items-center p-4 border-4 border-gray-900 font-bold;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    @apply bg-gray-300;
+  }
 </style>
 
 <script>
@@ -44,7 +58,7 @@
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
 
-  import { currentPalette, steps, palettes } from "./store";
+  import { paletteParams, steps, palettes } from "./store";
 </script>
 
 <main class="chrome">
@@ -56,6 +70,9 @@
     </h1>
   </header>
   <div class="controls">
+    <div class="button-set">
+      <button on:click="{() => paletteParams.add()}">Add Color</button>
+    </div>
     <div class="control-set control-set--half-width">
       <h2 id="steps-title">Steps</h2>
       <div class="control-group">
@@ -77,10 +94,14 @@
   <div class="palettes">
     {#each $palettes as palette, j (j)}
       <Palette
-        active="{$currentPalette === j}"
-        on:click="{() => {
-          $currentPalette = palette.id;
-        }}">
+        active="{$paletteParams.current === j}"
+        on:clickActivate="{() => {
+          $paletteParams.current = palette.id;
+        }}"
+        on:clickRemove="{() => {
+          paletteParams.removeByIndex(palette.id);
+        }}"
+        removable="{$palettes.length > 1}">
         {#each palette.swatches as color, i (i)}
           <Swatch fillHeight hexCode="{color.hex}" label="{i}" />
         {/each}

@@ -9,7 +9,7 @@
 	}
 
 	.header {
-		@apply p-4 bg-gray-900;
+		@apply p-4 border-4 border-r-4 border-gray-900;
 		grid-area: header;
 	}
 
@@ -30,11 +30,11 @@
 	}
 
 	.controls {
-		@apply border-r-4 border-gray-900;
+		@apply border-4 border-t-0 border-gray-900;
 	}
 
 	.title {
-		@apply text-2xl font-bold text-gray-100 text-center;
+		@apply text-2xl font-bold text-center leading-none;
 	}
 </style>
 

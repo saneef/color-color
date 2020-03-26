@@ -1,5 +1,7 @@
 /node_modules/
 /public/build/
+/public/*.css
+/public/index.html
 
 .eslintcache
 

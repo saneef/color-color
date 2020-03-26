@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
+    "@rollup/plugin-html": "^0.1.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "autoprefixer": "^9.7.5",
     "eslint": "^6.8.0",
@@ -23,7 +24,7 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.0.0",
-    "svelte-preprocess": "^3.5.0",
+    "svelte-preprocess": "^3.6.0",
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {

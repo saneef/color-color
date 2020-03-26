@@ -8,11 +8,6 @@
       "controls	palettes	graphs";
   }
 
-  .header {
-    @apply p-4 border-4 border-r-4 border-gray-900;
-    grid-area: header;
-  }
-
   .controls {
     @apply p-2;
     grid-area: controls;
@@ -33,10 +28,6 @@
     @apply border-4 border-t-0 border-gray-900;
   }
 
-  .title {
-    @apply text-2xl font-bold text-center leading-none;
-  }
-
   .button-set {
     @apply flex -mx-3 -mt-3 mb-4;
   }
@@ -54,6 +45,7 @@
 
 <script>
   import "./global.css";
+  import Header from "./Header.svelte";
   import Palette from "./Palette.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
@@ -62,13 +54,7 @@
 </script>
 
 <main class="chrome">
-  <header class="header">
-    <h1 class="title">
-      color
-      <span aria-hidden="true">×</span>
-      color
-    </h1>
-  </header>
+  <Header />
   <div class="controls">
     <div class="button-set">
       <button on:click="{() => paletteParams.add()}">Add Color</button>

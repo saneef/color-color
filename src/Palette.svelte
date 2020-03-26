@@ -8,7 +8,8 @@
   }
 
   button {
-    @apply flex flex-auto items-center p-4 pt-3 text-gray-700;
+    @apply flex flex-auto items-center p-4 pt-3 text-gray-500;
+    flex-grow: 0;
   }
 
   button:hover,
@@ -17,22 +18,16 @@
     @apply bg-gray-300;
   }
 
-  .button-activate {
-    @apply pl-2 font-bold;
-  }
-
   .button-remove {
-    flex-grow: 0;
+    @apply text-3xl leading-none;
   }
 
   .status {
-    @apply relative flex w-8 h-8 border-2 border-gray-900 rounded-full mr-2;
+    @apply relative flex w-8 h-8 border-2 border-gray-900 rounded-full;
   }
 
   .active {
-    @apply text-black;
   }
-
   .active .status {
     @apply bg-gray-900;
   }
@@ -72,10 +67,15 @@
   <div class="header">
     <button class="button-activate" class:active on:click="{onActivate}">
       <span class="status"></span>
-      {#if active}Active{:else}Activate{/if}
+      <span class="sr-only">
+        {#if active}Active{:else}Activate{/if}
+      </span>
     </button>
     {#if removable}
-      <button class="button-remove" on:click="{onRemove}">Remove</button>
+      <button class="button-remove" on:click="{onRemove}">
+        <span class="sr-only">Remove</span>
+        <span aria-hidden="true">×</span>
+      </button>
     {/if}
   </div>
   <slot />

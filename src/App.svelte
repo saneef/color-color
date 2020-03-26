@@ -95,7 +95,7 @@
         }}"
         removable="{$palettes.length > 1}">
         {#each palette.swatches as color, i (i)}
-          <Swatch fillHeight hexCode="{color.hex}" label="{i}" />
+          <Swatch fillHeight hexCode="{color.hex}" label="{color.id}" />
         {/each}
       </Palette>
     {/each}

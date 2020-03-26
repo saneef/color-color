@@ -80,7 +80,9 @@ export const palettes = derived(
         const s = sat.start + easeSteps(eases[sat.ease], i + 1, $steps) * sUnit;
         const l = lig.start + easeSteps(eases[lig.ease], i + 1, $steps) * lUnit;
         const hex = hsluvToHex([h, s, l]);
+        const id = (i + 1) * ($steps > 9 ? 10 : 100);
         return {
+          id,
           h,
           s,
           l,

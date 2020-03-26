@@ -2,7 +2,7 @@
   .chrome {
     @apply w-screen h-screen grid;
     grid-template-rows: 4rem 1fr;
-    grid-template-columns: 1fr 3fr 2fr;
+    grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
     grid-template-areas:
       "header		palettes	graphs"
       "controls	palettes	graphs";
@@ -21,7 +21,7 @@
 
   .controls,
   .palettes {
-    @apply overflow-y-auto;
+    @apply overflow-y-auto overflow-x-hidden;
   }
 
   .controls {
@@ -51,6 +51,12 @@
   import Swatch from "./Swatch.svelte";
 
   import { paletteParams, steps, palettes } from "./store";
+
+  function confirmAndDelete(id) {
+    if (window.confirm("Are you sure you want to delete?")) {
+      paletteParams.removeByIndex(id);
+    }
+  }
 </script>
 
 <main class="chrome">
@@ -85,7 +91,7 @@
           $paletteParams.current = palette.id;
         }}"
         on:clickRemove="{() => {
-          paletteParams.removeByIndex(palette.id);
+          confirmAndDelete(palette.id);
         }}"
         removable="{$palettes.length > 1}">
         {#each palette.swatches as color, i (i)}

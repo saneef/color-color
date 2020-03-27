@@ -1,3 +1,9 @@
+<style>
+  h2 {
+    @apply text-lg font-bold px-4;
+  }
+</style>
+
 <script>
   import eases from "eases";
   import { paletteParams } from "./store";

@@ -40,6 +40,10 @@
   button:focus {
     @apply bg-gray-300;
   }
+
+  h2 {
+    @apply text-lg font-bold px-4;
+  }
 </style>
 
 <script>

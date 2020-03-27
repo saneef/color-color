@@ -52,6 +52,7 @@
   import Palette from "./Palette.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
+  import Range from "./Range.svelte";
 
   import { paletteParams, steps, palettes } from "./store";
 
@@ -70,18 +71,12 @@
     </div>
     <div class="control-set control-set--half-width">
       <h2 id="steps-title">Steps</h2>
-      <div class="control-group">
-        <div class="range-set">
-          <input
-            aria-labelledby="steps-title"
-            id="steps"
-            type="range"
-            bind:value="{$steps}"
-            min="3"
-            max="21" />
-          <span class="range-set__value">{$steps}</span>
-        </div>
-      </div>
+      <Range
+        id="steps-range"
+        labelledby="steps-title"
+        bind:value="{$steps}"
+        min="3"
+        max="21" />
     </div>
 
     <PaletteKnobs />

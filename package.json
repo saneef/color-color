@@ -33,6 +33,7 @@
     "cssnano": "^4.1.10",
     "eases": "^1.0.8",
     "hsluv": "^0.1.0",
+    "jsoun": "^0.1.4",
     "postcss-import": "^12.0.1",
     "postcss-nesting": "^7.0.1",
     "sirv-cli": "^0.4.4"

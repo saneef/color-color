@@ -2,39 +2,49 @@ import { writable, derived } from "svelte/store";
 import eases from "eases";
 import hsluv from "hsluv";
 import chroma from "chroma-js";
+import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
+import { getBaseUrl, getStateFromUrl } from "./lib/url";
 
 const hsluvToHex = hsluv.hsluvToHex;
 
-export const steps = writable(10);
+const urlState = getStateFromUrl();
 
-export const settings = writable({
-  overlayContrast: false,
-  overlayHex: false,
-  refColorsRaw: "",
-});
+export const steps = writable(urlState.steps || 10);
+
+export const shareDialog = writable(false);
+
+export const settings = writable(
+  urlState.settings || {
+    overlayContrast: false,
+    overlayHex: false,
+    refColorsRaw: "",
+  }
+);
 
 function createPaletteParams() {
-  const { subscribe, set, update } = writable({
-    current: 0,
-    params: [
-      {
-        hue: { start: 230, end: 240, ease: "quadIn" },
-        sat: { start: 60, end: 100, ease: "quadOut" },
-        lig: { start: 100, end: 5, ease: "quadOut" },
-      },
-      {
-        hue: { start: 280, end: 290, ease: "quadIn" },
-        sat: { start: 60, end: 100, ease: "quadOut" },
-        lig: { start: 100, end: 5, ease: "quadOut" },
-      },
-      {
-        hue: { start: 340, end: 360, ease: "quadIn" },
-        sat: { start: 60, end: 100, ease: "quadOut" },
-        lig: { start: 100, end: 5, ease: "quadOut" },
-      },
-    ],
-  });
+  const { subscribe, set, update } = writable(
+    urlState.paletteParams || {
+      current: 0,
+      params: [
+        {
+          hue: { start: 230, end: 240, ease: "quadIn" },
+          sat: { start: 60, end: 100, ease: "quadOut" },
+          lig: { start: 100, end: 5, ease: "quadOut" },
+        },
+        {
+          hue: { start: 280, end: 290, ease: "quadIn" },
+          sat: { start: 60, end: 100, ease: "quadOut" },
+          lig: { start: 100, end: 5, ease: "quadOut" },
+        },
+        {
+          hue: { start: 340, end: 360, ease: "quadIn" },
+          sat: { start: 60, end: 100, ease: "quadOut" },
+          lig: { start: 100, end: 5, ease: "quadOut" },
+        },
+      ],
+    }
+  );
 
   const removeByIndex = index =>
     update(pp => {
@@ -140,5 +150,29 @@ export const nearestRefColors = derived(
     }, {});
 
     return matchedSwatches;
+  }
+);
+
+export const shareState = derived(
+  [settings, steps, paletteParams, palettes],
+  ([$settings, $steps, $paletteParams, $palettes]) => {
+    const state = {
+      steps: $steps,
+      paletteParams: $paletteParams,
+      settings: $settings,
+    };
+    const encodedState = jsoun.encode(state);
+
+    const paletteJson = $palettes.reduce((pacc, p, i) => {
+      const palette = p.swatches.reduce((acc, s) => {
+        return { ...acc, [s.id]: s.hex };
+      }, {});
+      return { ...pacc, [`color-${i + 1}`]: palette };
+    }, {});
+
+    return {
+      url: `${getBaseUrl()}#${encodedState}`,
+      json: JSON.stringify(paletteJson, null, 2),
+    };
   }
 );

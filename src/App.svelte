@@ -42,8 +42,15 @@
   import RangeField from "./RangeField.svelte";
   import Checkbox from "./Checkbox.svelte";
   import TextField from "./TextField.svelte";
+  import ShareDialog from "./ShareDialog.svelte";
 
-  import { paletteParams, steps, palettes, settings } from "./store";
+  import {
+    paletteParams,
+    steps,
+    palettes,
+    settings,
+    shareDialog,
+  } from "./store";
 
   function confirmAndDelete(id) {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -100,3 +107,7 @@
     {/each}
   </div>
 </main>
+
+{#if $shareDialog}
+  <ShareDialog />
+{/if}

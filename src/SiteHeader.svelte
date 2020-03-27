@@ -31,10 +31,14 @@
   button:focus {
     @apply bg-gray-300;
   }
+
+  button + button {
+    @apply -ml-1;
+  }
 </style>
 
 <script>
-  import { paletteParams } from "./store";
+  import { paletteParams, shareDialog } from "./store";
 </script>
 
 <header class="header">
@@ -46,6 +50,12 @@
     </a>
   </h1>
   <div class="button-set">
+    <button
+      on:click="{() => {
+        $shareDialog = true;
+      }}">
+      Share
+    </button>
     <button on:click="{() => paletteParams.add()}">Add colors</button>
   </div>
 </header>

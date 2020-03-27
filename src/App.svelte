@@ -1,4 +1,8 @@
 <style>
+  h2 {
+    @apply text-lg font-bold;
+  }
+
   .chrome {
     @apply w-screen h-screen grid;
     grid-template-rows: max-content 1fr;
@@ -24,8 +28,8 @@
     grid-area: controls;
   }
 
-  h2 {
-    @apply text-lg font-bold;
+  .control-set {
+    @apply mt-4 pt-4 border-t border-gray-500;
   }
 </style>
 
@@ -36,8 +40,9 @@
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
   import RangeField from "./RangeField.svelte";
+  import Checkbox from "./Checkbox.svelte";
 
-  import { paletteParams, steps, palettes } from "./store";
+  import { paletteParams, steps, palettes, settings } from "./store";
 
   function confirmAndDelete(id) {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -59,6 +64,12 @@
       max="21" />
 
     <PaletteKnobs />
+
+    <div class="control-set">
+      <h2>Overlay</h2>
+      <Checkbox label="HEX code" bind:checked="{$settings.showHex}" />
+      <Checkbox label="WCAG Contrast" bind:checked="{$settings.showContrast}" />
+    </div>
   </div>
   <div class="palettes">
     {#each $palettes as palette, j (j)}

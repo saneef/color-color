@@ -1,7 +1,7 @@
 <style>
   .chrome {
     @apply w-screen h-screen grid;
-    grid-template-rows: content-max 1fr;
+    grid-template-rows: max-content 1fr;
     grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
     grid-template-areas:
       "header		palettes	graphs"

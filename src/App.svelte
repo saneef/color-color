@@ -9,7 +9,6 @@
   }
 
   .controls {
-    @apply p-2;
     grid-area: controls;
   }
 
@@ -29,7 +28,7 @@
   }
 
   .button-set {
-    @apply flex -mx-3 -mt-3 mb-4;
+    @apply flex -mx-1 -mt-1 mb-4;
   }
 
   button {

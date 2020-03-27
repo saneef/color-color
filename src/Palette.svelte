@@ -8,7 +8,7 @@
   }
 
   button {
-    @apply flex flex-auto items-center p-4 pt-3 text-gray-500;
+    @apply flex flex-auto items-center p-4 pt-3 text-gray-600;
     flex-grow: 0;
   }
 
@@ -18,18 +18,22 @@
     @apply bg-gray-300;
   }
 
+  .button-activate {
+    @apply text-gray-200;
+  }
+
   .button-remove {
     @apply text-3xl leading-none;
   }
 
   .status {
-    @apply relative flex w-8 h-8 border-2 border-gray-900 rounded-full;
+    @apply relative flex items-center justify-center w-8 h-8 border-2 border-gray-900 rounded-full text-transparent;
   }
 
   .active {
   }
   .active .status {
-    @apply bg-gray-900;
+    @apply text-gray-100 bg-gray-900;
   }
 
   .active .status::before {
@@ -39,15 +43,11 @@
     margin-left: -0.125rem;
     content: "";
   }
-
-  .active .status::after {
-    @apply block absolute top-0 left-0 w-full h-full flex justify-center items-center;
-    content: "⚡️";
-  }
 </style>
 
 <script>
   import { createEventDispatcher } from "svelte";
+  import Icon from "./Icon.svelte";
 
   export let active = false;
   export let removable = true;
@@ -65,16 +65,19 @@
 
 <div class="palette">
   <div class="header">
-    <button class="button-activate" class:active on:click="{onActivate}">
-      <span class="status"></span>
-      <span class="sr-only">
-        {#if active}Active{:else}Activate{/if}
+    <button
+      class="button-activate"
+      class:active
+      on:click="{onActivate}"
+      title="{active ? 'Activate' : 'Deactivate'}">
+      <span class="status">
+        <Icon icon="flash" />
       </span>
     </button>
     {#if removable}
-      <button class="button-remove" on:click="{onRemove}">
+      <button class="button-remove" on:click="{onRemove}" title="Remove">
         <span class="sr-only">Remove</span>
-        <span aria-hidden="true">×</span>
+        <Icon icon="cross" />
       </button>
     {/if}
   </div>

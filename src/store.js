@@ -7,6 +7,11 @@ const hsluvToHex = hsluv.hsluvToHex;
 
 export const steps = writable(10);
 
+export const settings = writable({
+  showContrast: false,
+  showHex: true,
+});
+
 function createPaletteParams() {
   const { subscribe, set, update } = writable({
     current: 0,
@@ -52,8 +57,8 @@ function createPaletteParams() {
           lig: { start: 100, end: 5, ease: "quadOut" },
         };
 
-        pp.params = [param, ...pp.params];
-        pp.current = 0;
+        pp.current = pp.params.length;
+        pp.params = [...pp.params, param];
       }
 
       return pp;

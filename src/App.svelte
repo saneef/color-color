@@ -1,16 +1,20 @@
 <style>
+  h2 {
+    @apply text-lg font-bold;
+  }
+
   .chrome {
     @apply w-screen h-screen grid;
-    grid-template-rows: 4rem 1fr;
+    grid-template-rows: max-content 1fr;
     grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
     grid-template-areas:
       "header		palettes	graphs"
       "controls	palettes	graphs";
   }
 
-  .controls {
-    @apply p-2;
-    grid-area: controls;
+  .controls,
+  .palettes {
+    @apply overflow-y-auto overflow-x-hidden;
   }
 
   .palettes {
@@ -19,27 +23,13 @@
     grid-area: palettes / span 2;
   }
 
-  .controls,
-  .palettes {
-    @apply overflow-y-auto overflow-x-hidden;
-  }
-
   .controls {
-    @apply border-4 border-t-0 border-gray-900;
+    @apply p-4 border-4 border-t-0 border-gray-900;
+    grid-area: controls;
   }
 
-  .button-set {
-    @apply flex -mx-3 -mt-3 mb-4;
-  }
-
-  button {
-    @apply flex-auto items-center p-4 border-4 border-gray-900 font-bold;
-  }
-
-  button:hover,
-  button:active,
-  button:focus {
-    @apply bg-gray-300;
+  .control-set {
+    @apply mt-4 pt-4 border-t border-gray-500;
   }
 </style>
 
@@ -49,8 +39,10 @@
   import Palette from "./Palette.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
+  import RangeField from "./RangeField.svelte";
+  import Checkbox from "./Checkbox.svelte";
 
-  import { paletteParams, steps, palettes } from "./store";
+  import { paletteParams, steps, palettes, settings } from "./store";
 
   function confirmAndDelete(id) {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -62,26 +54,22 @@
 <main class="chrome">
   <Header />
   <div class="controls">
-    <div class="button-set">
-      <button on:click="{() => paletteParams.add()}">Add Color</button>
-    </div>
-    <div class="control-set control-set--half-width">
-      <h2 id="steps-title">Steps</h2>
-      <div class="control-group">
-        <div class="range-set">
-          <input
-            aria-labelledby="steps-title"
-            id="steps"
-            type="range"
-            bind:value="{$steps}"
-            min="3"
-            max="21" />
-          <span class="range-set__value">{$steps}</span>
-        </div>
-      </div>
-    </div>
+
+    <h2 id="steps-title">Steps</h2>
+    <RangeField
+      id="steps-range"
+      labelledby="steps-title"
+      bind:value="{$steps}"
+      min="3"
+      max="21" />
 
     <PaletteKnobs />
+
+    <div class="control-set">
+      <h2>Overlay</h2>
+      <Checkbox label="HEX code" bind:checked="{$settings.showHex}" />
+      <Checkbox label="WCAG Contrast" bind:checked="{$settings.showContrast}" />
+    </div>
   </div>
   <div class="palettes">
     {#each $palettes as palette, j (j)}

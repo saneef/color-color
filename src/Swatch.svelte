@@ -33,19 +33,18 @@
 
 <script>
   import chroma from "chroma-js";
+  import { settings } from "./store.js";
   export let hexCode = "#000";
   export let label = "";
   export let fillHeight = false;
 
   let isLight = false;
-  let showContrast = false;
-  let showHex = false;
   let whiteContrast = 0;
   let blackContrast = 0;
 
   $: isLight = chroma(hexCode).luminance() > 0.6;
-  $: whiteContrast = showContrast && chroma.contrast("#fff", hexCode);
-  $: blackContrast = showContrast && chroma.contrast("#000", hexCode);
+  $: whiteContrast = $settings.showContrast && chroma.contrast("#fff", hexCode);
+  $: blackContrast = $settings.showContrast && chroma.contrast("#000", hexCode);
 </script>
 
 <div
@@ -54,11 +53,11 @@
   class:isLight
   style="background-color:{hexCode}">
   <span class="label">{label}</span>
-  {#if showContrast}
+  {#if $settings.showContrast}
     <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
     <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
   {/if}
-  {#if showHex}
+  {#if $settings.showHex}
     <span class="hex-code">{hexCode}</span>
   {/if}
 </div>

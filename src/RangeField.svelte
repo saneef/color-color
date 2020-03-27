@@ -3,13 +3,17 @@
     @apply py-2;
   }
 
-  label {
+  .label {
     @apply block text-sm text-gray-700;
   }
 
   .wrapper {
     @apply flex items-center;
   }
+  .input {
+    @apply block w-full;
+  }
+
   .value {
     @apply flex-none w-10 text-right;
   }
@@ -24,12 +28,13 @@
 
 <div class="root">
   {#if label}
-    <label for="{id}">{label}</label>
+    <label class="label" for="{id}">{label}</label>
   {/if}
   <div class="wrapper">
     <input
       type="range"
       aria-labelledby="{labelledby}"
+      class="input"
       {id}
       bind:value
       {...$$restProps} />

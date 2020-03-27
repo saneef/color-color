@@ -8,7 +8,7 @@
   }
 
   select {
-    @apply block appearance-none w-full bg-gray-100 border-2 border-gray-700 text-gray-700 py-3 px-4 pr-8 leading-tight;
+    @apply block appearance-none w-full bg-gray-100 border-2 border-gray-700 text-gray-900 p-2 pr-4 pr-8 leading-tight;
   }
 
   select:focus {

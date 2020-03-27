@@ -1,6 +1,6 @@
 <style>
   .control {
-    @apply py-2;
+    @apply px-4 py-2;
   }
 
   label {
@@ -8,7 +8,7 @@
   }
 
   select {
-    @apply block appearance-none w-full bg-gray-100 border-4 border-gray-600 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight;
+    @apply block appearance-none w-full bg-gray-100 border-2 border-gray-700 text-gray-700 py-3 px-4 pr-8 leading-tight;
   }
 
   select:focus {

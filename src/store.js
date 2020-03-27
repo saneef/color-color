@@ -11,7 +11,7 @@ export const steps = writable(10);
 export const settings = writable({
   showContrast: false,
   showHex: false,
-  refColorsRaw: "#56a5cd, #f5fbff, #CC7722,#0E78BE,#F0B81A",
+  refColorsRaw: "",
 });
 
 function createPaletteParams() {
@@ -138,8 +138,6 @@ export const nearestRefColors = derived(
         ...acc,
       };
     }, {});
-
-    console.log(refs);
 
     return matchedSwatches;
   }

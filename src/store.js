@@ -1,6 +1,7 @@
 import { writable, derived } from "svelte/store";
 import eases from "eases";
 import hsluv from "hsluv";
+import chroma from "chroma-js";
 import { randomInt } from "./lib/math";
 
 const hsluvToHex = hsluv.hsluvToHex;
@@ -9,7 +10,8 @@ export const steps = writable(10);
 
 export const settings = writable({
   showContrast: false,
-  showHex: true,
+  showHex: false,
+  refColorsRaw: "#56a5cd, #f5fbff, #CC7722,#0E78BE,#F0B81A",
 });
 
 function createPaletteParams() {
@@ -97,4 +99,48 @@ export const palettes = derived(
 
       return { id, swatches };
     })
+);
+
+const hexRe = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/;
+
+export const refColors = derived(settings, $settings => {
+  return $settings.refColorsRaw
+    .split(",")
+    .map(s => s.trim())
+    .filter(s => s.match(hexRe) !== null);
+});
+
+export const nearestRefColors = derived(
+  [refColors, palettes],
+  ([$refColors, $palettes]) => {
+    const refs = $refColors.reduce((acc, c) => {
+      return { ...acc, [c]: {} };
+    }, {});
+
+    $refColors.forEach(rc => {
+      $palettes.forEach(p =>
+        p.swatches.forEach(swatch => {
+          const { hex } = swatch;
+          const dist = chroma.distance(rc, hex);
+          if (refs[rc].hex === undefined || refs[rc].dist > dist) {
+            refs[rc].hex = hex;
+            refs[rc].dist = dist;
+          }
+        })
+      );
+    });
+
+    const matchedSwatches = Object.keys(refs).reduce((acc, key) => {
+      const { hex } = refs[key];
+
+      return {
+        [hex]: key,
+        ...acc,
+      };
+    }, {});
+
+    console.log(refs);
+
+    return matchedSwatches;
+  }
 );

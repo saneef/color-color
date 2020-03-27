@@ -14,7 +14,8 @@
   .label,
   .hex-code,
   .w-contrast,
-  .b-contrast {
+  .b-contrast,
+  .ref-swatches {
     @apply px-4 font-mono;
   }
 
@@ -29,11 +30,27 @@
   .label {
     @apply font-bold mr-auto;
   }
+
+  .ref-swatches {
+    @apply flex;
+  }
+
+  .ref-swatch {
+    @apply block w-5 h-5 rounded border-b-2 border-gray-300;
+  }
+
+  .ref-swatch--light {
+    @apply border-gray-700;
+  }
+
+  .ref-swatch + .ref-swatch {
+    @apply -ml-2;
+  }
 </style>
 
 <script>
   import chroma from "chroma-js";
-  import { settings } from "./store.js";
+  import { settings, nearestRefColors } from "./store.js";
   export let hexCode = "#000";
   export let label = "";
   export let fillHeight = false;
@@ -41,10 +58,13 @@
   let isLight = false;
   let whiteContrast = 0;
   let blackContrast = 0;
+  let refColors = [];
 
   $: isLight = chroma(hexCode).luminance() > 0.6;
   $: whiteContrast = $settings.showContrast && chroma.contrast("#fff", hexCode);
   $: blackContrast = $settings.showContrast && chroma.contrast("#000", hexCode);
+
+  $: refColors = $nearestRefColors[hexCode] ? [$nearestRefColors[hexCode]] : [];
 </script>
 
 <div
@@ -53,6 +73,16 @@
   class:isLight
   style="background-color:{hexCode}">
   <span class="label">{label}</span>
+  {#if refColors.length}
+    <ul class="ref-swatches">
+      {#each refColors as c, i (c + i)}
+        <li
+          class="ref-swatch"
+          class:ref-swatch--light="{isLight}"
+          style="background-color: {c}"></li>
+      {/each}
+    </ul>
+  {/if}
   {#if $settings.showContrast}
     <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
     <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>

@@ -8,8 +8,8 @@
     grid-template-rows: max-content 1fr;
     grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
     grid-template-areas:
-      "header		palettes	graphs"
-      "controls	palettes	graphs";
+      "header   palettes  graphs"
+      "controls palettes  graphs";
   }
 
   .controls,
@@ -41,6 +41,7 @@
   import Swatch from "./Swatch.svelte";
   import RangeField from "./RangeField.svelte";
   import Checkbox from "./Checkbox.svelte";
+  import TextField from "./TextField.svelte";
 
   import { paletteParams, steps, palettes, settings } from "./store";
 
@@ -54,7 +55,6 @@
 <main class="chrome">
   <SiteHeader />
   <div class="controls">
-
     <h2 id="steps-title">Steps</h2>
     <RangeField
       id="steps-range"
@@ -64,6 +64,15 @@
       max="21" />
 
     <PaletteKnobs />
+
+    <div class="control-set">
+      <h2 id="ref-colors">Reference colors</h2>
+      <TextField
+        labelledby="ref-colors"
+        id="ref-colors-input"
+        bind:value="{$settings.refColorsRaw}"
+        legend="Comma seperated list of hex color codes." />
+    </div>
 
     <div class="control-set">
       <h2>Overlay</h2>

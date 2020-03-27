@@ -1,7 +1,10 @@
 <script>
   import eases from "eases";
-  const easeOptions = Object.keys(eases);
   import { paletteParams } from "./store";
+  import Select from "./Select.svelte";
+
+  const easeOptions = Object.keys(eases);
+
   let current = 0;
 
   $: current = $paletteParams.current;
@@ -27,16 +30,15 @@
       min="0"
       max="360" />
   </div>
-  <div class="control-group">
-    <label for="hue-ease">Easing</label>
-    <select
-      id="hue-ease"
-      bind:value="{$paletteParams.params[current].hue.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
-      {/each}
-    </select>
-  </div>
+
+  <Select
+    id="hue-ease"
+    label="Easing"
+    bind:value="{$paletteParams.params[current].hue.ease}">
+    {#each easeOptions as ease}
+      <option value="{ease}">{ease}</option>
+    {/each}
+  </Select>
 </div>
 
 <div class="control-set">
@@ -59,16 +61,15 @@
       max="100"
       bind:value="{$paletteParams.params[current].sat.end}" />
   </div>
-  <div class="control-group">
-    <label for="sat-ease">Easing</label>
-    <select
-      id="sat-ease"
-      bind:value="{$paletteParams.params[current].sat.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
-      {/each}
-    </select>
-  </div>
+
+  <Select
+    id="sat-ease"
+    label="Easing"
+    bind:value="{$paletteParams.params[current].sat.ease}">
+    {#each easeOptions as ease}
+      <option value="{ease}">{ease}</option>
+    {/each}
+  </Select>
 </div>
 
 <div class="control-set">
@@ -91,14 +92,12 @@
       max="100"
       bind:value="{$paletteParams.params[current].lig.end}" />
   </div>
-  <div class="control-group">
-    <label for="light-ease">Easing</label>
-    <select
-      id="light-ease"
-      bind:value="{$paletteParams.params[current].lig.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
-      {/each}
-    </select>
-  </div>
+  <Select
+    id="lig-ease"
+    label="Easing"
+    bind:value="{$paletteParams.params[current].lig.ease}">
+    {#each easeOptions as ease}
+      <option value="{ease}">{ease}</option>
+    {/each}
+  </Select>
 </div>

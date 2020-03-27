@@ -61,8 +61,10 @@
   let refColors = [];
 
   $: isLight = chroma(hexCode).luminance() > 0.6;
-  $: whiteContrast = $settings.showContrast && chroma.contrast("#fff", hexCode);
-  $: blackContrast = $settings.showContrast && chroma.contrast("#000", hexCode);
+  $: whiteContrast =
+    $settings.overlayContrast && chroma.contrast("#fff", hexCode);
+  $: blackContrast =
+    $settings.overlayContrast && chroma.contrast("#000", hexCode);
 
   $: refColors = $nearestRefColors[hexCode] ? [$nearestRefColors[hexCode]] : [];
 </script>
@@ -83,11 +85,11 @@
       {/each}
     </ul>
   {/if}
-  {#if $settings.showContrast}
+  {#if $settings.overlayContrast}
     <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
     <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
   {/if}
-  {#if $settings.showHex}
+  {#if $settings.overlayHex}
     <span class="hex-code">{hexCode}</span>
   {/if}
 </div>

@@ -9,8 +9,8 @@ const hsluvToHex = hsluv.hsluvToHex;
 export const steps = writable(10);
 
 export const settings = writable({
-  showContrast: false,
-  showHex: false,
+  overlayContrast: false,
+  overlayHex: false,
   refColorsRaw: "",
 });
 

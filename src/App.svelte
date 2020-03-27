@@ -76,8 +76,10 @@
 
     <div class="control-set">
       <h2>Overlay</h2>
-      <Checkbox label="HEX code" bind:checked="{$settings.showHex}" />
-      <Checkbox label="WCAG Contrast" bind:checked="{$settings.showContrast}" />
+      <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />
+      <Checkbox
+        label="WCAG Contrast"
+        bind:checked="{$settings.overlayContrast}" />
     </div>
   </div>
   <div class="palettes">

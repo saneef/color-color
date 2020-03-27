@@ -53,7 +53,7 @@
   import Palette from "./Palette.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
-  import Range from "./Range.svelte";
+  import RangeField from "./RangeField.svelte";
 
   import { paletteParams, steps, palettes } from "./store";
 
@@ -72,7 +72,7 @@
     </div>
     <div class="control-set control-set--half-width">
       <h2 id="steps-title">Steps</h2>
-      <Range
+      <RangeField
         id="steps-range"
         labelledby="steps-title"
         bind:value="{$steps}"

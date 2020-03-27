@@ -11,8 +11,8 @@
 <script>
   import eases from "eases";
   import { paletteParams } from "./store";
-  import Select from "./Select.svelte";
-  import Range from "./Range.svelte";
+  import SelectField from "./SelectField.svelte";
+  import RangeField from "./RangeField.svelte";
 
   const easeOptions = Object.keys(eases);
 
@@ -23,74 +23,74 @@
 
 <div class="control-set">
   <h2>Hue</h2>
-  <Range
+  <RangeField
     id="hue-start"
     label="Start"
     bind:value="{$paletteParams.params[current].hue.start}"
     min="0"
     max="360" />
-  <Range
+  <RangeField
     id="hue-end"
     label="End"
     bind:value="{$paletteParams.params[current].hue.end}"
     min="0"
     max="360" />
-  <Select
+  <SelectField
     id="hue-ease"
     label="Easing"
     bind:value="{$paletteParams.params[current].hue.ease}">
     {#each easeOptions as ease}
       <option value="{ease}">{ease}</option>
     {/each}
-  </Select>
+  </SelectField>
 </div>
 
 <div class="control-set">
   <h2>Saturation</h2>
-  <Range
+  <RangeField
     id="sat-start"
     label="Start"
     bind:value="{$paletteParams.params[current].sat.start}"
     min="0"
     max="100" />
 
-  <Range
+  <RangeField
     id="sat-end"
     label="End"
     bind:value="{$paletteParams.params[current].sat.end}"
     min="0"
     max="100" />
-  <Select
+  <SelectField
     id="sat-ease"
     label="Easing"
     bind:value="{$paletteParams.params[current].sat.ease}">
     {#each easeOptions as ease}
       <option value="{ease}">{ease}</option>
     {/each}
-  </Select>
+  </SelectField>
 </div>
 
 <div class="control-set">
   <h2>Lightness</h2>
-  <Range
+  <RangeField
     id="lig-start"
     label="Start"
     bind:value="{$paletteParams.params[current].lig.start}"
     min="0"
     max="100" />
 
-  <Range
+  <RangeField
     id="lig-end"
     label="End"
     bind:value="{$paletteParams.params[current].lig.end}"
     min="0"
     max="100" />
-  <Select
+  <SelectField
     id="lig-ease"
     label="Easing"
     bind:value="{$paletteParams.params[current].lig.ease}">
     {#each easeOptions as ease}
       <option value="{ease}">{ease}</option>
     {/each}
-  </Select>
+  </SelectField>
 </div>

@@ -1,9 +1,10 @@
 <style>
   h2 {
-    @apply text-lg font-bold px-4;
+    @apply text-lg font-bold;
   }
+
   .control-set {
-    @apply mt-4;
+    @apply mt-4 pt-4 border-t border-gray-500;
   }
 </style>
 

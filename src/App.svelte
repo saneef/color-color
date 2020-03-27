@@ -9,6 +9,7 @@
   }
 
   .controls {
+    @apply px-4;
     grid-area: controls;
   }
 
@@ -28,7 +29,7 @@
   }
 
   .button-set {
-    @apply flex -mx-1 -mt-1 mb-4;
+    @apply flex -mx-5 -mt-1 mb-4;
   }
 
   button {
@@ -42,7 +43,7 @@
   }
 
   h2 {
-    @apply text-lg font-bold px-4;
+    @apply text-lg font-bold;
   }
 </style>
 

@@ -1,6 +1,6 @@
 <style>
   .control {
-    @apply px-4 py-2;
+    @apply py-2;
   }
 
   label {

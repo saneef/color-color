@@ -1,6 +1,6 @@
 <style>
   .root {
-    @apply px-4 py-2;
+    @apply py-2;
   }
 
   label {
@@ -11,7 +11,7 @@
     @apply flex items-center;
   }
   .value {
-    @apply w-8 text-right;
+    @apply flex-none w-10 text-right;
   }
 </style>
 

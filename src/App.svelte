@@ -1,16 +1,16 @@
 <style>
   .chrome {
     @apply w-screen h-screen grid;
-    grid-template-rows: 4rem 1fr;
+    grid-template-rows: content-max 1fr;
     grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
     grid-template-areas:
       "header		palettes	graphs"
       "controls	palettes	graphs";
   }
 
-  .controls {
-    @apply px-4;
-    grid-area: controls;
+  .controls,
+  .palettes {
+    @apply overflow-y-auto overflow-x-hidden;
   }
 
   .palettes {
@@ -19,27 +19,9 @@
     grid-area: palettes / span 2;
   }
 
-  .controls,
-  .palettes {
-    @apply overflow-y-auto overflow-x-hidden;
-  }
-
   .controls {
-    @apply border-4 border-t-0 border-gray-900;
-  }
-
-  .button-set {
-    @apply flex -mx-5 -mt-1 mb-4;
-  }
-
-  button {
-    @apply flex-auto items-center p-4 border-4 border-gray-900 font-bold;
-  }
-
-  button:hover,
-  button:active,
-  button:focus {
-    @apply bg-gray-300;
+    @apply p-4 border-4 border-t-0 border-gray-900;
+    grid-area: controls;
   }
 
   h2 {
@@ -67,18 +49,14 @@
 <main class="chrome">
   <Header />
   <div class="controls">
-    <div class="button-set">
-      <button on:click="{() => paletteParams.add()}">Add Color</button>
-    </div>
-    <div class="control-set control-set--half-width">
-      <h2 id="steps-title">Steps</h2>
-      <RangeField
-        id="steps-range"
-        labelledby="steps-title"
-        bind:value="{$steps}"
-        min="3"
-        max="21" />
-    </div>
+
+    <h2 id="steps-title">Steps</h2>
+    <RangeField
+      id="steps-range"
+      labelledby="steps-title"
+      bind:value="{$steps}"
+      min="3"
+      max="21" />
 
     <PaletteKnobs />
   </div>

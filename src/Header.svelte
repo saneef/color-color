@@ -17,7 +17,25 @@
   .title a:active {
     @apply underline cursor-pointer;
   }
+
+  .button-set {
+    @apply flex -mx-1 -my-1;
+  }
+
+  button {
+    @apply flex-auto items-center p-2 border-4 border-gray-900 font-bold;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    @apply bg-gray-300;
+  }
 </style>
+
+<script>
+  import { paletteParams } from "./store";
+</script>
 
 <header class="header">
   <h1 class="title">
@@ -27,4 +45,7 @@
        color
     </a>
   </h1>
+  <div class="button-set">
+    <button on:click="{() => paletteParams.add()}">Add Color</button>
+  </div>
 </header>

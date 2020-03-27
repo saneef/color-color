@@ -15,6 +15,10 @@
     @apply bg-white border-gray-900;
   }
 
+  .input--textarea {
+    @apply h-32 resize-none;
+  }
+
   .legend {
     @apply mt-1 text-sm text-gray-700 leading-tight;
   }
@@ -26,18 +30,31 @@
   export let legend = null;
   export let labelledby = null;
   export let value;
+  export let multiline = false;
 </script>
 
 <div class="control">
   {#if label}
     <label class="label" for="{id}">{label}</label>
   {/if}
-  <input
-    class="input"
-    type="text"
-    {id}
-    bind:value
-    aria-labelledby="{labelledby}" />
+  {#if multiline}
+    <textarea
+      class="input input--textarea"
+      {id}
+      bind:value
+      aria-labelledby="{labelledby}"
+      on:click
+      {...$$restProps}></textarea>
+  {:else}
+    <input
+      class="input"
+      type="text"
+      {id}
+      bind:value
+      aria-labelledby="{labelledby}"
+      on:click
+      {...$$restProps} />
+  {/if}
   {#if legend}
     <p class="legend">{legend}</p>
   {/if}

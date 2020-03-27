@@ -9,7 +9,7 @@
   }
 
   .title a {
-    @apply block px-2 py-4;
+    @apply block px-2 pt-4 pb-6;
   }
 
   .title a:hover,
@@ -46,6 +46,6 @@
     </a>
   </h1>
   <div class="button-set">
-    <button on:click="{() => paletteParams.add()}">Add Color</button>
+    <button on:click="{() => paletteParams.add()}">Add colors</button>
   </div>
 </header>

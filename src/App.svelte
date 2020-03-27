@@ -35,7 +35,7 @@
 
 <script>
   import "./global.css";
-  import Header from "./Header.svelte";
+  import SiteHeader from "./SiteHeader.svelte";
   import Palette from "./Palette.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Swatch from "./Swatch.svelte";
@@ -52,7 +52,7 @@
 </script>
 
 <main class="chrome">
-  <Header />
+  <SiteHeader />
   <div class="controls">
 
     <h2 id="steps-title">Steps</h2>

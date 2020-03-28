@@ -15,7 +15,7 @@ export const shareDialog = writable(false);
 export const settings = writable(
   urlState.settings || {
     overlayContrast: false,
-    overlayHex: false,
+    overlayHex: true,
     refColorsRaw: "",
     colorSpace: "hsluv",
   }

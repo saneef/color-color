@@ -1,6 +1,8 @@
 # color × color
 
-Color-color is inspired by [Colorbox](https://www.colorbox.io). You can generate more than set of color shades, and compare side by side. Also, you can use reference colors to tune-in your color scheme.
+Color-color is a tool to generate color shades. It uses [HSLuv](https://www.hsluv.org) color space by default. You can generate more than one set of shades, and compare side by side. Bring in your reference colors to tune-in the color schemes.
+
+[Designing accessible color systems](https://stripe.com/au/blog/accessible-color-systems) article by Stripe, and [Colorbox](https://www.colorbox.io) by Lyft Design inspired us.
 
 ## Get started
 

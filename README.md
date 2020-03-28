@@ -1,5 +1,7 @@
 # color × color
 
+Color-color is inspired by [Colorbox](https://www.colorbox.io). You can generate more than set of color shades, and compare side by side. Also, you can use reference colors to tune-in your color scheme.
+
 ## Get started
 
 Install the dependencies...

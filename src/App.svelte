@@ -37,6 +37,7 @@
   import ShareDialog from "./ShareDialog.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import ColorSpaceSelector from "./ColorSpaceSelector.svelte";
+  import SiteFooter from "./SiteFooter.svelte";
 
   import {
     paletteParams,
@@ -83,6 +84,7 @@
         label="WCAG Contrast"
         bind:checked="{$settings.overlayContrast}" />
     </ControlGroup>
+    <SiteFooter />
   </div>
   <div class="palettes">
     {#each $palettes as palette, j (j)}

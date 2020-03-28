@@ -8,7 +8,7 @@
   }
 
   button {
-    @apply flex flex-auto items-center p-4 pt-3 text-gray-600;
+    @apply flex items-center p-4 pt-3 text-gray-600;
     flex-grow: 0;
   }
 
@@ -19,11 +19,11 @@
   }
 
   .button-activate {
-    @apply text-gray-200 mr-auto;
+    @apply flex-auto text-gray-200 mr-auto;
   }
 
   .button-remove {
-    @apply text-3xl leading-none border-r-2;
+    @apply flex-none text-3xl leading-none border-r-2;
   }
 
   .status {

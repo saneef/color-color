@@ -19,11 +19,11 @@
   }
 
   .button-activate {
-    @apply text-gray-200;
+    @apply text-gray-200 mr-auto;
   }
 
   .button-remove {
-    @apply text-3xl leading-none;
+    @apply text-3xl leading-none border-r-2;
   }
 
   .status {

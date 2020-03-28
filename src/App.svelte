@@ -20,7 +20,7 @@
   }
 
   .controls {
-    @apply p-4 border-4 border-t-0 border-gray-900;
+    @apply p-4 pb-0 border-4 border-t-0 border-gray-900;
     grid-area: controls;
   }
 </style>

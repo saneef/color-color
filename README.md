@@ -1,4 +1,4 @@
-# color-color
+# color × color
 
 ## Get started
 

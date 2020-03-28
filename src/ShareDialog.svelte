@@ -20,7 +20,7 @@
   }
 
   button {
-    @apply flex flex-auto items-center p-4 pt-3 text-gray-600;
+    @apply flex flex-auto items-center p-4 pt-3 text-gray-900;
     flex-grow: 0;
   }
 
@@ -50,7 +50,7 @@
         on:click="{() => {
           $shareDialog = false;
         }}">
-        <Icon icon="cross" />
+        <Icon icon="cross" size="lg" />
       </button>
     </div>
     <div class="content">

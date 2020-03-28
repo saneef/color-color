@@ -9,7 +9,7 @@
   }
 
   .title a {
-    @apply block px-2 pt-4 pb-6;
+    @apply block px-2 pt-4 pb-6 text-gray-100 bg-gray-900;
   }
 
   .title a:hover,

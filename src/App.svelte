@@ -90,6 +90,7 @@
     {#each $palettes as palette, j (j)}
       <Palette
         active="{$paletteParams.current === j}"
+        index="{j + 1}"
         on:clickActivate="{() => {
           $paletteParams.current = palette.id;
         }}"

@@ -27,7 +27,7 @@
   }
 
   .status {
-    @apply relative flex items-center justify-center w-8 h-8 border-2 border-gray-900 rounded-full text-transparent;
+    @apply relative flex items-center justify-center w-8 h-8 border-2 border-gray-900 rounded-full text-gray-900;
   }
 
   .active {
@@ -51,6 +51,7 @@
 
   export let active = false;
   export let removable = true;
+  export let index;
 
   const dispatch = createEventDispatcher();
 
@@ -70,9 +71,7 @@
       class:active
       on:click="{onActivate}"
       title="{active ? 'Activate' : 'Deactivate'}">
-      <span class="status">
-        <Icon icon="flash" />
-      </span>
+      <span class="status">{index}</span>
     </button>
     {#if removable}
       <button class="button-remove" on:click="{onRemove}" title="Remove">

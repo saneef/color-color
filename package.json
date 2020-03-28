@@ -1,10 +1,15 @@
 {
-  "name": "svelte-app",
+  "name": "color-color-app",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:saneef/color-color.git"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",

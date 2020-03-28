@@ -27,10 +27,6 @@
     @apply p-4 border-4 border-t-0 border-gray-900;
     grid-area: controls;
   }
-
-  .control-set {
-    @apply mt-4 pt-4 border-t border-gray-500;
-  }
 </style>
 
 <script>
@@ -43,6 +39,7 @@
   import Checkbox from "./Checkbox.svelte";
   import TextField from "./TextField.svelte";
   import ShareDialog from "./ShareDialog.svelte";
+  import ControlGroup from "./ControlGroup.svelte";
 
   import {
     paletteParams,
@@ -72,22 +69,22 @@
 
     <PaletteKnobs />
 
-    <div class="control-set">
+    <ControlGroup>
       <h2 id="ref-colors">Reference colors</h2>
       <TextField
         labelledby="ref-colors"
         id="ref-colors-input"
         bind:value="{$settings.refColorsRaw}"
         legend="Comma seperated list of hex color codes." />
-    </div>
+    </ControlGroup>
 
-    <div class="control-set">
+    <ControlGroup>
       <h2>Overlay</h2>
       <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />
       <Checkbox
         label="WCAG Contrast"
         bind:checked="{$settings.overlayContrast}" />
-    </div>
+    </ControlGroup>
   </div>
   <div class="palettes">
     {#each $palettes as palette, j (j)}

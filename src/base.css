@@ -1,12 +1,12 @@
 html,
 body {
-	@apply w-full h-full;
+  @apply w-full h-full;
 }
 
 html {
-	@apply text-gray-900 text-base;
+  @apply text-gray-900 text-base;
 }
 
 body {
-	@apply bg-gray-200;
+  @apply bg-gray-200;
 }

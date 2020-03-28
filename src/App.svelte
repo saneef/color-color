@@ -1,8 +1,4 @@
 <style>
-  h2 {
-    @apply text-lg font-bold;
-  }
-
   .chrome {
     @apply w-screen h-screen grid;
     grid-template-rows: max-content 1fr;
@@ -59,18 +55,18 @@
 <main class="chrome">
   <SiteHeader />
   <div class="controls">
-    <h2 id="steps-title">Steps</h2>
-    <RangeField
-      id="steps-range"
-      labelledby="steps-title"
-      bind:value="{$steps}"
-      min="3"
-      max="21" />
+    <ControlGroup title="Steps" titleId="steps-title">
+      <RangeField
+        id="steps-range"
+        labelledby="steps-title"
+        bind:value="{$steps}"
+        min="3"
+        max="21" />
+    </ControlGroup>
 
     <PaletteKnobs />
 
-    <ControlGroup>
-      <h2 id="ref-colors">Reference colors</h2>
+    <ControlGroup title="Reference colors" titleId="ref-colors">
       <TextField
         labelledby="ref-colors"
         id="ref-colors-input"
@@ -78,8 +74,7 @@
         legend="Comma seperated list of hex color codes." />
     </ControlGroup>
 
-    <ControlGroup>
-      <h2>Overlay</h2>
+    <ControlGroup title="Overlay">
       <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />
       <Checkbox
         label="WCAG Contrast"

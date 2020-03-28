@@ -11,5 +11,10 @@ export const getBaseUrl = () => {
 export const getStateFromUrl = () => {
   const data = window.location.hash.substr(1);
   if (data === "") return {};
-  return jsoun.decode(data);
+  try {
+    return jsoun.decode(data);
+  } catch (e) {
+    console.error("Unable to parse state from URL", e);
+    return {};
+  }
 };

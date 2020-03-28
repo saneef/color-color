@@ -10,9 +10,14 @@
   }
 </style>
 
+<script>
+  import { getBaseUrl } from "./lib/url";
+</script>
+
 <footer>
-  Mady by
+  <a href="{getBaseUrl()}">color × color</a>
+  by
   <a href="https://saneef.com">Saneef</a>
-  ·
+  <br />
   <a href="https://github.com/saneef/color-color">Github</a>
 </footer>

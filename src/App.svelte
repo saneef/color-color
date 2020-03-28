@@ -73,7 +73,8 @@
         labelledby="ref-colors"
         id="ref-colors-input"
         bind:value="{$settings.refColorsRaw}"
-        legend="Comma seperated list of hex color codes." />
+        legend="Comma seperated list of hex color codes."
+        placeholder="#e8a386, #4681a5, #f20,..." />
     </ControlGroup>
 
     <ColorSpaceSelector />

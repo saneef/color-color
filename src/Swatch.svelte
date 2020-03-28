@@ -36,11 +36,11 @@
   }
 
   .ref-swatch {
-    @apply block w-5 h-5 rounded border-b-2 border-gray-300;
+    @apply block w-5 h-5 rounded border-t-2 border-gray-300;
   }
 
   .ref-swatch--light {
-    @apply border-gray-700;
+    @apply border-b-2 border-t-0 border-gray-700;
   }
 
   .ref-swatch + .ref-swatch {

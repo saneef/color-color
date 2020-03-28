@@ -36,6 +36,7 @@
   import TextField from "./TextField.svelte";
   import ShareDialog from "./ShareDialog.svelte";
   import ControlGroup from "./ControlGroup.svelte";
+  import ColorSpaceSelector from "./ColorSpaceSelector.svelte";
 
   import {
     paletteParams,
@@ -73,6 +74,8 @@
         bind:value="{$settings.refColorsRaw}"
         legend="Comma seperated list of hex color codes." />
     </ControlGroup>
+
+    <ColorSpaceSelector />
 
     <ControlGroup title="Overlay">
       <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />

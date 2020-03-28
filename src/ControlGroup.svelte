@@ -10,7 +10,7 @@
 
 <script>
   export let title = null;
-  export let titleId;
+  export let titleId = null;
 </script>
 
 <div class="control-group">

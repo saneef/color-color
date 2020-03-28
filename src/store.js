@@ -1,12 +1,10 @@
 import { writable, derived } from "svelte/store";
 import eases from "eases";
-import hsluv from "hsluv";
 import chroma from "chroma-js";
 import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
 import { getBaseUrl, getStateFromUrl } from "./lib/url";
-
-const hsluvToHex = hsluv.hsluvToHex;
+import { hslToHex } from "./lib/colors";
 
 const urlState = getStateFromUrl();
 
@@ -19,6 +17,7 @@ export const settings = writable(
     overlayContrast: false,
     overlayHex: false,
     refColorsRaw: "",
+    colorSpace: "hsluv",
   }
 );
 
@@ -84,8 +83,8 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
   easeFn(currentStep / totalStep) * currentStep;
 
 export const palettes = derived(
-  [steps, paletteParams],
-  ([$steps, $paletteParams]) =>
+  [steps, paletteParams, settings],
+  ([$steps, $paletteParams, $settings]) =>
     $paletteParams.params.map((pal, id) => {
       const { hue, sat, lig } = pal;
       const hUnit = (hue.end - hue.start) / $steps;
@@ -96,7 +95,7 @@ export const palettes = derived(
         const h = hue.start + easeSteps(eases[hue.ease], i + 1, $steps) * hUnit;
         const s = sat.start + easeSteps(eases[sat.ease], i + 1, $steps) * sUnit;
         const l = lig.start + easeSteps(eases[lig.ease], i + 1, $steps) * lUnit;
-        const hex = hsluvToHex([h, s, l]);
+        const hex = hslToHex(h, s, l, $settings.colorSpace);
         const id = (i + 1) * ($steps > 9 ? 10 : 100);
         return {
           id,

@@ -1,6 +1,6 @@
 <style>
   footer {
-    @apply -mx-4 mt-4 p-4 text-center text-gray-100 bg-gray-900;
+    @apply -mx-4 mt-4 p-4 text-center text-gray-100 bg-gray-900 leading-loose;
   }
 
   a:hover,

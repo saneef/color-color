@@ -16,7 +16,7 @@
   }
 
   .input--textarea {
-    @apply h-32 resize-none;
+    @apply h-48 resize-none;
   }
 
   .legend {

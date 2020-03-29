@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
+    "change-case": "^4.1.1",
     "chroma-js": "^2.1.0",
     "cssnano": "^4.1.10",
     "eases": "^1.0.8",

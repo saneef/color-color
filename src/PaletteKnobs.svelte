@@ -33,13 +33,11 @@
 </style>
 
 <script>
-  import eases from "eases";
-  import { paletteParams } from "./store";
+  import { headerCase } from "change-case";
+  import { paletteParams, config } from "./store";
   import SelectField from "./SelectField.svelte";
   import RangeField from "./RangeField.svelte";
   import ControlGroup from "./ControlGroup.svelte";
-
-  const easeOptions = Object.keys(eases);
 
   let current = 0;
   let paletteIndex = [];
@@ -70,20 +68,22 @@
       id="hue-start"
       label="Start"
       bind:value="{$paletteParams.params[current].hue.start}"
-      min="0"
-      max="360" />
+      min="{$config.limits.hue[0]}"
+      max="{$config.limits.hue[1]}"
+      step="{$config.resolution}" />
     <RangeField
       id="hue-end"
       label="End"
       bind:value="{$paletteParams.params[current].hue.end}"
-      min="0"
-      max="360" />
+      min="{$config.limits.hue[0]}"
+      max="{$config.limits.hue[1]}"
+      step="{$config.resolution}" />
     <SelectField
       id="hue-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].hue.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
+      {#each $config.eases as ease}
+        <option value="{ease}">{headerCase(ease)}</option>
       {/each}
     </SelectField>
   </ControlGroup>
@@ -94,21 +94,23 @@
       id="sat-start"
       label="Start"
       bind:value="{$paletteParams.params[current].sat.start}"
-      min="0"
-      max="100" />
+      min="{$config.limits.sat[0]}"
+      max="{$config.limits.sat[1]}"
+      step="{$config.resolution}" />
 
     <RangeField
       id="sat-end"
       label="End"
       bind:value="{$paletteParams.params[current].sat.end}"
-      min="0"
-      max="100" />
+      min="{$config.limits.sat[0]}"
+      max="{$config.limits.sat[1]}"
+      step="{$config.resolution}" />
     <SelectField
       id="sat-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].sat.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
+      {#each $config.eases as ease}
+        <option value="{ease}">{headerCase(ease)}</option>
       {/each}
     </SelectField>
   </ControlGroup>
@@ -119,21 +121,23 @@
       id="lig-start"
       label="Start"
       bind:value="{$paletteParams.params[current].lig.start}"
-      min="0"
-      max="100" />
+      min="{$config.limits.lig[0]}"
+      max="{$config.limits.lig[1]}"
+      step="{$config.resolution}" />
 
     <RangeField
       id="lig-end"
       label="End"
       bind:value="{$paletteParams.params[current].lig.end}"
-      min="0"
-      max="100" />
+      min="{$config.limits.lig[0]}"
+      max="{$config.limits.lig[1]}"
+      step="{$config.resolution}" />
     <SelectField
       id="lig-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].lig.ease}">
-      {#each easeOptions as ease}
-        <option value="{ease}">{ease}</option>
+      {#each $config.eases as ease}
+        <option value="{ease}">{headerCase(ease)}</option>
       {/each}
     </SelectField>
   </ControlGroup>

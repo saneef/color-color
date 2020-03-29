@@ -1,4 +1,4 @@
-import { writable, derived } from "svelte/store";
+import { writable, derived, readable } from "svelte/store";
 import eases from "eases";
 import chroma from "chroma-js";
 import jsoun from "jsoun";
@@ -7,6 +7,30 @@ import { getBaseUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex } from "./lib/colors";
 
 const urlState = getStateFromUrl();
+
+// These eases are not very useful to generate
+// colour schemes.
+const easesBlacklist = [
+  "backInOut",
+  "backIn",
+  "backOut",
+  "elasticInOut",
+  "elasticIn",
+  "elasticOut",
+  "bounceInOut",
+  "bounceIn",
+  "bounceOut",
+];
+
+export const config = readable({
+  eases: Object.keys(eases).filter(e => !easesBlacklist.includes(e)),
+  resolution: 0.25,
+  limits: {
+    hue: [0, 360],
+    sat: [0, 100],
+    lig: [0, 100],
+  },
+});
 
 export const steps = writable(urlState.steps || 10);
 

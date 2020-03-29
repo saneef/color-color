@@ -6,6 +6,7 @@ import html from "@rollup/plugin-html";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
+import { template } from "./html-template.js";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -68,7 +69,16 @@ export default {
       }),
 
     html({
+      template,
       title: "color × color",
+      attributes: {
+        html: { lang: "en" },
+        link: null,
+        script: {
+          async: "async",
+          defer: "defer",
+        },
+      },
     }),
   ],
   watch: {

@@ -15,7 +15,7 @@
   .hex-code,
   .w-contrast,
   .b-contrast,
-  .ref-swatches {
+  .refColor {
     @apply px-4 font-mono;
   }
 
@@ -30,27 +30,13 @@
   .label {
     @apply font-bold mr-auto;
   }
-
-  .ref-swatches {
-    @apply flex;
-  }
-
-  .ref-swatch {
-    @apply block w-5 h-5 rounded border-t-2 border-gray-300;
-  }
-
-  .ref-swatch--light {
-    @apply border-b-2 border-t-0 border-gray-700;
-  }
-
-  .ref-swatch + .ref-swatch {
-    @apply -ml-2;
-  }
 </style>
 
 <script>
   import chroma from "chroma-js";
   import { settings, nearestRefColors } from "./store.js";
+  import TinySwatch from "./TinySwatch.svelte";
+
   export let hexCode = "#000";
   export let label = "";
   export let fillHeight = false;
@@ -58,15 +44,16 @@
   let isLight = false;
   let whiteContrast = 0;
   let blackContrast = 0;
-  let refColors = [];
+  let refColor;
 
   $: isLight = chroma(hexCode).luminance() > 0.6;
   $: whiteContrast =
     $settings.overlayContrast && chroma.contrast("#fff", hexCode);
   $: blackContrast =
     $settings.overlayContrast && chroma.contrast("#000", hexCode);
+  $: refColor = $nearestRefColors[hexCode];
 
-  $: refColors = $nearestRefColors[hexCode] ? [$nearestRefColors[hexCode]] : [];
+  $: console.log($nearestRefColors);
 </script>
 
 <div
@@ -75,15 +62,10 @@
   class:isLight
   style="background-color:{hexCode}">
   <span class="label">{label}</span>
-  {#if refColors.length}
-    <ul class="ref-swatches">
-      {#each refColors as c, i (c + i)}
-        <li
-          class="ref-swatch"
-          class:ref-swatch--light="{isLight}"
-          style="background-color: {c}"></li>
-      {/each}
-    </ul>
+  {#if refColor}
+    <div class="refColor">
+      <TinySwatch color="{refColor}" {isLight} />
+    </div>
   {/if}
   {#if $settings.overlayContrast}
     <span class="b-contrast">{blackContrast.toFixed(2)}b</span>

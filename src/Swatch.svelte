@@ -52,8 +52,6 @@
   $: blackContrast =
     $settings.overlayContrast && chroma.contrast("#000", hexCode);
   $: refColor = $nearestRefColors[hexCode];
-
-  $: console.log($nearestRefColors);
 </script>
 
 <div
@@ -64,7 +62,7 @@
   <span class="label">{label}</span>
   {#if refColor}
     <div class="refColor">
-      <TinySwatch color="{refColor}" {isLight} />
+      <TinySwatch color="{refColor}" />
     </div>
   {/if}
   {#if $settings.overlayContrast}

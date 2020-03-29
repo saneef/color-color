@@ -15,7 +15,11 @@
   }
 
   .value {
-    @apply flex-none w-10 text-right;
+    @apply flex-none w-16 text-right;
+  }
+
+  .shortValue {
+    @apply w-10;
   }
 </style>
 
@@ -24,6 +28,12 @@
   export let label = null;
   export let labelledby = null;
   export let value;
+  export let step = 1;
+
+  let shortValue = false;
+
+  $: shortValue = step === 1;
+  $: valueText = shortValue ? value : value.toFixed(2);
 </script>
 
 <div class="root">
@@ -36,8 +46,9 @@
       aria-labelledby="{labelledby}"
       class="input"
       {id}
+      {step}
       bind:value
       {...$$restProps} />
-    <div class="value">{value}</div>
+    <div class="value" class:shortValue>{valueText}</div>
   </div>
 </div>

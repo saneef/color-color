@@ -130,7 +130,7 @@ export const nearestRefColors = derived(
       $palettes.forEach(p =>
         p.swatches.forEach(swatch => {
           const { hex } = swatch;
-          const dist = chroma.distance(rc, hex);
+          const dist = chroma.distance(rc, hex, "rgb");
           if (refs[rc].hex === undefined || refs[rc].dist > dist) {
             refs[rc].hex = hex;
             refs[rc].dist = dist;

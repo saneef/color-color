@@ -33,10 +33,10 @@
   import Swatch from "./Swatch.svelte";
   import RangeField from "./RangeField.svelte";
   import Checkbox from "./Checkbox.svelte";
-  import TextField from "./TextField.svelte";
   import ShareDialog from "./ShareDialog.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import ColorSpaceSelector from "./ColorSpaceSelector.svelte";
+  import ReferenceColorFieldGroup from "./ReferenceColorFieldGroup.svelte";
   import SiteFooter from "./SiteFooter.svelte";
 
   import {
@@ -68,14 +68,7 @@
 
     <PaletteKnobs />
 
-    <ControlGroup title="Reference colors" titleId="ref-colors">
-      <TextField
-        labelledby="ref-colors"
-        id="ref-colors-input"
-        bind:value="{$settings.refColorsRaw}"
-        legend="Comma seperated list of hex color codes."
-        placeholder="#e8a386, #4681a5, #f20,..." />
-    </ControlGroup>
+    <ReferenceColorFieldGroup />
 
     <ColorSpaceSelector />
 

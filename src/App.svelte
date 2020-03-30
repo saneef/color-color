@@ -8,96 +8,37 @@
       "controls palettes  graphs";
   }
 
-  .controls,
-  .palettes {
-    @apply overflow-y-auto overflow-x-hidden;
-  }
-
-  .palettes {
-    @apply grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    grid-area: palettes / span 2;
-  }
-
   .controls {
-    @apply p-4 pb-0 border-4 border-t-0 border-gray-900;
+    @apply p-4 pb-0 overflow-y-auto overflow-x-hidden border-4 border-t-0 border-gray-900;
     grid-area: controls;
   }
 </style>
 
 <script>
   import "./global.css";
-  import SiteHeader from "./SiteHeader.svelte";
-  import Palette from "./Palette.svelte";
-  import PaletteKnobs from "./PaletteKnobs.svelte";
-  import Swatch from "./Swatch.svelte";
-  import RangeField from "./RangeField.svelte";
-  import Checkbox from "./Checkbox.svelte";
-  import ShareDialog from "./ShareDialog.svelte";
-  import ControlGroup from "./ControlGroup.svelte";
   import ColorSpaceSelector from "./ColorSpaceSelector.svelte";
+  import OverlayKnobs from "./OverlayKnobs.svelte";
+  import PaletteKnobs from "./PaletteKnobs.svelte";
+  import Palettes from "./Palettes.svelte";
   import ReferenceColorFieldGroup from "./ReferenceColorFieldGroup.svelte";
+  import ShareDialog from "./ShareDialog.svelte";
   import SiteFooter from "./SiteFooter.svelte";
-
-  import {
-    paletteParams,
-    steps,
-    palettes,
-    settings,
-    shareDialog,
-  } from "./store";
-
-  function confirmAndDelete(id) {
-    if (window.confirm("Are you sure you want to delete?")) {
-      paletteParams.removeByIndex(id);
-    }
-  }
+  import SiteHeader from "./SiteHeader.svelte";
+  import StepsKnob from "./StepsKnob.svelte";
+  import { shareDialog } from "./store";
 </script>
 
 <main class="chrome">
-  <SiteHeader />
+  <SiteHeader gridArea="header" />
   <div class="controls">
-    <ControlGroup title="Steps" titleId="steps-title">
-      <RangeField
-        id="steps-range"
-        labelledby="steps-title"
-        bind:value="{$steps}"
-        min="3"
-        max="21" />
-    </ControlGroup>
-
+    <StepsKnob />
     <PaletteKnobs />
-
     <ReferenceColorFieldGroup />
-
     <ColorSpaceSelector />
-
-    <ControlGroup title="Overlay">
-      <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />
-      <Checkbox
-        label="WCAG Contrast"
-        bind:checked="{$settings.overlayContrast}" />
-    </ControlGroup>
+    <OverlayKnobs />
     <SiteFooter />
   </div>
-  <div class="palettes">
-    {#each $palettes as palette, j (j)}
-      <Palette
-        active="{$paletteParams.current === j}"
-        index="{j + 1}"
-        on:clickActivate="{() => {
-          $paletteParams.current = palette.id;
-        }}"
-        on:clickRemove="{() => {
-          confirmAndDelete(palette.id);
-        }}"
-        removable="{$palettes.length > 1}">
-        {#each palette.swatches as color, i (i)}
-          <Swatch fillHeight hexCode="{color.hex}" label="{color.id}" />
-        {/each}
-      </Palette>
-    {/each}
-  </div>
+  <Palettes gridArea="palettes / span 2" />
 </main>
 
 {#if $shareDialog}

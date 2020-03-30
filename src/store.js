@@ -32,8 +32,6 @@ export const config = readable({
   },
 });
 
-export const steps = writable(urlState.steps || 9);
-
 export const shareDialog = writable(false);
 
 export const settings = writable(
@@ -45,11 +43,13 @@ export const settings = writable(
   }
 );
 
+const defaultSteps = 9;
 function createPaletteParams() {
   const { subscribe, set, update } = writable(
     urlState.paletteParams || {
+      steps: defaultSteps,
       paletteIndex: 0,
-      swatchIndex: 0,
+      swatchIndex: Math.floor(defaultSteps / 2),
       params: [
         {
           hue: { start: 230, end: 254, ease: "quadIn" },
@@ -100,7 +100,17 @@ function createPaletteParams() {
       return pp;
     });
 
-  return { subscribe, set, update, removeByIndex, add };
+  const checkAndSet = obj => {
+    const { swatchIndex, steps } = obj;
+
+    if (swatchIndex >= steps) {
+      obj.swatchIndex = steps - 1;
+    }
+
+    set(obj);
+  };
+
+  return { subscribe, set: checkAndSet, update, removeByIndex, add };
 }
 export const paletteParams = createPaletteParams();
 
@@ -108,20 +118,21 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
   easeFn(currentStep / totalStep) * currentStep;
 
 export const palettes = derived(
-  [steps, paletteParams, settings],
-  ([$steps, $paletteParams, $settings]) =>
-    $paletteParams.params.map(pal => {
+  [paletteParams, settings],
+  ([$paletteParams, $settings]) => {
+    const steps = $paletteParams.steps;
+    return $paletteParams.params.map(pal => {
       const { hue, sat, lig } = pal;
-      const hUnit = (hue.end - hue.start) / $steps;
-      const sUnit = (sat.end - sat.start) / $steps;
-      const lUnit = (lig.end - lig.start) / $steps;
+      const hUnit = (hue.end - hue.start) / steps;
+      const sUnit = (sat.end - sat.start) / steps;
+      const lUnit = (lig.end - lig.start) / steps;
 
-      const swatches = Array.from({ length: $steps }).map((_, i) => {
-        const h = hue.start + easeSteps(eases[hue.ease], i + 1, $steps) * hUnit;
-        const s = sat.start + easeSteps(eases[sat.ease], i + 1, $steps) * sUnit;
-        const l = lig.start + easeSteps(eases[lig.ease], i + 1, $steps) * lUnit;
+      const swatches = Array.from({ length: steps }).map((_, i) => {
+        const h = hue.start + easeSteps(eases[hue.ease], i + 1, steps) * hUnit;
+        const s = sat.start + easeSteps(eases[sat.ease], i + 1, steps) * sUnit;
+        const l = lig.start + easeSteps(eases[lig.ease], i + 1, steps) * lUnit;
         const hex = hslToHex(h, s, l, $settings.colorSpace);
-        const id = (i + 1) * ($steps > 9 ? 10 : 100);
+        const id = (i + 1) * (steps > 9 ? 10 : 100);
         return {
           id: id.toString(),
           h,
@@ -132,7 +143,8 @@ export const palettes = derived(
       });
 
       return swatches;
-    })
+    });
+  }
 );
 
 export const swatchesGroupedById = derived([palettes], ([$palettes]) => {
@@ -208,10 +220,9 @@ export const nearestRefColors = derived(
 );
 
 export const shareState = derived(
-  [settings, steps, paletteParams, palettes],
-  ([$settings, $steps, $paletteParams, $palettes]) => {
+  [settings, paletteParams, palettes],
+  ([$settings, $paletteParams, $palettes]) => {
     const state = {
-      steps: $steps,
       paletteParams: $paletteParams,
       settings: $settings,
     };

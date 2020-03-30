@@ -1,7 +1,7 @@
 <style>
   .header {
     @apply border-4 border-gray-900;
-    grid-area: header;
+    grid-area: var(--grid-area);
   }
 
   .title {
@@ -39,9 +39,10 @@
 
 <script>
   import { paletteParams, shareDialog } from "./store";
+  export let gridArea;
 </script>
 
-<header class="header">
+<header class="header" style="--grid-area:{gridArea};">
   <h1 class="title">
     <a href="/">
       color 

@@ -42,7 +42,7 @@
   let current = 0;
   let paletteIndex = [];
 
-  $: current = $paletteParams.current;
+  $: current = $paletteParams.paletteIndex;
   $: paletteIndex = $paletteParams.params.map((_, i) => i);
 </script>
 
@@ -55,7 +55,7 @@
           class:index-marker--active="{current === i}"
           href="#{i + 1}"
           on:click|preventDefault="{() => {
-            $paletteParams.current = i;
+            $paletteParams.paletteIndex = i;
           }}">
           {i + 1}
         </a>

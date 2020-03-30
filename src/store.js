@@ -48,7 +48,8 @@ export const settings = writable(
 function createPaletteParams() {
   const { subscribe, set, update } = writable(
     urlState.paletteParams || {
-      current: 0,
+      paletteIndex: 0,
+      swatchIndex: 0,
       params: [
         {
           hue: { start: 230, end: 254, ease: "quadIn" },
@@ -73,8 +74,8 @@ function createPaletteParams() {
     update(pp => {
       if (pp.params.length > 1) {
         pp.params = pp.params.filter((_, i) => i !== index);
-        if (pp.current > index) {
-          pp.current = pp.current - 1;
+        if (pp.paletteIndex > index) {
+          pp.paletteIndex = pp.paletteIndex - 1;
         }
       }
       return pp;
@@ -92,7 +93,7 @@ function createPaletteParams() {
           lig: { start: 100, end: 5, ease: "quadOut" },
         };
 
-        pp.current = pp.params.length;
+        pp.paletteIndex = pp.params.length;
         pp.params = [...pp.params, param];
       }
 

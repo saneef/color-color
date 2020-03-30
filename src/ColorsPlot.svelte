@@ -4,7 +4,7 @@
   }
 
   .wrapper {
-    @apply mt-2 p-2 rounded bg-gray-100;
+    @apply mt-2 p-1 bg-gray-100;
   }
 
   svg {
@@ -22,14 +22,22 @@
     stroke-width: var(--stroke-width);
     stroke-linejoin: round;
   }
+
+  .axis line {
+    stroke: #e2e8f0; /* border-gray-300 */
+    stroke-width: var(--stroke-width);
+    stroke-dasharray: 4 4;
+  }
 </style>
 
 <script>
   import { scaleLinear, scalePoint, line, curveCardinal } from "d3";
+  import { linspace } from "./lib/math.js";
 
   export let data = [];
   export let title;
   export let yDomain = [0, 100];
+  export let yTickDivisions = 4;
 
   const strokeWidth = 2;
   const r = 6;
@@ -51,6 +59,7 @@
     .domain(yDomain)
     .range([innerHeight, 0]);
 
+  $: yTicks = linspace(yTickDivisions).map(v => v * yDomain[1]);
   $: lineGenerator = line()
     .x(d => xScale(d.x))
     .y(d => yScale(d.y))
@@ -66,6 +75,22 @@
       {height}"
       style="--circ-stroke-width: {strokeWidth}">
       <g transform="{`translate(${margin.x},${margin.y})`}">
+        <g class="axis y-axis">
+          {#each yTicks as tick}
+            <g transform="translate(0, {yScale(tick)})">
+              <line x1="{0}" x2="{innerWidth}"></line>
+            </g>
+          {/each}
+        </g>
+
+        <g class="axis x-axis">
+          {#each data as s, i (i)}
+            <g transform="translate({xScale(s.x)}, 0)">
+              <line y1="{0}" y2="{innerHeight}"></line>
+            </g>
+          {/each}
+        </g>
+
         <path class="line-path" d="{pathD}"></path>
         {#each data as s, i (i)}
           <circle

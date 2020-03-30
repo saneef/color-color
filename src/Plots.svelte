@@ -54,6 +54,7 @@
       <ColorsPlot
         title="Hue"
         yDomain="{$config.limits.hue}"
+        yTickDivisions="{6}"
         data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
     </ControlGroup>
     <ControlGroup>
@@ -75,6 +76,7 @@
       <ColorsPlot
         title="Hue"
         yDomain="{$config.limits.hue}"
+        yTickDivisions="{6}"
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.h,

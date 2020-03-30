@@ -123,7 +123,7 @@ export const palettes = derived(
         const hex = hslToHex(h, s, l, $settings.colorSpace);
         const id = (i + 1) * ($steps > 9 ? 10 : 100);
         return {
-          id,
+          id: id.toString(),
           h,
           s,
           l,

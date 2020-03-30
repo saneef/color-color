@@ -22,15 +22,27 @@
 </style>
 
 <script>
+  import ColorsPlot from "./ColorsPlot.svelte";
+  import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
-  import { paletteParams, swatchesGroupedById } from "./store";
+  import {
+    paletteParams,
+    swatchesGroupedById,
+    palettes,
+    config,
+  } from "./store";
 
   export let gridArea;
 
+  let currentPalette = [];
   let currentSwatchId = "";
+  let currentSwatchSet = [];
+
+  $: currentPalette = $palettes[$paletteParams.paletteIndex];
 
   $: currentSwatchId =
     $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
+  $: currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
 </script>
 
 <div class="plots" style="--grid-area: {gridArea};">
@@ -38,8 +50,56 @@
     <div class="palette-selector">
       <PaletteSelector />
     </div>
+    <ControlGroup>
+      <ColorsPlot
+        title="Hue"
+        yDomain="{$config.limits.hue}"
+        data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Saturation"
+        yDomain="{$config.limits.sat}"
+        data="{currentPalette.map(s => ({ x: s.id, y: s.s, hex: s.hex }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Lightness"
+        yDomain="{$config.limits.lig}"
+        data="{currentPalette.map(s => ({ x: s.id, y: s.l, hex: s.hex }))}" />
+    </ControlGroup>
   </div>
   <div class="plot-group">
     <h2>{currentSwatchId}</h2>
+    <ControlGroup>
+      <ColorsPlot
+        title="Hue"
+        yDomain="{$config.limits.hue}"
+        data="{currentSwatchSet.map(s => ({
+          x: (s.paletteIndex + 1).toString(),
+          y: s.h,
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Saturation"
+        yDomain="{$config.limits.sat}"
+        data="{currentSwatchSet.map(s => ({
+          x: (s.paletteIndex + 1).toString(),
+          y: s.s,
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Lightness"
+        yDomain="{$config.limits.lig}"
+        data="{currentSwatchSet.map(s => ({
+          x: (s.paletteIndex + 1).toString(),
+          y: s.l,
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
   </div>
 </div>

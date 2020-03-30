@@ -8,10 +8,9 @@
   }
 
   .fillHeight {
-    @apply flex-auto;
+    @apply flex-1;
   }
 
-  .label,
   .hex-code,
   .w-contrast,
   .b-contrast,
@@ -27,8 +26,8 @@
     @apply text-black;
   }
 
-  .label {
-    @apply font-bold mr-auto;
+  .hex-code {
+    @apply mr-auto;
   }
 </style>
 
@@ -38,7 +37,6 @@
   import TinySwatch from "./TinySwatch.svelte";
 
   export let hexCode = "#000";
-  export let label = "";
   export let fillHeight = false;
 
   let isLight = false;
@@ -59,7 +57,9 @@
   class:fillHeight
   class:isLight
   style="background-color:{hexCode}">
-  <span class="label">{label}</span>
+  {#if $settings.overlayHex}
+    <span class="hex-code">{hexCode}</span>
+  {/if}
   {#if refColor}
     <div class="refColor">
       <TinySwatch color="{refColor}" />
@@ -68,8 +68,5 @@
   {#if $settings.overlayContrast}
     <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
     <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
-  {/if}
-  {#if $settings.overlayHex}
-    <span class="hex-code">{hexCode}</span>
   {/if}
 </div>

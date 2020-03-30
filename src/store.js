@@ -32,7 +32,7 @@ export const config = readable({
   },
 });
 
-export const steps = writable(urlState.steps || 10);
+export const steps = writable(urlState.steps || 9);
 
 export const shareDialog = writable(false);
 
@@ -110,7 +110,7 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
 export const palettes = derived(
   [steps, paletteParams, settings],
   ([$steps, $paletteParams, $settings]) =>
-    $paletteParams.params.map((pal, id) => {
+    $paletteParams.params.map(pal => {
       const { hue, sat, lig } = pal;
       const hUnit = (hue.end - hue.start) / $steps;
       const sUnit = (sat.end - sat.start) / $steps;
@@ -131,9 +131,39 @@ export const palettes = derived(
         };
       });
 
-      return { id, swatches };
+      return swatches;
     })
 );
+
+export const swatchesGroupedById = derived([palettes], ([$palettes]) => {
+  const groupedBySwatchId = $palettes
+    .map((palette, i) => {
+      return palette.map(swatch => {
+        const { id: swatchId, ...rest } = swatch;
+        return {
+          ...rest,
+          paletteIndex: i,
+          swatchId,
+        };
+      });
+    })
+    .flat()
+    .reduce(
+      (acc, swatch) => ({
+        ...acc,
+        [swatch.swatchId]: [
+          ...(acc[swatch.swatchId] ? acc[swatch.swatchId] : []),
+          swatch,
+        ],
+      }),
+      {}
+    );
+
+  return Object.keys(groupedBySwatchId).reduce((acc, swatchId, i) => {
+    acc[i] = groupedBySwatchId[swatchId];
+    return acc;
+  }, []);
+});
 
 const hexRe = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/;
 
@@ -153,7 +183,7 @@ export const nearestRefColors = derived(
 
     $refColors.forEach(rc => {
       $palettes.forEach(p =>
-        p.swatches.forEach(swatch => {
+        p.forEach(swatch => {
           const { hex } = swatch;
           const dist = chroma.distance(rc, hex, "rgb");
           if (refs[rc].hex === undefined || refs[rc].dist > dist) {
@@ -188,7 +218,7 @@ export const shareState = derived(
     const encodedState = jsoun.encode(state);
 
     const paletteJson = $palettes.reduce((pacc, p, i) => {
-      const palette = p.swatches.reduce((acc, s) => {
+      const palette = p.reduce((acc, s) => {
         return { ...acc, [s.id]: s.hex };
       }, {});
       return { ...pacc, [`color-${i + 1}`]: palette };

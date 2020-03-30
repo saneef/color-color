@@ -62,20 +62,20 @@
       active="{$paletteParams.paletteIndex === j}"
       index="{j + 1}"
       on:clickActivate="{() => {
-        $paletteParams.paletteIndex = palette.id;
+        $paletteParams.paletteIndex = j;
       }}"
       on:clickRemove="{() => {
-        confirmAndDelete(palette.id);
+        confirmAndDelete(j);
       }}"
       removable="{$palettes.length > 1}">
-      {#each palette.swatches as color, i (i)}
+      {#each palette as color, i (i)}
         <Swatch fillHeight hexCode="{color.hex}" />
       {/each}
     </Palette>
   {/each}
   <div class="ids">
     <div class="ids__header">&nbsp;</div>
-    {#each $palettes[0].swatches as color, i (i)}
+    {#each $palettes[0] as color, i (i)}
       <button
         on:click="{() => {
           $paletteParams.swatchIndex = i;

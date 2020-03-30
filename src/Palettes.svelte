@@ -1,8 +1,42 @@
 <style>
   .palettes {
-    @apply grid overflow-y-auto overflow-x-hidden;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    @apply grid overflow-y-auto overflow-x-hidden border-4 border-l-0 border-gray-900;
+    grid-template-columns: repeat(var(--columns), 1fr) max-content;
     grid-area: var(--grid-area);
+  }
+
+  .ids {
+    @apply flex flex-col;
+  }
+
+  .ids__header {
+    @apply sticky top-0 z-10 h-16 flex-none flex bg-gray-200;
+  }
+
+  button {
+    @apply flex flex-1 items-start px-2 py-3 text-gray-600;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    @apply bg-gray-300;
+  }
+
+  .button-label {
+    @apply relative block px-3 py-1 font-bold bg-transparent rounded-full;
+  }
+
+  .button-label--active {
+    @apply text-gray-200 bg-gray-900;
+  }
+
+  .button-label--active:after {
+    @apply block absolute w-5 h-1 bg-gray-900;
+    left: 100%;
+    top: 50%;
+    margin-top: -0.125rem;
+    content: "";
   }
 </style>
 
@@ -20,7 +54,9 @@
   }
 </script>
 
-<div class="palettes" style="--grid-area: {gridArea};">
+<div
+  class="palettes"
+  style="--grid-area: {gridArea}; --columns:{$palettes.length};">
   {#each $palettes as palette, j (j)}
     <Palette
       active="{$paletteParams.current === j}"
@@ -33,8 +69,18 @@
       }}"
       removable="{$palettes.length > 1}">
       {#each palette.swatches as color, i (i)}
-        <Swatch fillHeight hexCode="{color.hex}" label="{color.id}" />
+        <Swatch fillHeight hexCode="{color.hex}" />
       {/each}
     </Palette>
   {/each}
+  <div class="ids">
+    <div class="ids__header">&nbsp;</div>
+    {#each $palettes[0].swatches as color, i (i)}
+      <button>
+        <span class="button-label" class:button-label--active="{false}">
+          {color.id}
+        </span>
+      </button>
+    {/each}
+  </div>
 </div>

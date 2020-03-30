@@ -4,7 +4,7 @@
   }
 
   .header {
-    @apply sticky top-0 flex bg-gray-200 border-t-4 border-gray-900;
+    @apply sticky top-0 z-10 h-16 flex bg-gray-200;
   }
 
   button {

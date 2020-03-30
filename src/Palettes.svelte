@@ -59,10 +59,10 @@
   style="--grid-area: {gridArea}; --columns:{$palettes.length};">
   {#each $palettes as palette, j (j)}
     <Palette
-      active="{$paletteParams.current === j}"
+      active="{$paletteParams.paletteIndex === j}"
       index="{j + 1}"
       on:clickActivate="{() => {
-        $paletteParams.current = palette.id;
+        $paletteParams.paletteIndex = palette.id;
       }}"
       on:clickRemove="{() => {
         confirmAndDelete(palette.id);
@@ -76,8 +76,13 @@
   <div class="ids">
     <div class="ids__header">&nbsp;</div>
     {#each $palettes[0].swatches as color, i (i)}
-      <button>
-        <span class="button-label" class:button-label--active="{false}">
+      <button
+        on:click="{() => {
+          $paletteParams.swatchIndex = i;
+        }}">
+        <span
+          class="button-label"
+          class:button-label--active="{$paletteParams.swatchIndex === i}">
           {color.id}
         </span>
       </button>

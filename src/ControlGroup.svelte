@@ -14,7 +14,7 @@
 </script>
 
 <div class="control-group">
-  {#if title}
+  {#if title !== null}
     <h2 id="{titleId}" class="control-group__title">{title}</h2>
   {/if}
   <slot />

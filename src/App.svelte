@@ -2,7 +2,7 @@
   .chrome {
     @apply w-screen h-screen grid;
     grid-template-rows: max-content 1fr;
-    grid-template-columns: minmax(16rem, 1fr) 3fr 2fr;
+    grid-template-columns: minmax(16rem, 1fr) 4fr minmax(16rem, 1fr);
     grid-template-areas:
       "header   palettes  graphs"
       "controls palettes  graphs";
@@ -20,6 +20,7 @@
   import OverlayKnobs from "./OverlayKnobs.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Palettes from "./Palettes.svelte";
+  import Plots from "./Plots.svelte";
   import ReferenceColorFieldGroup from "./ReferenceColorFieldGroup.svelte";
   import ShareDialog from "./ShareDialog.svelte";
   import SiteFooter from "./SiteFooter.svelte";
@@ -38,7 +39,8 @@
     <OverlayKnobs />
     <SiteFooter />
   </div>
-  <Palettes gridArea="palettes / span 2" />
+  <Palettes gridArea="palettes" />
+  <Plots gridArea="graphs" />
 </main>
 
 {#if $shareDialog}

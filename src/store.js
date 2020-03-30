@@ -35,39 +35,47 @@ export const config = readable({
 export const shareDialog = writable(false);
 
 export const settings = writable(
-  urlState.settings || {
-    overlayContrast: false,
-    overlayHex: true,
-    refColorsRaw: "",
-    colorSpace: "hsluv",
-  }
+  Object.assign(
+    {},
+    {
+      overlayContrast: false,
+      overlayHex: true,
+      refColorsRaw: "",
+      colorSpace: "hsluv",
+    },
+    urlState.settings
+  )
 );
 
 const defaultSteps = 9;
 function createPaletteParams() {
   const { subscribe, set, update } = writable(
-    urlState.paletteParams || {
-      steps: defaultSteps,
-      paletteIndex: 0,
-      swatchIndex: Math.floor(defaultSteps / 2),
-      params: [
-        {
-          hue: { start: 230, end: 254, ease: "quadIn" },
-          sat: { start: 45, end: 100, ease: "quadOut" },
-          lig: { start: 99, end: 5, ease: "quadOut" },
-        },
-        {
-          hue: { start: 278, end: 290, ease: "quadIn" },
-          sat: { start: 38, end: 89, ease: "quadOut" },
-          lig: { start: 99, end: 5, ease: "quadOut" },
-        },
-        {
-          hue: { start: 9, end: 16, ease: "quadIn" },
-          sat: { start: 44, end: 81, ease: "quadOut" },
-          lig: { start: 99, end: 5, ease: "quadOut" },
-        },
-      ],
-    }
+    Object.assign(
+      {},
+      {
+        steps: defaultSteps,
+        paletteIndex: 0,
+        swatchIndex: Math.floor(defaultSteps / 2),
+        params: [
+          {
+            hue: { start: 230, end: 254, ease: "quadIn" },
+            sat: { start: 45, end: 100, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: "quadOut" },
+          },
+          {
+            hue: { start: 278, end: 290, ease: "quadIn" },
+            sat: { start: 38, end: 89, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: "quadOut" },
+          },
+          {
+            hue: { start: 9, end: 16, ease: "quadIn" },
+            sat: { start: 44, end: 81, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: "quadOut" },
+          },
+        ],
+      },
+      urlState.paletteParams
+    )
   );
 
   const removeByIndex = index =>

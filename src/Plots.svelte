@@ -13,7 +13,7 @@
   }
 
   h2 {
-    @apply text-xl font-bold;
+    @apply text-2xl font-bold;
   }
 
   .palette-selector {

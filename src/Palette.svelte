@@ -23,7 +23,7 @@
   }
 
   .button-remove {
-    @apply flex-none text-3xl leading-none border-r-2;
+    @apply flex-none text-3xl leading-none border-r;
   }
 
   .status {

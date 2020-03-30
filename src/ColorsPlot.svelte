@@ -11,14 +11,21 @@
     @apply max-w-full h-auto;
   }
 
-  circle {
-    stroke: #edf2f7; /* bg-gray-200; */
-    stroke-width: var(--circ-stroke-width);
+  .swatch-marker {
+    stroke: #a0aec0; /* border-gray-500 */
+    stroke-width: var(--stroke-width);
+  }
+
+  .line-path {
+    fill: none;
+    stroke: #a0aec0; /* border-gray-500 */
+    stroke-width: var(--stroke-width);
+    stroke-linejoin: round;
   }
 </style>
 
 <script>
-  import { scaleLinear, scalePoint } from "d3";
+  import { scaleLinear, scalePoint, line, curveCardinal } from "d3";
 
   export let data = [];
   export let title;
@@ -43,20 +50,30 @@
   $: yScale = scaleLinear()
     .domain(yDomain)
     .range([innerHeight, 0]);
+
+  $: lineGenerator = line()
+    .x(d => xScale(d.x))
+    .y(d => yScale(d.y))
+    .curve(curveCardinal);
+  $: pathD = lineGenerator(data);
 </script>
 
 <div class="root">
   <h3>{title}</h3>
   <div class="wrapper">
-    <svg viewBox="0 0 {width} {height}">
+    <svg
+      viewBox="0 0 {width}
+      {height}"
+      style="--circ-stroke-width: {strokeWidth}">
       <g transform="{`translate(${margin.x},${margin.y})`}">
+        <path class="line-path" d="{pathD}"></path>
         {#each data as s, i (i)}
           <circle
+            class="swatch-marker"
             {r}
             fill="{s.hex}"
             cx="{xScale(s.x)}"
-            cy="{yScale(s.y)}"
-            style="--circ-stroke-width: {strokeWidth}">
+            cy="{yScale(s.y)}">
             <title>{s.x}</title>
           </circle>
         {/each}

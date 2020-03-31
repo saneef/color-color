@@ -14,7 +14,7 @@
   }
 
   button {
-    @apply flex flex-1 items-start border-t px-2 py-3 text-gray-600;
+    @apply flex flex-col flex-1 border-t px-2 py-3 text-gray-600;
   }
 
   button:hover,

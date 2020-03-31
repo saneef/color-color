@@ -1,12 +1,13 @@
-import svelte from "rollup-plugin-svelte";
 import autoPreprocess from "svelte-preprocess";
-import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import html from "@rollup/plugin-html";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
-import { terser } from "rollup-plugin-terser";
+import replace from "@rollup/plugin-replace";
+import resolve from "@rollup/plugin-node-resolve";
+import svelte from "rollup-plugin-svelte";
 import { template } from "./html-template.js";
+import { terser } from "rollup-plugin-terser";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -35,6 +36,11 @@ export default {
       // we'll extract any component CSS out into
       // a separate file - better for performance
       emitCss: true,
+    }),
+    replace({
+      "process.env.NODE_ENV": !production
+        ? JSON.stringify("development")
+        : JSON.stringify("production"),
     }),
     postcss({
       extract: true,

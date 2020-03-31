@@ -60,6 +60,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Luminance"
+        subtitle="How bright is it?"
         yDomain="{[0, 1]}"
         data="{currentPalette.map(s => ({
           x: s.id,
@@ -70,6 +71,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Chroma"
+        subtitle="How colorful is it?"
         yDomain="{[0, 100]}"
         data="{currentPalette.map(s => ({
           x: s.id,
@@ -80,6 +82,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Hue"
+        subtitle="What color is it?"
         yDomain="{$config.limits.hue}"
         yTickDivisions="{6}"
         data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
@@ -90,6 +93,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Luminance"
+        subtitle="How bright is it?"
         yDomain="{[0, 1]}"
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
@@ -100,6 +104,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Chroma"
+        subtitle="How colorful is it?"
         yDomain="{[0, 100]}"
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
@@ -111,6 +116,7 @@
     <ControlGroup>
       <ColorsPlot
         title="Hue"
+        subtitle="What color is it?"
         yDomain="{$config.limits.hue}"
         yTickDivisions="{6}"
         data="{currentSwatchSet.map(s => ({

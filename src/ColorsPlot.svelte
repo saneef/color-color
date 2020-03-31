@@ -1,6 +1,10 @@
 <style>
   h3 {
-    @apply text-sm text-gray-700;
+    @apply text-sm font-bold text-gray-700;
+  }
+
+  .subtitle {
+    @apply ml-1 font-normal text-gray-600;
   }
 
   .wrapper {
@@ -36,6 +40,7 @@
 
   export let data = [];
   export let title;
+  export let subtitle = null;
   export let yDomain = [0, 100];
   export let yTickDivisions = 4;
 
@@ -68,7 +73,12 @@
 </script>
 
 <div class="root">
-  <h3>{title}</h3>
+  <h3>
+    {title}
+    {#if subtitle}
+      <span class="subtitle">· {subtitle}</span>
+    {/if}
+  </h3>
   <div class="wrapper">
     <svg
       viewBox="0 0 {width}

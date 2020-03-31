@@ -4,7 +4,7 @@
   }
 
   .subtitle {
-    @apply ml-1 font-normal text-gray-600;
+    @apply font-normal text-gray-600;
   }
 
   .wrapper {

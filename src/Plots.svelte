@@ -44,6 +44,11 @@
   $: currentSwatchId =
     $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
   $: currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
+
+  const getChroma = hex => {
+    const [, c] = chroma(hex).lch();
+    return c;
+  };
 </script>
 
 <div class="plots" style="--grid-area: {gridArea};">
@@ -51,19 +56,7 @@
     <div class="palette-selector">
       <PaletteSelector />
     </div>
-    <ControlGroup>
-      <ColorsPlot
-        title="Hue"
-        yDomain="{$config.limits.hue}"
-        yTickDivisions="{6}"
-        data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
-    </ControlGroup>
-    <ControlGroup>
-      <ColorsPlot
-        title="Saturation"
-        yDomain="{$config.limits.sat}"
-        data="{currentPalette.map(s => ({ x: s.id, y: s.s, hex: s.hex }))}" />
-    </ControlGroup>
+
     <ControlGroup>
       <ColorsPlot
         title="Luminance"
@@ -74,9 +67,47 @@
           hex: s.hex,
         }))}" />
     </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Chroma"
+        yDomain="{[0, 100]}"
+        data="{currentPalette.map(s => ({
+          x: s.id,
+          y: getChroma(s.hex),
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Hue"
+        yDomain="{$config.limits.hue}"
+        yTickDivisions="{6}"
+        data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
+    </ControlGroup>
   </div>
   <div class="plot-group">
     <h2>{currentSwatchId}</h2>
+    <ControlGroup>
+      <ColorsPlot
+        title="Luminance"
+        yDomain="{[0, 1]}"
+        data="{currentSwatchSet.map(s => ({
+          x: (s.paletteIndex + 1).toString(),
+          y: chroma(s.hex).luminance(),
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
+    <ControlGroup>
+      <ColorsPlot
+        title="Chroma"
+        yDomain="{[0, 100]}"
+        data="{currentSwatchSet.map(s => ({
+          x: (s.paletteIndex + 1).toString(),
+          y: getChroma(s.hex),
+          hex: s.hex,
+        }))}" />
+    </ControlGroup>
+
     <ControlGroup>
       <ColorsPlot
         title="Hue"
@@ -85,26 +116,6 @@
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.h,
-          hex: s.hex,
-        }))}" />
-    </ControlGroup>
-    <ControlGroup>
-      <ColorsPlot
-        title="Saturation"
-        yDomain="{$config.limits.sat}"
-        data="{currentSwatchSet.map(s => ({
-          x: (s.paletteIndex + 1).toString(),
-          y: s.s,
-          hex: s.hex,
-        }))}" />
-    </ControlGroup>
-    <ControlGroup>
-      <ColorsPlot
-        title="Luminance"
-        yDomain="{[0, 1]}"
-        data="{currentSwatchSet.map(s => ({
-          x: (s.paletteIndex + 1).toString(),
-          y: chroma(s.hex).luminance(),
           hex: s.hex,
         }))}" />
     </ControlGroup>

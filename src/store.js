@@ -6,6 +6,8 @@ import { randomInt } from "./lib/math";
 import { getBaseUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex } from "./lib/colors";
 
+const defaultSteps = 9;
+const maxNumOfPalettes = 6;
 const urlState = getStateFromUrl();
 
 // These eases are not very useful to generate
@@ -47,7 +49,6 @@ export const settings = writable(
   )
 );
 
-const defaultSteps = 9;
 function createPaletteParams() {
   const { subscribe, set, update } = writable(
     Object.assign(
@@ -91,7 +92,7 @@ function createPaletteParams() {
 
   const add = () =>
     update(pp => {
-      if (pp.params.length < 6) {
+      if (pp.params.length < maxNumOfPalettes) {
         const hueRange = 20;
         const hue = randomInt(0, 360 - hueRange);
 

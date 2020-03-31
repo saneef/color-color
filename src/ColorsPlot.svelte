@@ -40,7 +40,8 @@
 </style>
 
 <script>
-  import { scaleLinear, scalePoint, line, curveCardinal } from "d3";
+  import { scaleLinear, scalePoint } from "d3-scale";
+  import { line, curveCardinal } from "d3-shape";
   import { linspace } from "./lib/math.js";
 
   export let data = [];

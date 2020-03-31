@@ -83,7 +83,7 @@ function createPaletteParams() {
     update(pp => {
       if (pp.params.length > 1) {
         pp.params = pp.params.filter((_, i) => i !== index);
-        if (pp.paletteIndex > index) {
+        if (pp.paletteIndex >= index) {
           pp.paletteIndex = pp.paletteIndex - 1;
         }
       }

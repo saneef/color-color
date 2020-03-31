@@ -8,7 +8,11 @@
   }
 
   .wrapper {
-    @apply mt-2 p-1 bg-gray-100;
+    @apply flex mt-2 p-1 bg-gray-100;
+  }
+
+  .legend {
+    @apply pl-1 font-mono text-gray-600 text-xs flex flex-col justify-between;
   }
 
   svg {
@@ -80,39 +84,45 @@
     {/if}
   </h3>
   <div class="wrapper">
-    <svg
-      viewBox="0 0 {width}
-      {height}"
-      style="--circ-stroke-width: {strokeWidth}">
-      <g transform="{`translate(${margin.x},${margin.y})`}">
-        <g class="axis y-axis">
-          {#each yTicks as tick}
-            <g transform="translate(0, {yScale(tick)})">
-              <line x1="{0}" x2="{innerWidth}"></line>
-            </g>
-          {/each}
-        </g>
+    <div class="graph">
+      <svg
+        viewBox="0 0 {width}
+        {height}"
+        style="--circ-stroke-width: {strokeWidth}">
+        <g transform="{`translate(${margin.x},${margin.y})`}">
+          <g class="axis y-axis">
+            {#each yTicks as tick}
+              <g transform="translate(0, {yScale(tick)})">
+                <line x1="{0}" x2="{innerWidth}"></line>
+              </g>
+            {/each}
+          </g>
 
-        <g class="axis x-axis">
+          <g class="axis x-axis">
+            {#each data as s, i (i)}
+              <g transform="translate({xScale(s.x)}, 0)">
+                <line y1="{0}" y2="{innerHeight}"></line>
+              </g>
+            {/each}
+          </g>
+
+          <path class="line-path" d="{pathD}"></path>
           {#each data as s, i (i)}
-            <g transform="translate({xScale(s.x)}, 0)">
-              <line y1="{0}" y2="{innerHeight}"></line>
-            </g>
+            <circle
+              class="swatch-marker"
+              {r}
+              fill="{s.hex}"
+              cx="{xScale(s.x)}"
+              cy="{yScale(s.y)}">
+              <title>{s.x}</title>
+            </circle>
           {/each}
         </g>
-
-        <path class="line-path" d="{pathD}"></path>
-        {#each data as s, i (i)}
-          <circle
-            class="swatch-marker"
-            {r}
-            fill="{s.hex}"
-            cx="{xScale(s.x)}"
-            cy="{yScale(s.y)}">
-            <title>{s.x}</title>
-          </circle>
-        {/each}
-      </g>
-    </svg>
+      </svg>
+    </div>
+    <div class="legend">
+      <span>{yDomain[1]}</span>
+      <span>{yDomain[0]}</span>
+    </div>
   </div>
 </div>

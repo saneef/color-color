@@ -22,6 +22,7 @@
 </style>
 
 <script>
+  import chroma from "chroma-js";
   import ColorsPlot from "./ColorsPlot.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
@@ -65,9 +66,13 @@
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
-        title="Lightness"
-        yDomain="{$config.limits.lig}"
-        data="{currentPalette.map(s => ({ x: s.id, y: s.l, hex: s.hex }))}" />
+        title="Luminance"
+        yDomain="{[0, 1]}"
+        data="{currentPalette.map(s => ({
+          x: s.id,
+          y: chroma(s.hex).luminance(),
+          hex: s.hex,
+        }))}" />
     </ControlGroup>
   </div>
   <div class="plot-group">
@@ -95,11 +100,11 @@
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
-        title="Lightness"
-        yDomain="{$config.limits.lig}"
+        title="Luminance"
+        yDomain="{[0, 1]}"
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
-          y: s.l,
+          y: chroma(s.hex).luminance(),
           hex: s.hex,
         }))}" />
     </ControlGroup>

@@ -20,6 +20,7 @@ export const template = async ({ attributes, files, publicPath, title }) => {
   <head>
     <meta charset="utf-8">
     <title>${title}</title>
+    <meta name="description" content="Color-color is a tool to create accessible color systems for UIs. It uses HSLuv color space to create perceptually uniform colors.">
     ${links}
     ${scripts}
   </head>

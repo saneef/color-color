@@ -72,7 +72,7 @@
       <ColorsPlot
         title="Chroma"
         subtitle="How colorful is it?"
-        yDomain="{[0, 100]}"
+        yDomain="{[0, 150]}"
         data="{currentPalette.map(s => ({
           x: s.id,
           y: getChroma(s.hex),
@@ -105,7 +105,7 @@
       <ColorsPlot
         title="Chroma"
         subtitle="How colorful is it?"
-        yDomain="{[0, 100]}"
+        yDomain="{[0, 150]}"
         data="{currentSwatchSet.map(s => ({
           x: (s.paletteIndex + 1).toString(),
           y: getChroma(s.hex),

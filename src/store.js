@@ -1,5 +1,5 @@
 import { writable, derived, readable } from "svelte/store";
-import eases from "eases";
+import * as eases from "svelte/easing";
 import chroma from "chroma-js";
 import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
@@ -25,7 +25,9 @@ const easesBlacklist = [
 ];
 
 export const config = readable({
-  eases: Object.keys(eases).filter(e => !easesBlacklist.includes(e)),
+  eases: Object.keys(eases)
+    .filter(e => !easesBlacklist.includes(e))
+    .sort(),
   resolution: 0.25,
   limits: {
     hue: [0, 360],

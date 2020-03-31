@@ -8,7 +8,8 @@
   }
 
   .wrapper {
-    @apply flex mt-2 p-1 bg-gray-100;
+    @apply grid mt-2 p-1 bg-gray-100;
+    grid-template-columns: 1fr max-content;
   }
 
   .legend {

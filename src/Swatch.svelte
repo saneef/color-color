@@ -1,6 +1,6 @@
 <style>
   .swatch {
-    @apply relative flex flex-wrap justify-end content-start py-4 text-gray-300;
+    @apply relative flex flex-wrap justify-end items-start py-4 text-gray-300;
   }
 
   .click-area {

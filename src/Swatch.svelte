@@ -1,6 +1,6 @@
 <style>
   .swatch {
-    @apply relative flex flex-wrap justify-end py-4 text-gray-300;
+    @apply relative flex flex-wrap justify-end content-start py-4 text-gray-300;
   }
 
   .click-area {
@@ -28,7 +28,13 @@
   .w-contrast,
   .b-contrast,
   .refColor {
-    @apply relative px-4 font-mono;
+    @apply px-4 font-mono;
+  }
+
+  .hex-code,
+  .w-contrast,
+  .b-contrast {
+    @apply relative;
   }
 
   .w-contrast {

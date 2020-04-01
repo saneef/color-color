@@ -1,13 +1,17 @@
 <style>
   .ref-colors-list {
-    @apply flex flex-wrap -mx-4 -my-1;
   }
   .ref-colors-list > li {
-    @apply flex flex-no-wrap px-4 py-1 w-1/2;
+    @apply grid col-gap-2;
+    grid-template-columns: max-content 1fr;
   }
 
-  .ref-color-hex {
-    @apply ml-2 text-sm text-gray-700;
+  .ref-colors-list > li + li {
+    @apply mt-2;
+  }
+
+  .ref-color-code {
+    @apply text-xs text-gray-700 self-center col-start-2;
   }
 </style>
 
@@ -16,6 +20,13 @@
   import TextField from "./TextField.svelte";
   import TinySwatch from "./TinySwatch.svelte";
   import { settings, refColors } from "./store";
+
+  const prettyHSL = ([h, s, l]) => {
+    const hText = parseFloat(h.toFixed(2));
+    const sText = parseFloat(s.toFixed(2));
+    const lText = parseFloat(l.toFixed(2));
+    return `${$settings.colorSpace}(${hText},${sText}%,${lText}%)`;
+  };
 </script>
 
 <ControlGroup title="Reference colors" titleId="ref-colors">
@@ -30,8 +41,9 @@
     <ul class="ref-colors-list">
       {#each $refColors as c, i (i)}
         <li>
-          <TinySwatch color="{c}" />
-          <code class="ref-color-hex">{c}</code>
+          <TinySwatch color="{c.hex}" />
+          <code class="ref-color-code">{c.hex}</code>
+          <code class="ref-color-code">{prettyHSL(c.hsl)}</code>
         </li>
       {/each}
     </ul>

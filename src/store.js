@@ -4,7 +4,7 @@ import chroma from "chroma-js";
 import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
 import { getBaseUrl, getStateFromUrl } from "./lib/url";
-import { hslToHex } from "./lib/colors";
+import { hslToHex, hexToHsl } from "./lib/colors";
 
 const defaultSteps = 9;
 const maxNumOfPalettes = 6;
@@ -194,17 +194,18 @@ export const refColors = derived(settings, $settings => {
   return $settings.refColorsRaw
     .split(",")
     .map(s => s.trim())
-    .filter(s => s.match(hexRe) !== null);
+    .filter(s => s.match(hexRe) !== null)
+    .map(hex => ({ hex, hsl: hexToHsl(hex) }));
 });
 
 export const nearestRefColors = derived(
   [refColors, palettes],
   ([$refColors, $palettes]) => {
-    const refs = $refColors.reduce((acc, c) => {
-      return { ...acc, [c]: {} };
+    const refs = $refColors.reduce((acc, { hex }) => {
+      return { ...acc, [hex]: {} };
     }, {});
 
-    $refColors.forEach(rc => {
+    $refColors.forEach(({ hex: rc }) => {
       $palettes.forEach(p =>
         p.forEach(swatch => {
           const { hex } = swatch;

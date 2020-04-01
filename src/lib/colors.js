@@ -1,12 +1,24 @@
 import hsluv from "hsluv";
 import chroma from "chroma-js";
-const hsluvToHex = hsluv.hsluvToHex;
+import { clamp } from "./math";
 
 export const hslToHex = function(h, s, l, colorSpace = "hsluv") {
   switch (colorSpace) {
     case "hsl":
       return chroma.hsl(h, s / 100, l / 100).hex();
     default:
-      return hsluvToHex([h, s, l]);
+      return hsluv.hsluvToHex([h, s, l]);
+  }
+};
+
+export const hexToHsl = function(hex, colorSpace = "hsluv") {
+  let h, s, l;
+  switch (colorSpace) {
+    case "hsl":
+      [h, s, l] = chroma(hex).hsl();
+      return [h, s * 100, Number.isNan(l) ? 0 : l];
+    default:
+      [h, s, l] = hsluv.hexToHsluv(hex);
+      return [clamp(h, 0, 255), clamp(s, 0, 100), clamp(l, 0, 100)];
   }
 };

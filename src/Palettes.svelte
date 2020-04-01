@@ -52,6 +52,11 @@
       paletteParams.removeByIndex(id);
     }
   }
+
+  function setCurrentIndices(paletteIndex, swatchIndex) {
+    $paletteParams.paletteIndex = paletteIndex;
+    $paletteParams.swatchIndex = swatchIndex;
+  }
 </script>
 
 <div
@@ -69,7 +74,13 @@
       }}"
       removable="{$palettes.length > 1}">
       {#each palette as color, i (i)}
-        <Swatch fillHeight hexCode="{color.hex}" />
+        <Swatch
+          fillHeight
+          hexCode="{color.hex}"
+          on:click="{e => {
+            e.preventDefault();
+            setCurrentIndices(j, i);
+          }}" />
       {/each}
     </Palette>
   {/each}

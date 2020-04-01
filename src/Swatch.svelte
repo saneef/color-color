@@ -1,6 +1,19 @@
 <style>
   .swatch {
-    @apply flex flex-wrap justify-end py-4 text-gray-300;
+    @apply relative flex flex-wrap justify-end py-4 text-gray-300;
+  }
+
+  .click-area {
+    color: inherit;
+  }
+
+  .click-area::after {
+    @apply absolute inset-0;
+    content: "";
+  }
+
+  .click-area:hover::after {
+    border: 2px solid;
   }
 
   .isLight {
@@ -15,7 +28,7 @@
   .w-contrast,
   .b-contrast,
   .refColor {
-    @apply px-4 font-mono;
+    @apply relative px-4 font-mono;
   }
 
   .w-contrast {
@@ -44,7 +57,7 @@
   let blackContrast = 0;
   let refColor;
 
-  $: isLight = chroma(hexCode).luminance() > 0.6;
+  $: isLight = chroma(hexCode).luminance() > 0.55;
   $: whiteContrast =
     $settings.overlayContrast && chroma.contrast("#fff", hexCode);
   $: blackContrast =
@@ -57,6 +70,9 @@
   class:fillHeight
   class:isLight
   style="background-color:{hexCode}">
+  <a class="click-area" href="#{hexCode}" on:click>
+    <span class="sr-only">Select</span>
+  </a>
   {#if $settings.overlayHex}
     <span class="hex-code">{hexCode}</span>
   {/if}

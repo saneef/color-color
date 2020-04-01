@@ -195,7 +195,7 @@ export const refColors = derived(settings, $settings => {
     .split(",")
     .map(s => s.trim())
     .filter(s => s.match(hexRe) !== null)
-    .map(hex => ({ hex, hsl: hexToHsl(hex) }));
+    .map(hex => ({ hex, hsl: hexToHsl(hex, $settings.colorSpace) }));
 });
 
 export const nearestRefColors = derived(

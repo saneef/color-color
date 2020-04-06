@@ -1,6 +1,6 @@
 <style>
   footer {
-    @apply -mx-4 mt-4 p-4 text-center text-gray-100 bg-gray-900 leading-loose;
+    @apply -mx-4 mt-4 py-4 px-2 text-center text-gray-100 bg-gray-900 leading-loose;
   }
 
   a:hover,
@@ -9,37 +9,36 @@
     @apply text-white;
   }
 
-  ul {
-  }
   li + li {
     @apply mt-2;
   }
 
-  .img {
+  li:not(.full) {
     @apply inline-block;
-    height: 36px;
+  }
+
+  li:not(.full) + li::before {
+    @apply inline-block;
+    content: "\00B7\00A0"; /* "· " */
   }
 </style>
 
 <script>
+  import Icon from "./Icon.svelte";
   import { getBaseUrl } from "./lib/url";
 </script>
 
 <footer>
   <ul>
-    <li>
+    <li class="full">
       <a href="{getBaseUrl()}">color × color</a>
       by
       <a href="https://saneef.com">Saneef</a>
     </li>
     <li>
       <a href="https://ko-fi.com/N4N81KP2D" target="_blank">
-        <img
-          class="img"
-          height="36"
-          src="https://cdn.ko-fi.com/cdn/kofi2.png?v=2"
-          border="0"
-          alt="Buy Me a Coffee at ko-fi.com" />
+        <Icon icon="ko-fi" />
+        Buy me a coffee
       </a>
     </li>
     <li>

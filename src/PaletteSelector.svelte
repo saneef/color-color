@@ -1,18 +1,19 @@
 <style>
   .index {
-    @apply flex mb-4 -mx-1;
+    @apply grid pb-4;
+    grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));
+    grid-gap: 0.25rem;
   }
 
-  .index li {
-    @apply mx-1;
+  .index > li {
   }
 
   .index-marker {
-    @apply flex justify-center items-center h-8 w-8 no-underline border-2 border-gray-900 rounded-full;
+    @apply flex justify-center items-center h-8 w-8 border-2 border-gray-600 rounded-full text-gray-600 font-bold no-underline;
   }
 
   .index-marker--active {
-    @apply relative text-white bg-gray-900;
+    @apply relative border-gray-900 text-gray-100 bg-gray-900;
   }
 
   .index-marker--active::before {

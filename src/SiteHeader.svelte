@@ -23,7 +23,7 @@
   }
 
   button {
-    @apply flex-auto items-center p-2 border-4 border-gray-900 font-bold;
+    @apply flex-1 items-center p-2 border-4 border-gray-900 font-bold;
   }
 
   button:hover,

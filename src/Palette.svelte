@@ -27,13 +27,11 @@
   }
 
   .status {
-    @apply relative flex items-center justify-center w-8 h-8 border-2 border-gray-900 rounded-full text-gray-900;
+    @apply relative flex items-center justify-center w-8 h-8 border-2 border-gray-600 rounded-full font-bold text-gray-600;
   }
 
-  .active {
-  }
   .active .status {
-    @apply text-gray-100 bg-gray-900;
+    @apply border-gray-900 bg-gray-900 text-gray-100;
   }
 
   .active .status::before {

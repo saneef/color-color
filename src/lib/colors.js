@@ -19,6 +19,6 @@ export const hexToHsl = function(hex, colorSpace = "hsluv") {
       return [h, s * 100, isNaN(l) ? 0 : l];
     default:
       [h, s, l] = hsluv.hexToHsluv(hex);
-      return [clamp(h, 0, 360), clamp(s, 0, 100), clamp(l, 0, 100)];
+      return [clamp(0, h, 360), clamp(0, s, 100), clamp(0, l, 100)];
   }
 };

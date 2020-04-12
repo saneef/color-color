@@ -86,7 +86,7 @@ function createPaletteParams() {
       if (pp.params.length > 1) {
         pp.params = pp.params.filter((_, i) => i !== index);
         if (pp.paletteIndex >= index) {
-          pp.paletteIndex = pp.paletteIndex - 1;
+          pp.paletteIndex = Math.max(pp.paletteIndex - 1, 0);
         }
       }
       return pp;

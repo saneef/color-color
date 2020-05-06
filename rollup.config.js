@@ -61,25 +61,24 @@ export default {
       babel({
         extensions: [".js", ".mjs", ".html", ".svelte"],
         runtimeHelpers: true,
-        exclude: ["node_modules/@babel/**"],
+        exclude: [
+          "node_modules/@babel/**",
+          "node_modules/core-js/**",
+          "node_modules/core-js-*/**",
+        ],
         presets: [
           [
             "@babel/preset-env",
             {
               useBuiltIns: "usage",
-              corejs: { version: 3 },
+              corejs: { version: 3, proposals: true },
               targets: "> 0.25%, not dead",
             },
           ],
         ],
         plugins: [
           "@babel/plugin-syntax-dynamic-import",
-          [
-            "@babel/plugin-transform-runtime",
-            {
-              useESModules: true,
-            },
-          ],
+          "@babel/plugin-transform-runtime",
         ],
       }),
 

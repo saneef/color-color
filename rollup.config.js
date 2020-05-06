@@ -66,6 +66,8 @@ export default {
           [
             "@babel/preset-env",
             {
+              useBuiltIns: "usage",
+              corejs: { version: 3 },
               targets: "> 0.25%, not dead",
             },
           ],

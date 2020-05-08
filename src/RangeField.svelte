@@ -10,8 +10,52 @@
   .wrapper {
     @apply flex items-center;
   }
+
+  .input-wrapper {
+    @apply relative w-full;
+  }
+
   .input {
-    @apply block w-full;
+    @apply block w-full appearance-none bg-transparent;
+  }
+
+  .track {
+    @apply h-2 m-0 w-full bg-gray-600 cursor-pointer;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    @apply track;
+  }
+
+  input[type="range"]::-moz-range-track {
+    @apply track;
+  }
+
+  input[type="range"]::-ms-track {
+    @apply track;
+    @apply text-transparent;
+  }
+
+  input[type="range"]::-ms-fill-lower {
+    @apply bg-transparent;
+  }
+
+  .thumb {
+    @apply appearance-none h-6 w-3 bg-gray-200 border-2 border-solid border-gray-900;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    @apply thumb -mt-2;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply thumb;
+    @apply mt-0 rounded-none;
+  }
+
+  input[type="range"]::-ms-thumb {
+    @apply thumb;
+    @apply mt-0 rounded-none;
   }
 
   .value {
@@ -41,14 +85,16 @@
     <label class="label" for="{id}">{label}</label>
   {/if}
   <div class="wrapper">
-    <input
-      type="range"
-      aria-labelledby="{labelledby}"
-      class="input"
-      {id}
-      {step}
-      bind:value
-      {...$$restProps} />
+    <div class="input-wrapper">
+      <input
+        type="range"
+        aria-labelledby="{labelledby}"
+        class="input"
+        {id}
+        {step}
+        bind:value
+        {...$$restProps} />
+    </div>
     <div class="value" class:shortValue>{valueText}</div>
   </div>
 </div>

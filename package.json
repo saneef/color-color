@@ -4,7 +4,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --host"
+    "start": "sirv public --host",
+    "prerelease": "npm run build",
+    "release": "./release-on-sentry.sh"
   },
   "license": "MIT",
   "repository": {
@@ -20,6 +22,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-html": "^0.2.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@sentry/cli": "^1.55.1",
     "autoprefixer": "^9.8.6",
     "eslint": "^7.7.0",
     "eslint-plugin-svelte3": "^2.7.3",

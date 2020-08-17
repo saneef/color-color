@@ -2,11 +2,14 @@
   "name": "color-color-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "clean": "rimraf public/*.{js,css,map}",
+    "build:assets": "rollup -c",
+    "watch:assets": "rollup -c -w",
+    "dev": "run-s clean watch:*",
+    "build": "run-s clean build:*",
     "start": "sirv public --host",
-    "prerelease": "npm run build",
-    "release": "./release-on-sentry.sh"
+    "release:sentry": "./release-on-sentry.sh",
+    "release": "run-s build release:*"
   },
   "license": "MIT",
   "repository": {
@@ -28,9 +31,11 @@
     "eslint-plugin-svelte3": "^2.7.3",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "npm-run-all": "^4.1.5",
     "postcss-load-config": "^2.1.0",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.26.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-livereload": "^1.3.0",

@@ -16,6 +16,7 @@
 
 <div aria-labelledby="{labelledby}">
   {#each radios as radio, i (i)}
+    <!-- svelte-ignore a11y-label-has-associated-control -->
     <label>
       {radio.label}
       <div class="wrapper">

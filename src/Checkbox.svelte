@@ -13,6 +13,7 @@
   export let label;
 </script>
 
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <label>
   {label}
   <div class="wrapper">

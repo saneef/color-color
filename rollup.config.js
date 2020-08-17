@@ -42,6 +42,7 @@ export default {
       "process.env.NODE_ENV": !production
         ? JSON.stringify("development")
         : JSON.stringify("production"),
+      "process.env.SENTRY_DSN": JSON.stringify(process.env.SENTRY_DSN),
     }),
     postcss({
       extract: true,

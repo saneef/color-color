@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-RELEASE_NAME="$COMMIT_REF-$BUILD_ID"
+RELEASE_NAME=$(sentry-cli releases propose-version)
 
-echo $RELEASE_NAME
+echo "📦 Creating release: "$RELEASE_NAME
 npx sentry-cli releases new $RELEASE_NAME
 npx sentry-cli releases files $RELEASE_NAME upload-sourcemaps public/ --rewrite
+npx sentry-cli releases set-commits --auto $RELEASE_NAME
 npx sentry-cli releases finalize $RELEASE_NAME

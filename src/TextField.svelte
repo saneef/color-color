@@ -8,7 +8,7 @@
   }
 
   .input {
-    @apply block appearance-none w-full bg-white border-2 border-gray-500 rounded-none text-gray-700 p-2 pr-4 pr-8 leading-tight;
+    @apply block appearance-none w-full bg-white border-2 border-gray-500 rounded-none text-gray-700 p-2 leading-tight;
   }
 
   .input:focus {

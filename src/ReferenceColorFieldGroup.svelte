@@ -2,7 +2,7 @@
   .ref-colors-list {
   }
   .ref-colors-list > li {
-    @apply grid col-gap-2;
+    @apply grid gap-x-2;
     grid-template-columns: max-content 1fr;
   }
 

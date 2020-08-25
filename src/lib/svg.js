@@ -1,3 +1,5 @@
+import { minify } from "./string.js";
+
 const generateSwatches = (parentId, p, swatchWidth, swatchHeight, padding) =>
   Object.entries(p)
     .map(
@@ -7,6 +9,7 @@ const generateSwatches = (parentId, p, swatchWidth, swatchHeight, padding) =>
         }" width="${swatchWidth}" height="${swatchHeight}"></rect>`
     )
     .join("");
+
 const generateGroups = (p, swatchWidth, swatchHeight, padding) =>
   Object.entries(p).reduce(
     (acc, [id, colors], i) =>
@@ -33,7 +36,7 @@ export const jsonToSvg = (
   const canvasHeight =
     numOfSwatches * swatchHeight + (numOfSwatches - 1) * padding;
 
-  return `<svg width="${canvasWidth}px" height="${canvasHeight}px" viewBox="0 0 ${canvasWidth} ${canvasHeight}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const svg = `<svg width="${canvasWidth}px" height="${canvasHeight}px" viewBox="0 0 ${canvasWidth} ${canvasHeight}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Colors</title>
     <desc>Created with color-color</desc>
     <g id="palette" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -41,4 +44,6 @@ export const jsonToSvg = (
     </g>
 </svg>
 `;
+
+  return minify(svg);
 };

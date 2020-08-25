@@ -16,18 +16,15 @@
 
 <script>
   export let data = null;
+
   let filename = "Palette from ColorColor.svg";
 
-  $: strippedData = data
-    ? data.replace(/(\r\n|\n|\r)/gm, "").replace(/[ ]{2,}/gm, "")
-    : "";
+  $: base64EncodedData = data ? window.btoa(data) : null;
 </script>
 
-{#if data}
+{#if base64EncodedData}
   <div>
-    <a
-      href="data:image/svg;base64,{window.btoa(strippedData)}"
-      download="{filename}">
+    <a href="data:image/svg;base64,{base64EncodedData}" download="{filename}">
       Download as SVG
     </a>
   </div>

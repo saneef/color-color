@@ -35,9 +35,15 @@
   import { shareState, shareDialog } from "./store.js";
   import Icon from "./Icon.svelte";
   import TextField from "./TextField.svelte";
+  import DownloadAsSvg from "./DownloadAsSvg.svelte";
 
   function selectText(e) {
     e.currentTarget.select();
+  }
+
+  function closeModal(e) {
+    e.preventDefault();
+    $shareDialog = !$shareDialog;
   }
 </script>
 
@@ -45,11 +51,7 @@
   <div class="dialog">
     <div class="header">
       <h2>Share</h2>
-      <button
-        title="Close"
-        on:click="{() => {
-          $shareDialog = false;
-        }}">
+      <button title="Close" on:click="{closeModal}">
         <Icon icon="cross" size="lg" />
       </button>
     </div>
@@ -67,6 +69,7 @@
         readonly="readonly"
         value="{$shareState.json}"
         on:click="{selectText}" />
+      <DownloadAsSvg data="{$shareState.svg}" />
     </div>
   </div>
 </div>

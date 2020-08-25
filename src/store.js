@@ -5,6 +5,7 @@ import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
 import { getBaseUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex, hexToHsl } from "./lib/colors";
+import { jsonToSvg } from "./lib/svg";
 
 const defaultSteps = 9;
 const maxNumOfPalettes = 6;
@@ -26,7 +27,7 @@ const easesBlacklist = [
 
 export const config = readable({
   eases: Object.keys(eases)
-    .filter(e => !easesBlacklist.includes(e))
+    .filter((e) => !easesBlacklist.includes(e))
     .sort(),
   resolution: 0.25,
   limits: {
@@ -81,8 +82,8 @@ function createPaletteParams() {
     )
   );
 
-  const removeByIndex = index =>
-    update(pp => {
+  const removeByIndex = (index) =>
+    update((pp) => {
       if (pp.params.length > 1) {
         pp.params = pp.params.filter((_, i) => i !== index);
         if (pp.paletteIndex >= index) {
@@ -93,7 +94,7 @@ function createPaletteParams() {
     });
 
   const add = () =>
-    update(pp => {
+    update((pp) => {
       if (pp.params.length < maxNumOfPalettes) {
         const hueRange = 20;
         const hue = randomInt(0, 360 - hueRange);
@@ -111,7 +112,7 @@ function createPaletteParams() {
       return pp;
     });
 
-  const checkAndSet = obj => {
+  const checkAndSet = (obj) => {
     const { swatchIndex, steps } = obj;
 
     if (swatchIndex >= steps) {
@@ -132,7 +133,7 @@ export const palettes = derived(
   [paletteParams, settings],
   ([$paletteParams, $settings]) => {
     const steps = $paletteParams.steps;
-    return $paletteParams.params.map(pal => {
+    return $paletteParams.params.map((pal) => {
       const { hue, sat, lig } = pal;
       const hUnit = (hue.end - hue.start) / steps;
       const sUnit = (sat.end - sat.start) / steps;
@@ -161,7 +162,7 @@ export const palettes = derived(
 export const swatchesGroupedById = derived([palettes], ([$palettes]) => {
   const groupedBySwatchId = $palettes
     .map((palette, i) => {
-      return palette.map(swatch => {
+      return palette.map((swatch) => {
         const { id: swatchId, ...rest } = swatch;
         return {
           ...rest,
@@ -190,12 +191,12 @@ export const swatchesGroupedById = derived([palettes], ([$palettes]) => {
 
 const hexRe = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/;
 
-export const refColors = derived(settings, $settings => {
+export const refColors = derived(settings, ($settings) => {
   return $settings.refColorsRaw
     .split(",")
-    .map(s => s.trim())
-    .filter(s => s.match(hexRe) !== null)
-    .map(hex => ({ hex, hsl: hexToHsl(hex, $settings.colorSpace) }));
+    .map((s) => s.trim())
+    .filter((s) => s.match(hexRe) !== null)
+    .map((hex) => ({ hex, hsl: hexToHsl(hex, $settings.colorSpace) }));
 });
 
 export const nearestRefColors = derived(
@@ -206,8 +207,8 @@ export const nearestRefColors = derived(
     }, {});
 
     $refColors.forEach(({ hex: rc }) => {
-      $palettes.forEach(p =>
-        p.forEach(swatch => {
+      $palettes.forEach((p) =>
+        p.forEach((swatch) => {
           const { hex } = swatch;
           const dist = chroma.distance(rc, hex, "rgb");
           if (refs[rc].hex === undefined || refs[rc].dist > dist) {
@@ -247,9 +248,12 @@ export const shareState = derived(
       return { ...pacc, [`color-${i + 1}`]: palette };
     }, {});
 
+    const paletteSVG = jsonToSvg(paletteJson);
+
     return {
       url: `${getBaseUrl()}#${encodedState}`,
       json: JSON.stringify(paletteJson, null, 2),
+      svg: paletteSVG,
     };
   }
 );

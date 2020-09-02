@@ -8,11 +8,38 @@ export const getBaseUrl = () => {
   );
 };
 
+const cleanseData = (data) => {
+  const params = data.paletteParams && data.paletteParams.params;
+  const cleanedParams = params.map((p) => {
+    const sat = p.sat;
+    if (sat) {
+      return {
+        ...p,
+        sat: {
+          ...sat,
+          rate: sat.rate || 100,
+        },
+      };
+    }
+
+    return p;
+  });
+
+  return {
+    ...data,
+    paletteParams: {
+      ...data.paletteParams,
+      params: cleanedParams,
+    },
+  };
+};
+
 export const getStateFromUrl = () => {
   const data = window.location.hash.substr(1);
   if (data === "") return {};
   try {
-    return jsoun.decode(data);
+    const decodedData = jsoun.decode(data);
+    return cleanseData(decodedData);
   } catch (e) {
     console.error("Unable to parse state from URL", e);
     return {};

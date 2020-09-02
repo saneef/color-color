@@ -7,7 +7,10 @@ import { getBaseUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex, hexToHsl } from "./lib/colors";
 import { jsonToSvg } from "./lib/svg";
 
-const defaultSteps = 9;
+const defaults = {
+  steps: 9,
+  saturationRate: 130,
+};
 const maxNumOfPalettes = 6;
 const urlState = getStateFromUrl();
 
@@ -34,6 +37,7 @@ export const config = readable({
     hue: [0, 360],
     sat: [0, 100],
     lig: [0, 100],
+    rate: [0, 200],
   },
 });
 
@@ -57,23 +61,38 @@ function createPaletteParams() {
     Object.assign(
       {},
       {
-        steps: defaultSteps,
+        steps: defaults.steps,
         paletteIndex: 0,
-        swatchIndex: Math.floor(defaultSteps / 2),
+        swatchIndex: Math.floor(defaults.steps / 2),
         params: [
           {
             hue: { start: 230, end: 254, ease: "quadIn" },
-            sat: { start: 45, end: 100, ease: "quadOut" },
+            sat: {
+              start: 45,
+              end: 100,
+              ease: "quadOut",
+              rate: defaults.saturationRate,
+            },
             lig: { start: 99, end: 5, ease: "quadOut" },
           },
           {
             hue: { start: 278, end: 290, ease: "quadIn" },
-            sat: { start: 38, end: 89, ease: "quadOut" },
+            sat: {
+              start: 38,
+              end: 89,
+              ease: "quadOut",
+              rate: defaults.saturationRate,
+            },
             lig: { start: 99, end: 5, ease: "quadOut" },
           },
           {
             hue: { start: 9, end: 16, ease: "quadIn" },
-            sat: { start: 44, end: 81, ease: "quadOut" },
+            sat: {
+              start: 44,
+              end: 81,
+              ease: "quadOut",
+              rate: defaults.saturationRate,
+            },
             lig: { start: 99, end: 5, ease: "quadOut" },
           },
         ],
@@ -101,7 +120,12 @@ function createPaletteParams() {
 
         const param = {
           hue: { start: hue, end: hue + hueRange, ease: "quadIn" },
-          sat: { start: 60, end: 100, ease: "quadOut" },
+          sat: {
+            start: 60,
+            end: 100,
+            ease: "quadOut",
+            rate: defaults.saturationRate,
+          },
           lig: { start: 100, end: 5, ease: "quadOut" },
         };
 
@@ -141,10 +165,14 @@ export const palettes = derived(
 
       const swatches = Array.from({ length: steps }).map((_, i) => {
         const h = hue.start + easeSteps(eases[hue.ease], i + 1, steps) * hUnit;
-        const s = sat.start + easeSteps(eases[sat.ease], i + 1, steps) * sUnit;
+
+        let s = sat.start + easeSteps(eases[sat.ease], i + 1, steps) * sUnit;
+        s = Math.min(100, s * (sat.rate / 100));
+
         const l = lig.start + easeSteps(eases[lig.ease], i + 1, steps) * lUnit;
         const hex = hslToHex(h, s, l, $settings.colorSpace);
         const id = (i + 1) * (steps > 9 ? 10 : 100);
+
         return {
           id: id.toString(),
           h,

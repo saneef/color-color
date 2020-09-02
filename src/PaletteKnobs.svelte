@@ -68,6 +68,12 @@
         <option value="{ease}">{headerCase(ease)}</option>
       {/each}
     </SelectField>
+    <RangeField
+      id="sat-rate"
+      label="Rate"
+      bind:value="{$paletteParams.params[current].sat.rate}"
+      min="{$config.limits.rate[0]}"
+      max="{$config.limits.rate[1]}" />
   </ControlGroup>
 
   <ControlGroup title="Lightness">

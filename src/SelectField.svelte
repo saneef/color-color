@@ -34,7 +34,7 @@
 <div class="control">
   <label for="{id}">{label}</label>
   <div class="wrapper">
-    <select name="" {id} bind:value>
+    <select name="" id="{id}" bind:value>
       <slot />
     </select>
     <div class="icon">

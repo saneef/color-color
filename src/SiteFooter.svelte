@@ -31,9 +31,8 @@
 <footer>
   <ul>
     <li class="full">
-      <a href="{getBaseUrl()}">color × color</a>
-      by
-      <a href="https://saneef.com">Saneef</a>
+      <a href="{getBaseUrl()}">color × color</a> by <a
+        href="https://saneef.com">Saneef</a>
     </li>
     <li>
       <a href="https://ko-fi.com/N4N81KP2D" target="_blank">
@@ -41,8 +40,6 @@
         Buy me a coffee
       </a>
     </li>
-    <li>
-      <a href="https://github.com/saneef/color-color">Github</a>
-    </li>
+    <li><a href="https://github.com/saneef/color-color">Github</a></li>
   </ul>
 </footer>

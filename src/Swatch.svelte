@@ -79,9 +79,7 @@
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>
   </a>
-  {#if $settings.overlayHex}
-    <span class="hex-code">{hexCode}</span>
-  {/if}
+  {#if $settings.overlayHex}<span class="hex-code">{hexCode}</span>{/if}
   {#if refColor}
     <div class="refColor">
       <TinySwatch color="{refColor}" />

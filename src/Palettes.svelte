@@ -77,7 +77,7 @@
         <Swatch
           fillHeight
           hexCode="{color.hex}"
-          on:click="{e => {
+          on:click="{(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);
           }}" />

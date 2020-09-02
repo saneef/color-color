@@ -81,17 +81,15 @@
 </script>
 
 <div class="root">
-  {#if label}
-    <label class="label" for="{id}">{label}</label>
-  {/if}
+  {#if label}<label class="label" for="{id}">{label}</label>{/if}
   <div class="wrapper">
     <div class="input-wrapper">
       <input
         type="range"
         aria-labelledby="{labelledby}"
         class="input"
-        {id}
-        {step}
+        id="{id}"
+        step="{step}"
         bind:value
         {...$$restProps} />
     </div>

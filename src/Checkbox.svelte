@@ -16,7 +16,5 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label>
   {label}
-  <div class="wrapper">
-    <input type="checkbox" bind:checked />
-  </div>
+  <div class="wrapper"><input type="checkbox" bind:checked /></div>
 </label>

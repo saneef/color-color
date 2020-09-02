@@ -45,7 +45,7 @@
     $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
   $: currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
 
-  const getChroma = hex => {
+  const getChroma = (hex) => {
     const [, c] = chroma(hex).lch();
     return c;
   };
@@ -62,7 +62,7 @@
         title="Luminance"
         subtitle="How bright is it?"
         yDomain="{[0, 1]}"
-        data="{currentPalette.map(s => ({
+        data="{currentPalette.map((s) => ({
           x: s.id,
           y: chroma(s.hex).luminance(),
           hex: s.hex,
@@ -73,7 +73,7 @@
         title="Chroma"
         subtitle="How colorful is it?"
         yDomain="{[0, 150]}"
-        data="{currentPalette.map(s => ({
+        data="{currentPalette.map((s) => ({
           x: s.id,
           y: getChroma(s.hex),
           hex: s.hex,
@@ -85,7 +85,7 @@
         subtitle="What color is it?"
         yDomain="{$config.limits.hue}"
         yTickDivisions="{6}"
-        data="{currentPalette.map(s => ({ x: s.id, y: s.h, hex: s.hex }))}" />
+        data="{currentPalette.map((s) => ({ x: s.id, y: s.h, hex: s.hex }))}" />
     </ControlGroup>
   </div>
   <div class="plot-group">
@@ -95,7 +95,7 @@
         title="Luminance"
         subtitle="How bright is it?"
         yDomain="{[0, 1]}"
-        data="{currentSwatchSet.map(s => ({
+        data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: chroma(s.hex).luminance(),
           hex: s.hex,
@@ -106,7 +106,7 @@
         title="Chroma"
         subtitle="How colorful is it?"
         yDomain="{[0, 150]}"
-        data="{currentSwatchSet.map(s => ({
+        data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: getChroma(s.hex),
           hex: s.hex,
@@ -119,7 +119,7 @@
         subtitle="What color is it?"
         yDomain="{$config.limits.hue}"
         yTickDivisions="{6}"
-        data="{currentSwatchSet.map(s => ({
+        data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.h,
           hex: s.hex,

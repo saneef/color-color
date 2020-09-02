@@ -17,14 +17,12 @@
 
 <ControlGroup title="Color space" titleId="color-space">
   <RadioGroup
-    {radios}
+    radios="{radios}"
     bind:group="{$settings.colorSpace}"
     labelledby="color-space" />
   <p class="note">
-    Learn how
-    <a href="https://www.hsluv.org/comparison/" target="_blank">
+    Learn how <a href="https://www.hsluv.org/comparison/" target="_blank">
       HSLuv differs from HSL
-    </a>
-    .
+    </a> .
   </p>
 </ControlGroup>

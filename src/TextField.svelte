@@ -34,13 +34,11 @@
 </script>
 
 <div class="control">
-  {#if label}
-    <label class="label" for="{id}">{label}</label>
-  {/if}
+  {#if label}<label class="label" for="{id}">{label}</label>{/if}
   {#if multiline}
     <textarea
       class="input input--textarea"
-      {id}
+      id="{id}"
       bind:value
       aria-labelledby="{labelledby}"
       on:click
@@ -49,7 +47,7 @@
     <input
       class="input"
       type="text"
-      {id}
+      id="{id}"
       bind:value
       aria-labelledby="{labelledby}"
       on:click

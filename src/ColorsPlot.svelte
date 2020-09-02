@@ -62,18 +62,14 @@
   let innerWidth = width - 2 * margin.y;
   let innerHeight = height - 2 * margin.x;
 
-  $: xSteps = data.map(d => d.x);
-  $: xScale = scalePoint()
-    .domain(xSteps)
-    .range([0, innerWidth]);
-  $: yScale = scaleLinear()
-    .domain(yDomain)
-    .range([innerHeight, 0]);
+  $: xSteps = data.map((d) => d.x);
+  $: xScale = scalePoint().domain(xSteps).range([0, innerWidth]);
+  $: yScale = scaleLinear().domain(yDomain).range([innerHeight, 0]);
 
-  $: yTicks = linspace(yTickDivisions).map(v => v * yDomain[1]);
+  $: yTicks = linspace(yTickDivisions).map((v) => v * yDomain[1]);
   $: lineGenerator = line()
-    .x(d => xScale(d.x))
-    .y(d => yScale(d.y))
+    .x((d) => xScale(d.x))
+    .y((d) => yScale(d.y))
     .curve(curveCardinal);
   $: pathD = lineGenerator(data);
 </script>
@@ -81,9 +77,7 @@
 <div class="root">
   <h3>
     {title}
-    {#if subtitle}
-      <span class="subtitle">· {subtitle}</span>
-    {/if}
+    {#if subtitle}<span class="subtitle">· {subtitle}</span>{/if}
   </h3>
   <div class="wrapper">
     <div class="graph">
@@ -112,7 +106,7 @@
           {#each data as s, i (i)}
             <circle
               class="swatch-marker"
-              {r}
+              r="{r}"
               fill="{s.hex}"
               cx="{xScale(s.x)}"
               cy="{yScale(s.y)}">

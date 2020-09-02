@@ -37,7 +37,7 @@
   }
 
   button[disabled] {
-    @apply text-gray-500;
+    @apply line-through;
   }
 
   button[disabled]:hover,
@@ -58,7 +58,7 @@
 
 <header class="header" style="--grid-area:{gridArea};">
   <h1 class="title">
-    <a href="/"> color  <span aria-hidden="true">×</span>  color </a>
+    <a href="/"> color <span aria-hidden="true">×</span> color </a>
   </h1>
   <div class="button-set">
     <button

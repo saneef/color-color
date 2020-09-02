@@ -35,11 +35,25 @@
   button + button {
     @apply -ml-1;
   }
+
+  button[disabled] {
+    @apply text-gray-500;
+  }
+
+  button[disabled]:hover,
+  button[disabled]:active,
+  button[disabled]:focus {
+    @apply bg-transparent;
+    @apply cursor-not-allowed;
+  }
 </style>
 
 <script>
   import { paletteParams, shareDialog } from "./store";
   export let gridArea;
+
+  $: canAddMoreColors =
+    $paletteParams.params.length < $paletteParams.maxNumOfPalettes;
 </script>
 
 <header class="header" style="--grid-area:{gridArea};">
@@ -53,10 +67,14 @@
   <div class="button-set">
     <button
       on:click="{() => {
-        $shareDialog = true;
+        $shareDialog = !$shareDialog;
       }}">
       Share
     </button>
-    <button on:click="{() => paletteParams.add()}">Add colors</button>
+    <button
+      on:click="{() => paletteParams.add()}"
+      disabled="{!canAddMoreColors}">
+      Add colors
+    </button>
   </div>
 </header>

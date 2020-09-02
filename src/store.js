@@ -64,6 +64,7 @@ function createPaletteParams() {
         steps: defaults.steps,
         paletteIndex: 0,
         swatchIndex: Math.floor(defaults.steps / 2),
+        maxNumOfPalettes,
         params: [
           {
             hue: { start: 230, end: 254, ease: "quadIn" },

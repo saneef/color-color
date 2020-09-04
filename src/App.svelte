@@ -1,16 +1,33 @@
 <style>
   .chrome {
-    @apply w-screen h-screen grid;
+    @apply w-screen h-screen;
+    display: grid;
     grid-template-rows: max-content 1fr;
-    grid-template-columns: minmax(16rem, 1fr) 4fr minmax(16rem, 1fr);
+    grid-template-columns: repeat(2, 60vw) min-content;
     grid-template-areas:
-      "header   palettes  graphs"
-      "controls palettes  graphs";
+      "header controls   palettes"
+      "graphs controls palettes";
+    scroll-snap-type: x proximity;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    @screen md {
+      grid-template-columns: minmax(16rem, 1fr) 4fr minmax(16rem, 1fr);
+      grid-template-areas:
+        "header   palettes  graphs"
+        "controls palettes  graphs";
+    }
   }
 
   .controls {
-    @apply p-4 pb-0 overflow-y-auto overflow-x-hidden border-4 border-t-0 border-gray-900;
+    @apply p-4 pb-0 overflow-y-auto overflow-x-hidden;
+    @apply border-4 border-l-0 border-gray-900;
     grid-area: controls;
+    scroll-snap-align: start;
+
+    @screen md {
+      @apply border-t-0 border-l-4;
+    }
   }
 </style>
 

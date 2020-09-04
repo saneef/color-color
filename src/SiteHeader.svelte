@@ -1,6 +1,5 @@
 <style>
   .header {
-    @apply border-4 border-gray-900;
     grid-area: var(--grid-area);
   }
 
@@ -9,7 +8,7 @@
   }
 
   .title a {
-    @apply block px-2 pt-4 pb-6 no-underline text-gray-100 bg-gray-900;
+    @apply block px-2 py-4 no-underline text-gray-100 bg-gray-900;
   }
 
   .title a:hover,
@@ -19,7 +18,7 @@
   }
 
   .button-set {
-    @apply flex -mx-1 -my-1;
+    @apply flex;
   }
 
   button {

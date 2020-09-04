@@ -1,7 +1,13 @@
 <style>
   .plots {
-    @apply overflow-y-auto overflow-x-hidden border-4 border-l-0 border-gray-900;
+    @apply overflow-y-auto overflow-x-hidden;
+    @apply border-4 border-t-0 border-gray-900;
     grid-area: var(--grid-area);
+    scroll-snap-align: start;
+
+    @screen md {
+      @apply border-t-4 border-l-0;
+    }
   }
 
   .plot-group {

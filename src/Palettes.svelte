@@ -1,8 +1,10 @@
 <style>
   .palettes {
-    @apply grid overflow-y-auto overflow-x-hidden border-4 border-l-0 border-gray-900;
+    @apply grid overflow-y-auto overflow-x-hidden;
+    @apply border-4 border-l-0 border-gray-900;
     grid-template-columns: repeat(var(--columns), 1fr) max-content;
     grid-area: var(--grid-area);
+    scroll-snap-align: start;
   }
 
   .ids {

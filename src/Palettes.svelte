@@ -5,6 +5,10 @@
     grid-template-columns: repeat(var(--columns), 1fr) max-content;
     grid-area: var(--grid-area);
     scroll-snap-align: start;
+
+    @screen md {
+      @apply overflow-x-auto;
+    }
   }
 
   .ids {

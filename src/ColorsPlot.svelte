@@ -110,7 +110,7 @@
               fill="{s.hex}"
               cx="{xScale(s.x)}"
               cy="{yScale(s.y)}">
-              <title>{s.x}</title>
+              <title>{s.x} · {title}: {s.y.toFixed(2)}</title>
             </circle>
           {/each}
         </g>

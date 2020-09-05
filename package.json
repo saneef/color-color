@@ -50,7 +50,6 @@
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@rollup/plugin-replace": "^2.3.3",
     "@sentry/browser": "^5.22.3",
-    "change-case": "^4.1.1",
     "chroma-js": "^2.1.0",
     "core-js": "^3.6.5",
     "cssnano": "^4.1.10",

@@ -6,6 +6,7 @@ import { randomInt } from "./lib/math";
 import { getBaseUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex, hexToHsl } from "./lib/colors";
 import { jsonToSvg } from "./lib/svg";
+import { eases as selectedEases } from "./lib/eases";
 
 const defaults = {
   steps: 9,
@@ -14,24 +15,8 @@ const defaults = {
 const maxNumOfPalettes = 6;
 const urlState = getStateFromUrl();
 
-// These eases are not very useful to generate
-// colour schemes.
-const easesBlacklist = [
-  "backInOut",
-  "backIn",
-  "backOut",
-  "elasticInOut",
-  "elasticIn",
-  "elasticOut",
-  "bounceInOut",
-  "bounceIn",
-  "bounceOut",
-];
-
 export const config = readable({
-  eases: Object.keys(eases)
-    .filter((e) => !easesBlacklist.includes(e))
-    .sort(),
+  eases: selectedEases,
   resolution: 0.25,
   limits: {
     hue: [0, 360],

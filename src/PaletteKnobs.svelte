@@ -9,7 +9,8 @@
   import PaletteSelector from "./PaletteSelector.svelte";
   import RangeField from "./RangeField.svelte";
   import SelectField from "./SelectField.svelte";
-  import { headerCase } from "change-case";
+  import EaseSelectOptions from "./EaseSelectOptions.svelte";
+
   import { paletteParams, config } from "./store";
 
   let current = 0;
@@ -38,9 +39,7 @@
       id="hue-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].hue.ease}">
-      {#each $config.eases as ease}
-        <option value="{ease}">{headerCase(ease)}</option>
-      {/each}
+      <EaseSelectOptions />
     </SelectField>
   </ControlGroup>
 
@@ -64,9 +63,7 @@
       id="sat-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].sat.ease}">
-      {#each $config.eases as ease}
-        <option value="{ease}">{headerCase(ease)}</option>
-      {/each}
+      <EaseSelectOptions />
     </SelectField>
     <RangeField
       id="sat-rate"
@@ -96,9 +93,7 @@
       id="lig-ease"
       label="Easing"
       bind:value="{$paletteParams.params[current].lig.ease}">
-      {#each $config.eases as ease}
-        <option value="{ease}">{headerCase(ease)}</option>
-      {/each}
+      <EaseSelectOptions />
     </SelectField>
   </ControlGroup>
 </div>

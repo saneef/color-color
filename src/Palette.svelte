@@ -68,7 +68,7 @@
       class="button-activate"
       class:active
       on:click="{onActivate}"
-      title="{active ? 'Activate' : 'Deactivate'}">
+      title="{active ? 'Active' : 'Activate'}">
       <span class="status">{index}</span>
     </button>
     {#if removable}

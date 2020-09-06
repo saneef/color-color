@@ -9,7 +9,10 @@
   }
 
   .index-marker {
-    @apply flex justify-center items-center h-8 w-8 border-2 border-gray-600 rounded-full text-gray-600 font-bold no-underline;
+    @apply flex justify-center items-center;
+    @apply h-8 w-8;
+    @apply border-2 border-gray-600 rounded-full;
+    @apply text-gray-600 font-bold no-underline;
   }
 
   .index-marker--active {
@@ -17,11 +20,15 @@
   }
 
   .index-marker--active::before {
-    @apply block absolute w-1 h-4 bg-gray-900;
+    @apply hidden absolute w-1 h-4 bg-gray-900;
     bottom: 100%;
     left: 50%;
     margin-left: -0.125rem;
     content: "";
+
+    @screen md {
+      display: block;
+    }
   }
 </style>
 

@@ -22,7 +22,8 @@
   }
 
   button {
-    @apply flex-1 items-center p-2 border-4 border-gray-900 font-bold;
+    @apply flex-1 items-center p-2 border-4 border-gray-900;
+    @apply leading-tight font-bold;
   }
 
   button:hover,

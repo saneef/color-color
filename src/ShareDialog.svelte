@@ -1,6 +1,9 @@
 <style>
   .overlay {
-    @apply flex items-center justify-center absolute inset-0;
+    @apply absolute inset-0;
+    @apply flex items-center justify-center;
+    @apply bg-black bg-opacity-25;
+    @apply z-10;
   }
 
   h2 {
@@ -8,7 +11,13 @@
   }
 
   .dialog {
-    @apply border-4 border-gray-900 bg-gray-200 w-2/3 max-w-2xl shadow-lg;
+    @apply w-11/12 max-w-2xl;
+    @apply border-4 border-gray-900 bg-gray-200;
+    @apply shadow-lg;
+
+    @screen md {
+      @apply w-2/3;
+    }
   }
 
   .header {

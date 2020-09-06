@@ -1,6 +1,6 @@
 <style>
   .chrome {
-    @apply w-screen h-screen;
+    @apply w-screen;
     display: grid;
     grid-template-rows: max-content 1fr;
     grid-template-columns: repeat(2, 60vw) min-content;
@@ -10,6 +10,8 @@
     scroll-snap-type: x proximity;
     overflow-x: auto;
     overflow-y: hidden;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
 
     @screen md {
       grid-template-columns: minmax(16rem, 1fr) 4fr minmax(16rem, 1fr);
@@ -43,9 +45,11 @@
   import SiteFooter from "./SiteFooter.svelte";
   import SiteHeader from "./SiteHeader.svelte";
   import StepsKnob from "./StepsKnob.svelte";
+  import VhProvider from "./VhProvider.svelte";
   import { shareDialog } from "./store";
 </script>
 
+<VhProvider />
 <main class="chrome">
   <SiteHeader gridArea="header" />
   <div class="controls">

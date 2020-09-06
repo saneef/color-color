@@ -55,6 +55,7 @@
     "cssnano": "^4.1.10",
     "d3-scale": "^3.2.2",
     "d3-shape": "^2.0.0",
+    "debounce-fn": "^4.0.0",
     "hsluv": "^0.1.0",
     "jsoun": "^0.1.4",
     "postcss-import": "^12.0.1",

@@ -10,6 +10,7 @@
   import RangeField from "./RangeField.svelte";
   import SelectField from "./SelectField.svelte";
   import EaseSelectOptions from "./EaseSelectOptions.svelte";
+  import CubicBezierEditor from "./CubicBezierEditor.svelte";
 
   import { paletteParams, config } from "./store";
 
@@ -41,6 +42,7 @@
       bind:value="{$paletteParams.params[current].hue.ease}">
       <EaseSelectOptions />
     </SelectField>
+    <CubicBezierEditor />
   </ControlGroup>
 
   <ControlGroup title="Saturation">

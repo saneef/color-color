@@ -1,4 +1,5 @@
 import pako from "pako";
+import { getBezierEasingByAlias, stringToCubicBezierParams } from "./eases.js";
 
 export const getBaseUrl = () => {
   const getUrl = window.location;

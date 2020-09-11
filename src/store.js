@@ -1,11 +1,15 @@
 import { writable, derived, readable } from "svelte/store";
-import * as eases from "svelte/easing";
 import chroma from "chroma-js";
 import { randomInt } from "./lib/math";
 import { getStatefulUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex, hexToHsl } from "./lib/colors";
 import { jsonToSvg } from "./lib/svg";
-import { eases as selectedEases } from "./lib/eases";
+import {
+  eases,
+  getBezierEasingByAlias,
+  stringToCubicBezierParams,
+} from "./lib/eases";
+import BezierEasing from "bezier-easing";
 
 const defaults = {
   steps: 9,
@@ -15,7 +19,7 @@ const maxNumOfPalettes = 6;
 const urlState = getStateFromUrl();
 
 export const config = readable({
-  eases: selectedEases,
+  eases: eases,
   resolution: 0.25,
   limits: {
     hue: [0, 360],
@@ -72,34 +76,42 @@ function createPaletteParams() {
         maxNumOfPalettes,
         params: [
           {
-            hue: { start: 230, end: 254, ease: "quadIn" },
+            hue: {
+              start: 230,
+              end: 254,
+              ease: getBezierEasingByAlias("quadIn"),
+            },
             sat: {
               start: 45,
               end: 100,
-              ease: "quadOut",
+              ease: getBezierEasingByAlias("quadOut"),
               rate: defaults.saturationRate,
             },
-            lig: { start: 99, end: 5, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
           },
           {
-            hue: { start: 278, end: 290, ease: "quadIn" },
+            hue: {
+              start: 278,
+              end: 290,
+              ease: getBezierEasingByAlias("quadIn"),
+            },
             sat: {
               start: 38,
               end: 89,
-              ease: "quadOut",
+              ease: getBezierEasingByAlias("quadOut"),
               rate: defaults.saturationRate,
             },
-            lig: { start: 99, end: 5, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
           },
           {
-            hue: { start: 9, end: 16, ease: "quadIn" },
+            hue: { start: 9, end: 16, ease: getBezierEasingByAlias("quadIn") },
             sat: {
               start: 44,
               end: 81,
-              ease: "quadOut",
+              ease: getBezierEasingByAlias("quadOut"),
               rate: defaults.saturationRate,
             },
-            lig: { start: 99, end: 5, ease: "quadOut" },
+            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
           },
         ],
       },
@@ -125,14 +137,18 @@ function createPaletteParams() {
         const hue = randomInt(0, 360 - hueRange);
 
         const param = {
-          hue: { start: hue, end: hue + hueRange, ease: "quadIn" },
+          hue: {
+            start: hue,
+            end: hue + hueRange,
+            ease: getBezierEasingByAlias("quadIn"),
+          },
           sat: {
             start: 60,
             end: 100,
-            ease: "quadOut",
+            ease: getBezierEasingByAlias("quadOut"),
             rate: defaults.saturationRate,
           },
-          lig: { start: 100, end: 5, ease: "quadOut" },
+          lig: { start: 100, end: 5, ease: getBezierEasingByAlias("quadOut") },
         };
 
         pp.paletteIndex = pp.params.length;
@@ -170,12 +186,15 @@ export const palettes = derived(
       const lUnit = (lig.end - lig.start) / steps;
 
       const swatches = Array.from({ length: steps }).map((_, i) => {
-        const h = hue.start + easeSteps(eases[hue.ease], i + 1, steps) * hUnit;
+        const hueEaseFn = BezierEasing(...stringToCubicBezierParams(hue.ease));
+        const h = hue.start + easeSteps(hueEaseFn, i + 1, steps) * hUnit;
 
-        let s = sat.start + easeSteps(eases[sat.ease], i + 1, steps) * sUnit;
+        const satEaseFn = BezierEasing(...stringToCubicBezierParams(sat.ease));
+        let s = sat.start + easeSteps(satEaseFn, i + 1, steps) * sUnit;
         s = Math.min(100, s * (sat.rate / 100));
 
-        const l = lig.start + easeSteps(eases[lig.ease], i + 1, steps) * lUnit;
+        const ligEaseFn = BezierEasing(...stringToCubicBezierParams(lig.ease));
+        const l = lig.start + easeSteps(ligEaseFn, i + 1, steps) * lUnit;
         const hex = hslToHex(h, s, l, $settings.colorSpace);
         const id = (i + 1) * (steps > 9 ? 10 : 100);
 

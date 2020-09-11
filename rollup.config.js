@@ -102,7 +102,6 @@ export default {
 
     html({
       template,
-      title: "color × color",
       attributes: {
         html: { lang: "en" },
         link: null,

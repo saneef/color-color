@@ -19,11 +19,15 @@
 <script>
   import { scaleLinear } from "d3-scale";
   import { linspace } from "./lib/math.js";
+  import { stringToCubicBezierParams } from "./lib/eases";
 
-  export let x1 = 0.61;
-  export let y1 = 1;
-  export let x2 = 0.88;
-  export let y2 = 1;
+  export let params;
+
+  $: parsedParams = stringToCubicBezierParams(params);
+  $: x1 = parsedParams[0];
+  $: y1 = parsedParams[1];
+  $: x2 = parsedParams[2];
+  $: y2 = parsedParams[3];
 
   const tickDivisions = 4;
   const width = 300;

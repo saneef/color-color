@@ -185,15 +185,16 @@ export const palettes = derived(
       const sUnit = (sat.end - sat.start) / steps;
       const lUnit = (lig.end - lig.start) / steps;
 
+      const hueEaseFn = BezierEasing(...stringToCubicBezierParams(hue.ease));
+      const satEaseFn = BezierEasing(...stringToCubicBezierParams(sat.ease));
+      const ligEaseFn = BezierEasing(...stringToCubicBezierParams(lig.ease));
+
       const swatches = Array.from({ length: steps }).map((_, i) => {
-        const hueEaseFn = BezierEasing(...stringToCubicBezierParams(hue.ease));
         const h = hue.start + easeSteps(hueEaseFn, i + 1, steps) * hUnit;
 
-        const satEaseFn = BezierEasing(...stringToCubicBezierParams(sat.ease));
         let s = sat.start + easeSteps(satEaseFn, i + 1, steps) * sUnit;
         s = Math.min(100, s * (sat.rate / 100));
 
-        const ligEaseFn = BezierEasing(...stringToCubicBezierParams(lig.ease));
         const l = lig.start + easeSteps(ligEaseFn, i + 1, steps) * lUnit;
         const hex = hslToHex(h, s, l, $settings.colorSpace);
         const id = (i + 1) * (steps > 9 ? 10 : 100);

@@ -1,16 +1,24 @@
 <style>
   .wrapper {
-    @apply bg-gray-100;
+    @apply bg-gray-100 pb-2;
+    @apply grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr max-content;
+  }
+
+  .plot {
+    grid-column: 1 / 3;
+    @apply mb-2;
   }
 
   .legend {
-    @apply text-lg italic font-serif text-gray-600;
+    @apply text-xl italic font-serif text-gray-600;
     @apply fill-current;
   }
 
   .axis line {
     @apply stroke-current text-gray-300;
-    stroke-width: 1;
+    stroke-width: var(--stroke-width);
     stroke-dasharray: 4 4;
   }
 
@@ -20,36 +28,56 @@
     stroke-linecap: round;
   }
 
-  .handle {
-    @apply stroke-current text-black;
-    stroke-width: var(--stroke-width-lg);
-    fill: white;
+  .control-point-line {
+    @apply stroke-current text-blue-400 text-opacity-75;
+    stroke-width: var(--stroke-width);
   }
 
-  .handle-line {
-    @apply stroke-current text-red-400 text-opacity-75;
+  .control-point {
+    @apply stroke-current text-green-500;
+    stroke-width: var(--stroke-width-lg);
+  }
+
+  .control-point--2 {
+    @apply text-red-500;
+  }
+
+  .control-point-label {
+    @apply pl-1;
+    @apply text-2xl font-bold text-green-500;
+  }
+
+  .control-point-label--2 {
+    @apply text-red-500;
+  }
+
+  .input-set {
+    @apply mx-2;
   }
 </style>
 
 <script>
   import { scaleLinear } from "d3-scale";
   import { linspace } from "./lib/math.js";
-  import { stringToCubicBezierParams } from "./lib/eases";
+  import XYInputField from "./XYInputField.svelte";
+  import {
+    stringToCubicBezierParams,
+    cubicBezierParamsToString,
+  } from "./lib/eases";
 
   export let params;
 
-  $: parsedParams = stringToCubicBezierParams(params);
-  $: x1 = parsedParams[0];
-  $: y1 = parsedParams[1];
-  $: x2 = parsedParams[2];
-  $: y2 = parsedParams[3];
-  $: console.log(params);
+  $: x1 = stringToCubicBezierParams(params)[0];
+  $: y1 = stringToCubicBezierParams(params)[1];
+  $: x2 = stringToCubicBezierParams(params)[2];
+  $: y2 = stringToCubicBezierParams(params)[3];
 
   const tickDivisions = 4;
   const width = 300;
   const height = 300;
   const r = width / 30;
-  const strokeWidth = 3;
+  const strokeWidth = 4;
+  const strokeWidthSmall = 2;
   const margin = r + strokeWidth;
   const innerWidth = width - 2 * margin;
   const innerHeight = height - 2 * margin;
@@ -68,56 +96,99 @@
   $: controlY1 = margin + yScale(y1);
   $: controlX2 = margin + xScale(x2);
   $: controlY2 = margin + yScale(y2);
+
+  const onChangeValues = (index, value) => {
+    const p = stringToCubicBezierParams(params);
+    p[index] = +value;
+    params = cubicBezierParamsToString(p);
+  };
+
+  const generateCross = (x, y, size = 2 * r) => `
+  <line
+    class="cross-stroke"
+    x1="${-size / 2}"
+    y1="${-size / 2}"
+    x2="${size / 2}"
+    y2="${size / 2}"
+  ></line>
+  <line
+    class="cross-stroke"
+    x1="${size / 2}"
+    y1="${-size / 2}"
+    x2="${-size / 2}"
+    y2="${size / 2}"
+  ></line>`;
 </script>
 
 <div class="wrapper">
-  <svg
-    viewBox="0 0 {width} {height}"
-    fill="none"
-    style="--stroke-width-lg: {strokeWidth};">
-    <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
-    <text
-      x="{innerWidth + margin - 2 * r}"
-      y="{margin + innerHeight - r}"
-      class="legend">
-      t
-    </text>
-    <g transform="{`translate(${margin},${margin})`}">
-      <g class="axis">
-        {#each ticks as tick}
-          <g transform="translate(0, {yScale(tick)})">
-            <line x1="{0}" x2="{innerWidth}"></line>
-          </g>
+  <div class="plot">
+    <svg
+      viewBox="0 0 {width} {height}"
+      fill="none"
+      style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;">
+      <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
+      <text
+        x="{innerWidth + margin - 2 * r}"
+        y="{margin + innerHeight - r}"
+        class="legend">
+        t
+      </text>
+      <g transform="{`translate(${margin},${margin})`}">
+        <g class="axis">
+          {#each ticks as tick}
+            <g transform="translate(0, {yScale(tick)})">
+              <line x1="{0}" x2="{innerWidth}"></line>
+            </g>
 
-          <g transform="translate({xScale(tick)}, 0)">
-            <line y1="{0}" y2="{innerHeight}"></line>
-          </g>
-        {/each}
+            <g transform="translate({xScale(tick)}, 0)">
+              <line y1="{0}" y2="{innerHeight}"></line>
+            </g>
+          {/each}
+        </g>
       </g>
-    </g>
-    <line
-      class="handle-line handle-line-1"
-      x1="{margin}"
-      y1="{margin + innerHeight}"
-      x2="{controlX1}"
-      y2="{controlY1}"></line>
-    <line
-      class="handle-line handle-line-2"
-      x1="{margin + innerWidth}"
-      y1="{margin}"
-      x2="{controlX2}"
-      y2="{controlY2}"></line>
-    <path class="curve" d="{curvePathD}"></path>
-    <circle
-      class="handle handle-1"
-      cx="{controlX1}"
-      cy="{controlY1}"
-      r="{r}"></circle>
-    <rect
-      class="handle handle-2"
-      x="{controlX2 - r}"
-      y="{controlY2 - r}"
-      width="{2 * r}"
-      height="{2 * r}"></rect>
-  </svg>
+      <line
+        class="control-point-line control-point-line-1"
+        x1="{margin}"
+        y1="{margin + innerHeight}"
+        x2="{controlX1}"
+        y2="{controlY1}"></line>
+      <line
+        class="control-point-line control-point-line-2"
+        x1="{margin + innerWidth}"
+        y1="{margin}"
+        x2="{controlX2}"
+        y2="{controlY2}"></line>
+      <path class="curve" d="{curvePathD}"></path>
+      <g
+        class="control-point control-point--1"
+        transform="translate({controlX1},{controlY1})">
+        {@html generateCross(controlX2, controlY2)}
+      </g>
+      <g
+        class="control-point control-point--2"
+        transform="translate({controlX2},{controlY2})">
+        {@html generateCross(controlX2, controlY2)}
+      </g>
+    </svg>
+  </div>
+  <div class="input-set">
+    <XYInputField
+      id="control-point-1"
+      x="{x1}"
+      onXChange="{(e) => onChangeValues(0, e)}"
+      y="{y1}"
+      onYChange="{(e) => onChangeValues(1, e)}">
+      <div class="control-point-label control-point-label--1">&times;</div>
+    </XYInputField>
+  </div>
+  <div class="input-set">
+    <XYInputField
+      id="control-point-2"
+      x="{x2}"
+      onXChange="{(e) => onChangeValues(2, e)}"
+      y="{y2}"
+      onYChange="{(e) => onChangeValues(3, e)}">
+      <div class="control-point-label control-point-label--2">&times;</div>
+    </XYInputField>
+  </div>
 </div>

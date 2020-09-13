@@ -1,5 +1,6 @@
 import {
   getBezierEasingByAlias,
+  getAliasByBezierEasing,
   stringToCubicBezierParams,
   cubicBezierParamsToString,
 } from "./eases.js";
@@ -11,6 +12,14 @@ describe("query eases", () => {
 
   test("should not get cubic bezier value for 'blah'", () => {
     expect(getBezierEasingByAlias("blah")).toBeUndefined();
+  });
+
+  test("should get cubic bezier alias for '.85,0,.15,1'", () => {
+    expect(getAliasByBezierEasing(".85,0,.15,1")).toBe("circInOut");
+  });
+
+  test("should get cubic bezier alias for '.85,0,.15,1.5'", () => {
+    expect(getAliasByBezierEasing(".85,0,.15,1.5")).toBeUndefined();
   });
 });
 

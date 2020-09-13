@@ -20,11 +20,11 @@
 </script>
 
 <SelectField id="{id}" label="{label}" bind:value>
-  <EaseSelectOptions />
+  <EaseSelectOptions value="{value}" />
 </SelectField>
 {#if showCurve}
   <div class="editor">
-    <CubicBezierEditor params="{value}" />
+    <CubicBezierEditor bind:params="{value}" />
   </div>
 {/if}
 <a

@@ -160,6 +160,14 @@ export const getBezierEasingByAlias = (alias) => {
   return ease && ease.value;
 };
 
+export const getAliasByBezierEasing = (value) => {
+  const ungroupedEases = eases.reduce((acc, cur) => [...acc, ...cur.eases], []);
+
+  const ease = ungroupedEases.find((e) => e.value === value);
+
+  return ease && ease.alias;
+};
+
 export const stringToCubicBezierParams = (str) => {
   const params = str.split(",");
   const numericParams = params.map((p) => +p.trim()).filter((n) => !isNaN(n));

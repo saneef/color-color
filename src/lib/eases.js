@@ -5,7 +5,7 @@ export const eases = [
     eases: [
       {
         title: "Linear",
-        value: ".25,.25,.25,.25",
+        value: ".25,.25,.75,.75",
         alias: "linear",
       },
     ],
@@ -45,7 +45,7 @@ export const eases = [
       },
       {
         title: "Ease out quad",
-        value: ".5,1, .89,1",
+        value: ".5,1,.89,1",
         alias: "quadOut",
       },
     ],

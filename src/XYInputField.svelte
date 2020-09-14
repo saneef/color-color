@@ -9,7 +9,7 @@
   }
 
   label {
-    @apply italic font-serif text-gray-900 text-center;
+    @apply font-mono text-sm text-gray-700 text-center;
     @apply border-r;
   }
 
@@ -57,6 +57,7 @@
   <div class="fieldset">
     <label class="label" for="{id}-x">x</label>
     <input
+      id="{id}-x"
       type="number"
       value="{x}"
       on:change="{handleXChange}"
@@ -66,6 +67,11 @@
   </div>
   <div class="fieldset">
     <label class="label" for="{id}-y">y</label>
-    <input type="number" step="0.01" value="{y}" on:change="{handleYChange}" />
+    <input
+      id="{id}-y"
+      type="number"
+      step="0.01"
+      value="{y}"
+      on:change="{handleYChange}" />
   </div>
 </div>

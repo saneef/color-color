@@ -12,7 +12,7 @@
   }
 
   .legend {
-    @apply text-xl italic font-serif text-gray-600;
+    @apply font-mono text-gray-600;
     @apply fill-current;
   }
 
@@ -33,26 +33,28 @@
     stroke-width: var(--stroke-width);
   }
 
+  .control-point-icon,
   .control-point {
     @apply stroke-current text-green-500;
-    stroke-width: var(--stroke-width-lg);
+    fill: #f7fafc; /* .bg-gray-100 */
+    stroke-width: var(--stroke-width);
   }
 
-  .control-point--2 {
+  .control-point--2,
+  .control-point-icon--2 {
     @apply text-red-500;
   }
 
-  .control-point-label {
-    @apply pl-1;
-    @apply text-2xl font-bold text-green-500;
-  }
-
-  .control-point-label--2 {
-    @apply text-red-500;
+  .control-point-icon {
+    stroke-width: calc(var(--stroke-width) * 2 / 3);
   }
 
   .input-set {
     @apply mx-2;
+  }
+
+  .control-point-icon {
+    @apply w-6 h-6;
   }
 </style>
 
@@ -64,6 +66,7 @@
     stringToCubicBezierParams,
     cubicBezierParamsToString,
   } from "./lib/eases";
+  import { controlPointMarker } from "./lib/svg";
 
   export let params;
 
@@ -102,30 +105,13 @@
     p[index] = +value;
     params = cubicBezierParamsToString(p);
   };
-
-  const generateCross = (x, y, size = 2 * r) => `
-  <line
-    class="cross-stroke"
-    x1="${-size / 2}"
-    y1="${-size / 2}"
-    x2="${size / 2}"
-    y2="${size / 2}"
-  ></line>
-  <line
-    class="cross-stroke"
-    x1="${size / 2}"
-    y1="${-size / 2}"
-    x2="${-size / 2}"
-    y2="${size / 2}"
-  ></line>`;
 </script>
 
-<div class="wrapper">
+<div
+  class="wrapper"
+  style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;">
   <div class="plot">
-    <svg
-      viewBox="0 0 {width} {height}"
-      fill="none"
-      style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;">
+    <svg viewBox="0 0 {width} {height}" fill="none">
       <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
       <text
         x="{innerWidth + margin - 2 * r}"
@@ -162,12 +148,12 @@
       <g
         class="control-point control-point--1"
         transform="translate({controlX1},{controlY1})">
-        {@html generateCross(controlX2, controlY2)}
+        {@html controlPointMarker(r * 2, 'circle')}
       </g>
       <g
         class="control-point control-point--2"
         transform="translate({controlX2},{controlY2})">
-        {@html generateCross(controlX2, controlY2)}
+        {@html controlPointMarker(r * 2)}
       </g>
     </svg>
   </div>
@@ -178,7 +164,13 @@
       onXChange="{(e) => onChangeValues(0, e)}"
       y="{y1}"
       onYChange="{(e) => onChangeValues(1, e)}">
-      <div class="control-point-label control-point-label--1">&times;</div>
+      <div>
+        <svg class="control-point-icon" viewBox="0 0 24 24">
+          <g transform="translate(12, 12)">
+            {@html controlPointMarker(12, 'circle')}
+          </g>
+        </svg>
+      </div>
     </XYInputField>
   </div>
   <div class="input-set">
@@ -188,7 +180,15 @@
       onXChange="{(e) => onChangeValues(2, e)}"
       y="{y2}"
       onYChange="{(e) => onChangeValues(3, e)}">
-      <div class="control-point-label control-point-label--2">&times;</div>
+      <div>
+        <svg
+          class="control-point-icon control-point-icon--2"
+          viewBox="0 0 24 24">
+          <g transform="translate(12, 12)">
+            {@html controlPointMarker(12)}
+          </g>
+        </svg>
+      </div>
     </XYInputField>
   </div>
 </div>

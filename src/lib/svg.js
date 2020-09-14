@@ -47,3 +47,19 @@ export const jsonToSvg = (
 
   return minify(svg);
 };
+
+export const controlPointMarker = (size, variant = "square") => {
+  if (variant === "square") {
+    return `<rect
+  class="control-point-marker control-point-marker--square"
+  x="${-size / 2}"
+  y="${-size / 2}"
+  width="${size}"
+  height="${size}"
+/>`;
+  }
+
+  return `<circle class="control-point-marker control-point-marker--circle" cx="0" cy="0" r="${
+    size / 2
+  }"/>`;
+};

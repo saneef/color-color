@@ -16,6 +16,7 @@
   button:active,
   button:focus {
     @apply bg-gray-300;
+    @apply text-gray-800;
   }
 
   .button-activate {

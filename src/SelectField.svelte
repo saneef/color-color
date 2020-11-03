@@ -20,7 +20,11 @@
   }
 
   .icon {
-    @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2;
+    @apply absolute inset-y-0 right-0;
+    @apply px-2;
+    @apply flex items-center;
+    @apply text-gray-600;
+    @apply pointer-events-none;
   }
 </style>
 

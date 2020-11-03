@@ -2,7 +2,6 @@
   .overlay {
     @apply absolute inset-0;
     @apply flex items-center justify-center;
-    @apply bg-black bg-opacity-25;
     @apply z-10;
   }
 
@@ -14,6 +13,8 @@
     @apply w-11/12 max-w-2xl;
     @apply border-4 border-gray-900 bg-gray-200;
     @apply shadow-lg;
+
+    transform-origin: top left;
 
     @screen md {
       @apply w-2/3;
@@ -41,10 +42,12 @@
 </style>
 
 <script>
+  import { cubicOut } from "svelte/easing";
   import { shareState, shareDialog } from "./store.js";
   import Icon from "./Icon.svelte";
   import TextField from "./TextField.svelte";
   import DownloadAsSvg from "./DownloadAsSvg.svelte";
+  import { lerp, clamp } from "./lib/math";
 
   function selectText(e) {
     e.currentTarget.select();
@@ -52,12 +55,34 @@
 
   function closeModal(e) {
     e.preventDefault();
-    $shareDialog = !$shareDialog;
+    $shareDialog.open = false;
+  }
+
+  function fly(node, params) {
+    const first = $shareDialog.rect || { x: 0, y: 0, width: 0, height: 0 };
+    const last = node.getBoundingClientRect();
+
+    const dx = last.x - first.x;
+    const dy = last.y - first.y;
+    const dw = last.width / first.width;
+    const dh = last.height / first.height;
+
+    return {
+      ...params,
+      css: (t, u) => `
+        transform: translate(${u * -dx}px, ${u * -dy}px) scale(${lerp(
+        1 / dw,
+        1,
+        t
+      )}, ${lerp(1 / dh, 1, t)});
+        opacity: ${clamp(0, t * 1.5, 1)}
+      `,
+    };
   }
 </script>
 
 <div class="overlay">
-  <div class="dialog">
+  <div transition:fly="{{ duration: 400, easing: cubicOut }}" class="dialog">
     <div class="header">
       <h2>Share</h2>
       <button title="Close" on:click="{closeModal}">

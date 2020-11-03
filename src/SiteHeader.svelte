@@ -62,8 +62,10 @@
   </h1>
   <div class="button-set">
     <button
-      on:click="{() => {
-        $shareDialog = !$shareDialog;
+      on:click="{(e) => {
+        const target = e.currentTarget;
+        const rect = target.getBoundingClientRect();
+        shareDialog.openWithTriggerRect(rect);
       }}">
       Share
     </button>

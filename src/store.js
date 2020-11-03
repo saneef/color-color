@@ -26,7 +26,28 @@ export const config = readable({
   },
 });
 
-export const shareDialog = writable(false);
+const shareDialogStoreCreator = (config) => {
+  const { subscribe, set, update } = writable(config);
+
+  const openWithTriggerRect = (rect) => {
+    update((state) => {
+      return {
+        ...state,
+        open: true,
+        rect,
+      };
+    });
+  };
+
+  return {
+    subscribe,
+    set,
+    update,
+    openWithTriggerRect,
+  };
+};
+
+export const shareDialog = shareDialogStoreCreator({ open: false });
 
 export const settings = writable(
   Object.assign(

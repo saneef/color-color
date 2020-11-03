@@ -46,6 +46,7 @@
   import SiteHeader from "./SiteHeader.svelte";
   import StepsKnob from "./StepsKnob.svelte";
   import VhProvider from "./VhProvider.svelte";
+  import Scrim from "./Scrim.svelte";
   import { shareDialog } from "./store";
 </script>
 
@@ -64,6 +65,7 @@
   <Plots gridArea="graphs" />
 </main>
 
-{#if $shareDialog}
+{#if $shareDialog.open}
+  <Scrim />
   <ShareDialog />
 {/if}

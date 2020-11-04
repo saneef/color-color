@@ -19,17 +19,26 @@
 
   .button-set {
     @apply flex;
+    @apply bg-gray-900;
   }
 
   button {
     @apply flex-1 items-center p-2 border-4 border-gray-900;
+    @apply bg-gray-200;
     @apply leading-tight font-bold;
+    @apply transition-opacity ease-in;
+    transition-duration: 100ms;
+    transition-delay: 150ms;
   }
 
   button:hover,
   button:active,
   button:focus {
     @apply bg-gray-300;
+  }
+
+  button:active {
+    @apply transform scale-95;
   }
 
   button + button {
@@ -45,6 +54,13 @@
   button[disabled]:focus {
     @apply bg-transparent;
     @apply cursor-not-allowed;
+  }
+
+  .button--hidden {
+    @apply ease-out;
+    opacity: 0;
+    transition-delay: 0ms;
+    transition-duration: 0s;
   }
 </style>
 
@@ -62,6 +78,7 @@
   </h1>
   <div class="button-set">
     <button
+      class:button--hidden="{$shareDialog.open}"
       on:click="{(e) => {
         const target = e.currentTarget;
         const rect = target.getBoundingClientRect();

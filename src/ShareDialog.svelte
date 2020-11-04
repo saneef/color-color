@@ -30,7 +30,7 @@
   }
 
   button {
-    @apply flex flex-auto items-center p-4 pt-3 text-gray-900;
+    @apply flex flex-auto items-center py-3 px-4 text-gray-900;
     flex-grow: 0;
   }
 

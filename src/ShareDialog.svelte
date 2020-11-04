@@ -75,7 +75,7 @@
         1,
         t
       )}, ${lerp(1 / dh, 1, t)});
-        opacity: ${clamp(0, t * 1.5, 1)}
+        opacity: ${clamp(0, t * 2, 1)}
       `,
     };
   }

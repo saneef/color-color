@@ -20,3 +20,20 @@ a:focus,
 a:active {
   @apply text-black;
 }
+
+/* https://gist.github.com/zachleat/a7393810acf7890e6bef6a34eaa7b78c#gistcomment-3426446 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

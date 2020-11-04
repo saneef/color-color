@@ -86,7 +86,7 @@
     <div class="header">
       <h2>Share</h2>
       <button title="Close" on:click="{closeModal}">
-        <Icon icon="cross" size="lg" />
+        <Icon icon="cross" />
       </button>
     </div>
     <div class="content">

@@ -37,7 +37,7 @@
     @apply bg-gray-300;
   }
 
-  button:active {
+  button:active:not([disabled]) {
     @apply transform scale-95;
   }
 
@@ -52,7 +52,7 @@
   button[disabled]:hover,
   button[disabled]:active,
   button[disabled]:focus {
-    @apply bg-transparent;
+    @apply bg-gray-200;
     @apply cursor-not-allowed;
   }
 
@@ -88,7 +88,8 @@
     </button>
     <button
       on:click="{() => paletteParams.add()}"
-      disabled="{!canAddMoreColors}">
+      disabled="{!canAddMoreColors}"
+      title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}">
       Add colors
     </button>
   </div>

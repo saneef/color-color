@@ -45,3 +45,9 @@ export const getStateFromUrl = () => {
     return {};
   }
 };
+
+export const getStatefulUrl = (state) => {
+  const encodedState = jsoun.encode(state);
+
+  return `${getBaseUrl()}#${encodedState}`;
+};

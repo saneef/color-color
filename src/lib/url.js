@@ -1,4 +1,4 @@
-import jsoun from "jsoun";
+import pako from "pako";
 
 export const getBaseUrl = () => {
   const getUrl = window.location;
@@ -8,46 +8,53 @@ export const getBaseUrl = () => {
   );
 };
 
-const cleanseData = (data) => {
-  const params = data.paletteParams && data.paletteParams.params;
-  const cleanedParams = params.map((p) => {
-    const sat = p.sat;
-    if (sat) {
-      return {
-        ...p,
-        sat: {
-          ...sat,
-          rate: sat.rate || 100,
-        },
-      };
-    }
+const getQueryParams = () => {
+  const search = window.location.search;
+  const queryParams = new URLSearchParams(search);
+  let obj = {};
 
-    return p;
-  });
+  for (const [key, value] of queryParams) {
+    obj[key] = value;
+  }
 
-  return {
-    ...data,
-    paletteParams: {
-      ...data.paletteParams,
-      params: cleanedParams,
-    },
-  };
+  return obj;
+};
+
+const buildUrl = (encodedState) => {
+  const url = new URL(getBaseUrl());
+
+  url.searchParams.append("s", encodedState);
+
+  return url.href;
+};
+
+const serializeState = (state) =>
+  window.btoa(pako.deflate(JSON.stringify(state), { to: "string" }));
+
+const deserializeState = (string) => {
+  let data = "{}";
+
+  try {
+    const binaryData = window.atob(string);
+    data = pako.inflate(binaryData, { to: "string" });
+  } catch (e) {
+    console.log("Unable extract state from URL");
+  }
+
+  return JSON.parse(data);
 };
 
 export const getStateFromUrl = () => {
-  const data = window.location.hash.substr(1);
-  if (data === "") return {};
-  try {
-    const decodedData = jsoun.decode(data);
-    return cleanseData(decodedData);
-  } catch (e) {
-    console.error("Unable to parse state from URL", e);
-    return {};
+  const { s } = getQueryParams();
+
+  if (s) {
+    return deserializeState(s);
   }
+  return {};
 };
 
 export const getStatefulUrl = (state) => {
-  const encodedState = jsoun.encode(state);
+  const encodedState = serializeState(state);
 
-  return `${getBaseUrl()}#${encodedState}`;
+  return buildUrl(encodedState);
 };

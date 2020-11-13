@@ -1,9 +1,8 @@
 import { writable, derived, readable } from "svelte/store";
 import * as eases from "svelte/easing";
 import chroma from "chroma-js";
-import jsoun from "jsoun";
 import { randomInt } from "./lib/math";
-import { getBaseUrl, getStateFromUrl } from "./lib/url";
+import { getStatefulUrl, getStateFromUrl } from "./lib/url";
 import { hslToHex, hexToHsl } from "./lib/colors";
 import { jsonToSvg } from "./lib/svg";
 import { eases as selectedEases } from "./lib/eases";
@@ -267,6 +266,14 @@ export const nearestRefColors = derived(
   }
 );
 
+const groupPalettesByName = (palettes) =>
+  palettes.reduce((pacc, p, i) => {
+    const palette = p.reduce((acc, s) => {
+      return { ...acc, [s.id]: s.hex };
+    }, {});
+    return { ...pacc, [`color-${i + 1}`]: palette };
+  }, {});
+
 export const shareState = derived(
   [settings, paletteParams, palettes],
   ([$settings, $paletteParams, $palettes]) => {
@@ -274,21 +281,13 @@ export const shareState = derived(
       paletteParams: $paletteParams,
       settings: $settings,
     };
-    const encodedState = jsoun.encode(state);
 
-    const paletteJson = $palettes.reduce((pacc, p, i) => {
-      const palette = p.reduce((acc, s) => {
-        return { ...acc, [s.id]: s.hex };
-      }, {});
-      return { ...pacc, [`color-${i + 1}`]: palette };
-    }, {});
-
-    const paletteSVG = jsonToSvg(paletteJson);
+    const paletteGroup = groupPalettesByName($palettes);
 
     return {
-      url: `${getBaseUrl()}#${encodedState}`,
-      json: JSON.stringify(paletteJson, null, 2),
-      svg: paletteSVG,
+      url: getStatefulUrl(state),
+      json: JSON.stringify(paletteGroup, null, 2),
+      svg: jsonToSvg(paletteGroup),
     };
   }
 );

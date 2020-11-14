@@ -1,5 +1,5 @@
 import autoPreprocess from "svelte-preprocess";
-import babel from "rollup-plugin-babel";
+import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import html from "@rollup/plugin-html";
 import livereload from "rollup-plugin-livereload";
@@ -61,7 +61,7 @@ export default {
     production &&
       babel({
         extensions: [".js", ".mjs", ".html", ".svelte"],
-        runtimeHelpers: true,
+        babelHelpers: "runtime",
         exclude: [
           "node_modules/@babel/**",
           "node_modules/core-js/**",

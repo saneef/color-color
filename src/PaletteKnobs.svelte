@@ -8,9 +8,7 @@
   import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
   import RangeField from "./RangeField.svelte";
-  import SelectField from "./SelectField.svelte";
-  import EaseSelectOptions from "./EaseSelectOptions.svelte";
-
+  import EaseControl from "./EaseControl.svelte";
   import { paletteParams, config } from "./store";
 
   let current = 0;
@@ -20,7 +18,7 @@
 
 <div class="root">
   <PaletteSelector />
-  <ControlGroup title="Hue">
+  <ControlGroup title="Hue" noBorderTop>
     <RangeField
       id="hue-start"
       label="Start"
@@ -35,12 +33,10 @@
       min="{$config.limits.hue[0]}"
       max="{$config.limits.hue[1]}"
       step="{$config.resolution}" />
-    <SelectField
+
+    <EaseControl
       id="hue-ease"
-      label="Easing"
-      bind:value="{$paletteParams.params[current].hue.ease}">
-      <EaseSelectOptions />
-    </SelectField>
+      bind:value="{$paletteParams.params[current].hue.ease}" />
   </ControlGroup>
 
   <ControlGroup title="Saturation">
@@ -59,12 +55,10 @@
       min="{$config.limits.sat[0]}"
       max="{$config.limits.sat[1]}"
       step="{$config.resolution}" />
-    <SelectField
+
+    <EaseControl
       id="sat-ease"
-      label="Easing"
-      bind:value="{$paletteParams.params[current].sat.ease}">
-      <EaseSelectOptions />
-    </SelectField>
+      bind:value="{$paletteParams.params[current].sat.ease}" />
     <RangeField
       id="sat-rate"
       label="Rate"
@@ -89,11 +83,8 @@
       min="{$config.limits.lig[0]}"
       max="{$config.limits.lig[1]}"
       step="{$config.resolution}" />
-    <SelectField
+    <EaseControl
       id="lig-ease"
-      label="Easing"
-      bind:value="{$paletteParams.params[current].lig.ease}">
-      <EaseSelectOptions />
-    </SelectField>
+      bind:value="{$paletteParams.params[current].lig.ease}" />
   </ControlGroup>
 </div>

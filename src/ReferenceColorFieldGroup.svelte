@@ -29,7 +29,7 @@
   };
 </script>
 
-<ControlGroup title="Reference colors" titleId="ref-colors">
+<ControlGroup title="Reference colors" titleId="ref-colors" noBorderTop>
   <TextField
     labelledby="ref-colors"
     id="ref-colors-input"

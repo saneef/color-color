@@ -60,7 +60,7 @@
       id="{id}-x"
       type="number"
       value="{x}"
-      on:change="{handleXChange}"
+      on:input="{handleXChange}"
       step="0.01"
       min="0"
       max="1" />
@@ -72,6 +72,6 @@
       type="number"
       step="0.01"
       value="{y}"
-      on:change="{handleYChange}" />
+      on:input="{handleYChange}" />
   </div>
 </div>

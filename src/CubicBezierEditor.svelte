@@ -61,6 +61,11 @@
   .control-point-icon {
     @apply w-6 h-6;
   }
+
+  .plot--dragging,
+  .plot--dragging .control-point {
+    cursor: grabbing;
+  }
 </style>
 
 <script>
@@ -189,6 +194,8 @@
   };
 
   const handleMouseDownFn = (index) => (e) => {
+    e.preventDefault();
+
     const target = e.currentTarget;
     const { width, height } = target.getBoundingClientRect();
     service.send({
@@ -204,12 +211,15 @@
 
 <svelte:body
   on:keyup="{escapeHandler}"
-  on:mouseup="{service.send}"
+  on:mouseup|preventDefault="{service.send}"
   on:mousemove="{service.send}" />
 <div
   class="wrapper"
   style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;">
-  <div class="plot" bind:this="{plotEl}">
+  <div
+    class="plot"
+    bind:this="{plotEl}"
+    class:plot--dragging="{$service.value === 'dragging'}">
     <svg viewBox="0 0 {width} {height}" fill="none">
       <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
       <text

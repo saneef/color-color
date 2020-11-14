@@ -1,5 +1,5 @@
 import autoPreprocess from "svelte-preprocess";
-import babel from "rollup-plugin-babel";
+import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import html from "@rollup/plugin-html";
 import livereload from "rollup-plugin-livereload";

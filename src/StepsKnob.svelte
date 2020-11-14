@@ -4,7 +4,7 @@
   import RangeField from "./RangeField.svelte";
 </script>
 
-<ControlGroup title="Steps" titleId="steps-title">
+<ControlGroup title="Steps" titleId="steps-title" noBorderTop>
   <RangeField
     id="steps-range"
     labelledby="steps-title"

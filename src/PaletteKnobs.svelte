@@ -18,7 +18,7 @@
 
 <div class="root">
   <PaletteSelector />
-  <ControlGroup title="Hue">
+  <ControlGroup title="Hue" noBorderTop>
     <RangeField
       id="hue-start"
       label="Start"

@@ -25,6 +25,7 @@
 </style>
 
 <script>
+  import { clamp } from "./lib/math.js";
   export let id;
   export let x;
   export let y;
@@ -33,20 +34,14 @@
 
   const handleXChange = (e) => {
     if (e.currentTarget.value) {
-      let value = +e.currentTarget.value;
-
-      if (value > 1) {
-        value = 1;
-      } else if (value < 0) {
-        value = 0;
-      }
+      let value = clamp(0, +e.currentTarget.value, 1);
 
       onXChange(value);
     }
   };
 
   const handleYChange = (e) => {
-    let value = +e.currentTarget.value;
+    let value = clamp(-0.3, +e.currentTarget.value, 1.3);
 
     onYChange(value);
   };

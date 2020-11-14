@@ -26,6 +26,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-html": "^0.2.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.3.4",
     "@sentry/cli": "^1.56.1",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.3.0",
@@ -52,8 +53,8 @@
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
-    "@rollup/plugin-replace": "^2.3.3",
     "@sentry/browser": "^5.23.0",
+    "@xstate/fsm": "^1.5.1",
     "bezier-easing": "^2.1.0",
     "chroma-js": "^2.1.0",
     "core-js": "^3.6.5",

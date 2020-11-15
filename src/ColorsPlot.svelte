@@ -41,7 +41,7 @@
 
 <script>
   import { scaleLinear, scalePoint } from "d3-scale";
-  import { line, curveCardinal } from "d3-shape";
+  import { line as generateLine, curveCardinal } from "d3-shape";
   import { linspace } from "./lib/math.js";
 
   export let data = [];
@@ -67,7 +67,7 @@
   $: yScale = scaleLinear().domain(yDomain).range([innerHeight, 0]);
 
   $: yTicks = linspace(yTickDivisions).map((v) => v * yDomain[1]);
-  $: lineGenerator = line()
+  $: lineGenerator = generateLine()
     .x((d) => xScale(d.x))
     .y((d) => yScale(d.y))
     .curve(curveCardinal);

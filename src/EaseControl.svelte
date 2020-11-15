@@ -11,12 +11,15 @@
   import SelectField from "./SelectField.svelte";
   import EaseSelectOptions from "./EaseSelectOptions.svelte";
   import CubicBezierEditor from "./CubicBezierEditor.svelte";
+  import { getAliasByBezierEasing } from "./lib/eases.js";
 
   export let id;
   export let value;
   export let label = "Easing";
 
-  let showCurve = false;
+  let alias = getAliasByBezierEasing(value);
+  // alias will be empty for 'Custom' curve
+  let showCurve = !alias;
 </script>
 
 <SelectField id="{id}" label="{label}" bind:value>
@@ -32,4 +35,5 @@
   href="#toggle-curve"
   on:click|preventDefault="{() => (showCurve = !showCurve)}">{#if showCurve}
     ↑ Hide
-  {:else}↓ Show{/if} Curve</a>
+  {:else}↓ Show{/if}
+  Curve</a>

@@ -52,6 +52,7 @@
     "tailwindcss": "^1.9.6"
   },
   "dependencies": {
+    "@borderless/base64": "^1.0.1",
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@sentry/browser": "^5.27.4",
     "@xstate/fsm": "^1.5.1",

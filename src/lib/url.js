@@ -1,5 +1,8 @@
 import pako from "pako";
-import { base64ToBuffer } from "./array.js";
+import {
+  encode as base64Encode,
+  decode as base64Decode,
+} from "@borderless/base64";
 
 export const getBaseUrl = () => {
   const getUrl = window.location;
@@ -30,13 +33,13 @@ const buildUrl = (encodedState) => {
 };
 
 const serializeState = (state) =>
-  window.btoa(pako.deflate(JSON.stringify(state)));
+  base64Encode(pako.deflate(JSON.stringify(state)));
 
 const deserializeState = (string) => {
   let data = "{}";
 
   try {
-    const binaryData = base64ToBuffer(string);
+    const binaryData = base64Decode(string);
 
     data = pako.inflate(binaryData, { to: "string" });
   } catch (e) {

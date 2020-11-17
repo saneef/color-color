@@ -1,5 +1,5 @@
 import pako from "pako";
-import { getBezierEasingByAlias, stringToCubicBezierParams } from "./eases.js";
+import { base64ToBuffer } from "./array.js";
 
 export const getBaseUrl = () => {
   const getUrl = window.location;
@@ -30,13 +30,14 @@ const buildUrl = (encodedState) => {
 };
 
 const serializeState = (state) =>
-  window.btoa(pako.deflate(JSON.stringify(state), { to: "string" }));
+  window.btoa(pako.deflate(JSON.stringify(state)));
 
 const deserializeState = (string) => {
   let data = "{}";
 
   try {
-    const binaryData = window.atob(string);
+    const binaryData = base64ToBuffer(string);
+
     data = pako.inflate(binaryData, { to: "string" });
   } catch (e) {
     console.log("Unable extract state from URL");

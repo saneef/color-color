@@ -1,6 +1,6 @@
 import pako from "pako";
 import {
-  encode as base64Encode,
+  encodeUrl as base64Encode,
   decode as base64Decode,
 } from "@borderless/base64";
 

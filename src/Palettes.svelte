@@ -54,7 +54,7 @@
   export let gridArea;
 
   function confirmAndDelete(id) {
-    if (window.confirm("Are you sure you want to remove?")) {
+    if (window.confirm("Are you sure to delete it?")) {
       paletteParams.removeByIndex(id);
     }
   }

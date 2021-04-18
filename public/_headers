@@ -3,6 +3,7 @@
   cache-control: no-cache
   cache-control: no-store
   cache-control: must-revalidate
+  Permissions-Policy: interest-cohort=()
 
 /*.png
   cache-control: public, max-age=86400

@@ -4,6 +4,7 @@ import App from "./App.svelte";
 if (process.env.NODE_ENV === "production" && process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
+    allowUrls: [/https?:\/\/(www\.)?colorcolor\.in/],
   });
 }
 

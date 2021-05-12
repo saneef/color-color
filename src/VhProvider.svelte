@@ -1,6 +1,6 @@
 <script>
   // Based on https://www.bram.us/2020/05/06/100vh-in-safari-on-ios/
-  import debounceFn from "debounce-fn";
+  import debounce from "debounce";
 
   let vh;
 
@@ -12,12 +12,9 @@
     }
   }
 
-  const getVh = debounceFn(
-    () => {
-      vh = window.innerHeight * 0.01;
-    },
-    { wait: 200 }
-  );
+  const getVh = debounce(() => {
+    vh = window.innerHeight * 0.01;
+  }, 200);
 
   $: setVhOnDocument(vh);
 </script>

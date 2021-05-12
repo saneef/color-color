@@ -32,17 +32,22 @@ export default {
       preprocess: autoPreprocess({
         postcss: true,
       }),
-      // enable run-time checks when not in production
-      dev: !production,
+      compilerOptions: {
+        // enable run-time checks when not in production
+        dev: !production,
+      },
       // we'll extract any component CSS out into
       // a separate file - better for performance
       emitCss: true,
     }),
     replace({
-      "process.env.NODE_ENV": !production
-        ? JSON.stringify("development")
-        : JSON.stringify("production"),
-      "process.env.SENTRY_DSN": JSON.stringify(process.env.SENTRY_DSN),
+      preventAssignment: true,
+      values: {
+        "process.env.NODE_ENV": !production
+          ? JSON.stringify("development")
+          : JSON.stringify("production"),
+        "process.env.SENTRY_DSN": JSON.stringify(process.env.SENTRY_DSN),
+      },
     }),
     postcss({
       extract: true,

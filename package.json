@@ -20,10 +20,10 @@
     "url": "git://github.com:saneef/color-color.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.2",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.13.15",
-    "@babel/preset-env": "^7.14.1",
+    "@babel/plugin-transform-runtime": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@babel/runtime": "^7.14.0",
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@rollup/plugin-babel": "^5.3.0",
@@ -50,7 +50,7 @@
     "prettier": "^2.3.0",
     "prettier-plugin-svelte": "^2.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.47.0",
+    "rollup": "^2.48.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-svelte": "^7.1.0",
@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@borderless/base64": "^1.0.1",
-    "@sentry/browser": "^6.3.6",
+    "@sentry/browser": "^6.4.0",
     "@xstate/fsm": "^1.6.0",
     "bezier-easing": "^2.1.0",
     "chroma-js": "^2.1.1",

@@ -9,6 +9,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import svelte from "rollup-plugin-svelte";
 import { template } from "./html-template.js";
 import { terser } from "rollup-plugin-terser";
+import { generateSW } from "rollup-plugin-workbox";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -103,6 +104,12 @@ export default {
         output: {
           comments: false,
         },
+      }),
+
+    production &&
+      generateSW({
+        swDest: "public/sw.js",
+        globDirectory: "public/",
       }),
 
     html({

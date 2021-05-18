@@ -13,4 +13,8 @@ const app = new App({
   props: {},
 });
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+
 export default app;

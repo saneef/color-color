@@ -4,6 +4,8 @@
 /public/*.html
 /public/*.map
 
+/CAs
+
 .eslintcache
 
 .DS_Store

@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   label {
     @apply relative block pl-6 my-2;
   }

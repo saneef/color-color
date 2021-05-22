@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .editor {
     @apply pb-1;
   }
@@ -33,7 +33,9 @@
 <a
   class="toggle"
   href="#toggle-curve"
-  on:click|preventDefault="{() => (showCurve = !showCurve)}">{#if showCurve}
+  on:click|preventDefault="{() => (showCurve = !showCurve)}"
+  >{#if showCurve}
     ↑ Hide
   {:else}↓ Show{/if}
-  Curve</a>
+  Curve</a
+>

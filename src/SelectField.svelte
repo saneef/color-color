@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .control {
     @apply py-2;
   }

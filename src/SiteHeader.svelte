@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .header {
     grid-area: var(--grid-area);
   }
@@ -83,13 +83,15 @@
         const target = e.currentTarget;
         const rect = target.getBoundingClientRect();
         shareDialog.openWithTriggerRect(rect);
-      }}">
+      }}"
+    >
       Share
     </button>
     <button
       on:click="{() => paletteParams.add()}"
       disabled="{!canAddMoreColors}"
-      title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}">
+      title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}"
+    >
       Add colors
     </button>
   </div>

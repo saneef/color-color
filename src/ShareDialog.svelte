@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .overlay {
     @apply absolute inset-0;
     @apply flex items-center justify-center;
@@ -95,14 +95,16 @@
         label="URL"
         readonly="readonly"
         value="{$shareState.url}"
-        on:click="{selectText}" />
+        on:click="{selectText}"
+      />
       <TextField
         multiline
         id="share-json"
         label="JSON"
         readonly="readonly"
         value="{$shareState.json}"
-        on:click="{selectText}" />
+        on:click="{selectText}"
+      />
       <DownloadAsSvg data="{$shareState.svg}" />
     </div>
   </div>

@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   div {
     @apply pt-2;
   }

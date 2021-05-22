@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .palette {
     @apply flex flex-col;
   }
@@ -69,7 +69,8 @@
       class="button-activate"
       class:active
       on:click="{onActivate}"
-      title="{active ? 'Active' : 'Activate'}">
+      title="{active ? 'Active' : 'Activate'}"
+    >
       <span class="status">{index}</span>
     </button>
     {#if removable}

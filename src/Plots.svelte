@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .plots {
     @apply overflow-y-auto overflow-x-hidden;
     @apply border-4 border-t-0 border-gray-900;
@@ -72,7 +72,8 @@
           x: s.id,
           y: chroma(s.hex).luminance(),
           hex: s.hex,
-        }))}" />
+        }))}"
+      />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
@@ -83,7 +84,8 @@
           x: s.id,
           y: getChroma(s.hex),
           hex: s.hex,
-        }))}" />
+        }))}"
+      />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
@@ -91,7 +93,8 @@
         subtitle="What color is it?"
         yDomain="{$config.limits.hue}"
         yTickDivisions="{6}"
-        data="{currentPalette.map((s) => ({ x: s.id, y: s.h, hex: s.hex }))}" />
+        data="{currentPalette.map((s) => ({ x: s.id, y: s.h, hex: s.hex }))}"
+      />
     </ControlGroup>
   </div>
   <div class="plot-group">
@@ -105,7 +108,8 @@
           x: (s.paletteIndex + 1).toString(),
           y: chroma(s.hex).luminance(),
           hex: s.hex,
-        }))}" />
+        }))}"
+      />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
@@ -116,7 +120,8 @@
           x: (s.paletteIndex + 1).toString(),
           y: getChroma(s.hex),
           hex: s.hex,
-        }))}" />
+        }))}"
+      />
     </ControlGroup>
 
     <ControlGroup>
@@ -129,7 +134,8 @@
           x: (s.paletteIndex + 1).toString(),
           y: s.h,
           hex: s.hex,
-        }))}" />
+        }))}"
+      />
     </ControlGroup>
   </div>
 </div>

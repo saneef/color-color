@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .chrome {
     @apply w-screen;
     display: grid;

@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   footer {
     @apply -mx-4 mt-4 py-4 px-2 text-center text-gray-100 bg-gray-900 leading-loose;
   }
@@ -31,8 +31,8 @@
 <footer>
   <ul>
     <li class="full">
-      <a href="{getBaseUrl()}">color × color</a> by <a
-        href="https://saneef.com">Saneef</a>
+      <a href="{getBaseUrl()}">color × color</a> by
+      <a href="https://saneef.com">Saneef</a>
     </li>
     <li>
       <a href="https://ko-fi.com/N4N81KP2D" target="_blank">

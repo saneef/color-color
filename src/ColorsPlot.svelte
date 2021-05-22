@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   h3 {
     @apply text-sm font-bold text-gray-700;
   }
@@ -84,7 +84,8 @@
       <svg
         viewBox="0 0 {width}
         {height}"
-        style="--circ-stroke-width: {strokeWidth}">
+        style="--circ-stroke-width: {strokeWidth}"
+      >
         <g transform="{`translate(${margin.x},${margin.y})`}">
           <g class="axis y-axis">
             {#each yTicks as tick}
@@ -109,7 +110,8 @@
               r="{r}"
               fill="{s.hex}"
               cx="{xScale(s.x)}"
-              cy="{yScale(s.y)}">
+              cy="{yScale(s.y)}"
+            >
               <title>{s.x} · {title}: {s.y.toFixed(2)}</title>
             </circle>
           {/each}

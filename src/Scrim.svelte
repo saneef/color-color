@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .scrim {
     @apply absolute inset-0;
     @apply bg-black bg-opacity-25;
@@ -13,4 +13,5 @@
 
 <div
   transition:fade="{{ delay: 0, duration: 400, easing: expoOut }}"
-  class="scrim"></div>
+  class="scrim"
+></div>

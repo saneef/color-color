@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .root {
     @apply border;
   }
@@ -58,7 +58,8 @@
       on:input="{handleXChange}"
       step="0.01"
       min="0"
-      max="1" />
+      max="1"
+    />
   </div>
   <div class="fieldset">
     <label class="label" for="{id}-y">y</label>
@@ -67,6 +68,7 @@
       type="number"
       step="0.01"
       value="{y}"
-      on:input="{handleYChange}" />
+      on:input="{handleYChange}"
+    />
   </div>
 </div>

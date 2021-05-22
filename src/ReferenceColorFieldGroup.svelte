@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .ref-colors-list {
   }
   .ref-colors-list > li {
@@ -35,7 +35,8 @@
     id="ref-colors-input"
     bind:value="{$settings.refColorsRaw}"
     legend="Comma seperated list of hex color codes."
-    placeholder="#c0ffee, #be57ed, #7ea,..." />
+    placeholder="#c0ffee, #be57ed, #7ea,..."
+  />
 
   {#if $refColors.length}
     <ul class="ref-colors-list">

@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .root {
     @apply p-4 pt-3 -mx-4 my-4 border-t-4 border-b-4 border-gray-900;
   }
@@ -25,18 +25,21 @@
       bind:value="{$paletteParams.params[current].hue.start}"
       min="{$config.limits.hue[0]}"
       max="{$config.limits.hue[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
     <RangeField
       id="hue-end"
       label="End"
       bind:value="{$paletteParams.params[current].hue.end}"
       min="{$config.limits.hue[0]}"
       max="{$config.limits.hue[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
 
     <EaseControl
       id="hue-ease"
-      bind:value="{$paletteParams.params[current].hue.ease}" />
+      bind:value="{$paletteParams.params[current].hue.ease}"
+    />
   </ControlGroup>
 
   <ControlGroup title="Saturation">
@@ -46,7 +49,8 @@
       bind:value="{$paletteParams.params[current].sat.start}"
       min="{$config.limits.sat[0]}"
       max="{$config.limits.sat[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
 
     <RangeField
       id="sat-end"
@@ -54,17 +58,20 @@
       bind:value="{$paletteParams.params[current].sat.end}"
       min="{$config.limits.sat[0]}"
       max="{$config.limits.sat[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
 
     <EaseControl
       id="sat-ease"
-      bind:value="{$paletteParams.params[current].sat.ease}" />
+      bind:value="{$paletteParams.params[current].sat.ease}"
+    />
     <RangeField
       id="sat-rate"
       label="Rate"
       bind:value="{$paletteParams.params[current].sat.rate}"
       min="{$config.limits.rate[0]}"
-      max="{$config.limits.rate[1]}" />
+      max="{$config.limits.rate[1]}"
+    />
   </ControlGroup>
 
   <ControlGroup title="Lightness">
@@ -74,7 +81,8 @@
       bind:value="{$paletteParams.params[current].lig.start}"
       min="{$config.limits.lig[0]}"
       max="{$config.limits.lig[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
 
     <RangeField
       id="lig-end"
@@ -82,9 +90,11 @@
       bind:value="{$paletteParams.params[current].lig.end}"
       min="{$config.limits.lig[0]}"
       max="{$config.limits.lig[1]}"
-      step="{$config.resolution}" />
+      step="{$config.resolution}"
+    />
     <EaseControl
       id="lig-ease"
-      bind:value="{$paletteParams.params[current].lig.ease}" />
+      bind:value="{$paletteParams.params[current].lig.ease}"
+    />
   </ControlGroup>
 </div>

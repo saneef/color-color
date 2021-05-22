@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .control {
     @apply py-2;
   }
@@ -51,7 +51,8 @@
       bind:value
       aria-labelledby="{labelledby}"
       on:click
-      {...$$restProps} />
+      {...$$restProps}
+    />
   {/if}
   {#if legend}
     <p class="legend">{legend}</p>

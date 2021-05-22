@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .note {
     @apply mt-1 text-sm text-gray-700 leading-tight;
   }
@@ -19,7 +19,8 @@
   <RadioGroup
     radios="{radios}"
     bind:group="{$settings.colorSpace}"
-    labelledby="color-space" />
+    labelledby="color-space"
+  />
   <p class="note">
     Learn how <a href="https://www.hsluv.org/comparison/" target="_blank">
       HSLuv differs from HSL

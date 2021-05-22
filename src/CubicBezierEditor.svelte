@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .wrapper {
     @apply bg-gray-100 pb-2;
     @apply grid;
@@ -215,17 +215,20 @@
   on:mousemove="{service.send}" />
 <div
   class="wrapper"
-  style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;">
+  style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;"
+>
   <div
     class="plot"
     bind:this="{plotEl}"
-    class:plot--dragging="{$service.value === 'dragging'}">
+    class:plot--dragging="{$service.value === 'dragging'}"
+  >
     <svg viewBox="0 0 {width} {height}" fill="none">
       <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
       <text
         x="{innerWidth + margin - 2 * r}"
         y="{margin + innerHeight - r}"
-        class="legend">
+        class="legend"
+      >
         t
       </text>
       <g transform="{`translate(${margin},${margin})`}">
@@ -256,15 +259,18 @@
       <path class="curve" d="{curvePathD}"></path>
       <g
         class="control-point control-point--1"
-        transform="translate({controlX1},{controlY1})">
+        transform="translate({controlX1},{controlY1})"
+      >
         <ControlPoint
           on:mousedown="{handleMouseDownFn(1)}"
           size="{r * 2}"
-          variant="circle" />
+          variant="circle"
+        />
       </g>
       <g
         class="control-point control-point--2"
-        transform="translate({controlX2},{controlY2})">
+        transform="translate({controlX2},{controlY2})"
+      >
         <ControlPoint on:mousedown="{handleMouseDownFn(2)}" size="{r * 2}" />
       </g>
     </svg>
@@ -275,7 +281,8 @@
       x="{x1}"
       onXChange="{(e) => onChangeValues(0, e)}"
       y="{y1}"
-      onYChange="{(e) => onChangeValues(1, e)}">
+      onYChange="{(e) => onChangeValues(1, e)}"
+    >
       <div>
         <svg class="control-point-icon" viewBox="0 0 24 24">
           <g transform="translate(12, 12)">
@@ -291,11 +298,13 @@
       x="{x2}"
       onXChange="{(e) => onChangeValues(2, e)}"
       y="{y2}"
-      onYChange="{(e) => onChangeValues(3, e)}">
+      onYChange="{(e) => onChangeValues(3, e)}"
+    >
       <div>
         <svg
           class="control-point-icon control-point-icon--2"
-          viewBox="0 0 24 24">
+          viewBox="0 0 24 24"
+        >
           <g transform="translate(12, 12)">
             <ControlPoint size="12" />
           </g>

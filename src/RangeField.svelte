@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .root {
     @apply py-2;
   }
@@ -91,7 +91,8 @@
         id="{id}"
         step="{step}"
         bind:value
-        {...$$restProps} />
+        {...$$restProps}
+      />
     </div>
     <div class="value" class:shortValue>{valueText}</div>
   </div>

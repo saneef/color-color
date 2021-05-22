@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .index {
     @apply grid pb-4;
     grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));
@@ -47,7 +47,8 @@
         href="#{i + 1}"
         on:click|preventDefault="{() => {
           $paletteParams.paletteIndex = i;
-        }}">
+        }}"
+      >
         {i + 1}
       </a>
     </li>

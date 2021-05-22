@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .swatch {
     @apply relative flex flex-wrap justify-end items-start py-4 text-gray-300;
   }
@@ -75,7 +75,8 @@
   class="swatch"
   class:fillHeight
   class:isLight
-  style="background-color:{hexCode}">
+  style="background-color:{hexCode}"
+>
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>
   </a>

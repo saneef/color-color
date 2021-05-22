@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .palettes {
     @apply grid overflow-y-auto overflow-x-hidden;
     @apply border-4 border-l-0 border-gray-900;
@@ -67,7 +67,8 @@
 
 <div
   class="palettes"
-  style="--grid-area: {gridArea}; --columns:{$palettes.length};">
+  style="--grid-area: {gridArea}; --columns:{$palettes.length};"
+>
   {#each $palettes as palette, j (j)}
     <Palette
       active="{$paletteParams.paletteIndex === j}"
@@ -78,7 +79,8 @@
       on:clickRemove="{() => {
         confirmAndDelete(j);
       }}"
-      removable="{$palettes.length > 1}">
+      removable="{$palettes.length > 1}"
+    >
       {#each palette as color, i (i)}
         <Swatch
           fillHeight
@@ -86,7 +88,8 @@
           on:click="{(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);
-          }}" />
+          }}"
+        />
       {/each}
     </Palette>
   {/each}
@@ -96,10 +99,12 @@
       <button
         on:click="{() => {
           $paletteParams.swatchIndex = i;
-        }}">
+        }}"
+      >
         <span
           class="button-label"
-          class:button-label--active="{$paletteParams.swatchIndex === i}">
+          class:button-label--active="{$paletteParams.swatchIndex === i}"
+        >
           {color.id}
         </span>
       </button>

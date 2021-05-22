@@ -1,4 +1,4 @@
-<style>
+<style lang="postcss">
   .root {
     @apply inline-block fill-current;
   }
@@ -25,21 +25,17 @@
   class="root {size}"
   title="{icon}"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 20 20">
-  {#if icon === 'chevron-small-down'}
-    <path
-      d="M6 8L10 12L14 8"
-      stroke="currentColor"
-      fill="none"
-      stroke-width="2"></path>
+  viewBox="0 0 20 20"
+>
+  {#if icon === "chevron-small-down"}
+    <path d="M6 8L10 12L14 8" stroke="currentColor" fill="none" stroke-width="2"
+    ></path>
   {/if}
-  {#if icon === 'cross'}
-    <path
-      d="M4 4L16 16M16 4L4 16"
-      stroke="currentColor"
-      stroke-width="2"></path>
+  {#if icon === "cross"}
+    <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="2"
+    ></path>
   {/if}
-  {#if icon === 'ko-fi'}
+  {#if icon === "ko-fi"}
     <g fill-rule="nonzero">
       <path
         d="M19.9 7.458c-.277-1.465-1.065-2.377-1.874-2.942a4.985 4.985 0

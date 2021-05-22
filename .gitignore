@@ -1,14 +1,7 @@
 /node_modules/
-/public/*.css
-/public/*.js
-/public/*.html
-/public/*.map
-
+/dist/
 /CAs
 
 .eslintcache
-
 .DS_Store
-
-# Local Netlify folder
 .netlify

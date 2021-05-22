@@ -1,8 +1,8 @@
-const purgecss = require("@fullhuman/postcss-purgecss")({
-  content: ["./src/**/*.svelte"],
-  safelist: [/svelte-/],
-  defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
-});
+// const purgecss = require("@fullhuman/postcss-purgecss")({
+//   content: ["./src/**/*.svelte"],
+//   safelist: [/svelte-/],
+//   defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+// });
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -14,7 +14,7 @@ module.exports = {
     require("postcss-nesting"),
     ...(production
       ? [
-          purgecss,
+          // purgecss,
           require("cssnano")({
             preset: [
               "default",

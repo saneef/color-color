@@ -2,9 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Svelte + Vite App</title>
+    <title><%- title %></title>
+    <meta name="description" content="<%- description %>" />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="<%- siteUrl %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%- title %>" />
+    <meta property="og:description" content="<%- description %>" />
+    <meta property="og:image" content="<%- imagePath %>" />
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:url" content="<%- siteUrl %>" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%- title %>" />
+    <meta name="twitter:description" content="<%- description %>" />
+    <meta name="twitter:image" content="<%- imagePath %>" />
   </head>
   <body>
     <script type="module" src="/src/main.js"></script>

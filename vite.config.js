@@ -7,6 +7,9 @@ import legacy from "@vitejs/plugin-legacy";
 import siteInfo from "./site-info.js";
 
 export default defineConfig({
+  build: {
+    sourcemap: true,
+  },
   plugins: [
     injectHtml({
       injectData: {

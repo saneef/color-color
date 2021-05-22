@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "prebuild": "npm run clean",
-    "build": "NODE_ENV=production vite build",
+    "build:app:": "vite build",
+    "build": "NODE_ENV=production run-s clean build:*",
     "dev": "vite",
     "prepare": "husky install",
     "release:sentry": "./release-on-sentry.sh",
@@ -20,6 +20,7 @@
     "eslint-plugin-svelte3": "^3.2.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
+    "npm-run-all": "^4.1.5",
     "prettier-plugin-svelte": "^2.3.0",
     "svelte": "^3.38.2",
     "vite": "^2.3.3",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@borderless/base64": "^1.0.1",
     "@sentry/browser": "^6.4.1",
+    "@sentry/cli": "^1.64.2",
     "@xstate/fsm": "^1.6.1",
     "autoprefixer": "^10.2.5",
     "bezier-easing": "^2.1.0",

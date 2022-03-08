@@ -6,6 +6,7 @@ const info = {
     "Color-color is a tool to create accessible color systems for UIs. It uses HSLuv color space to create perceptually uniform colors.",
   siteUrl,
   imagePath: `${siteUrl}/screenshot.jpg`,
+  domain: process.env.PLAUSIBLE_DOMAINS || "",
 };
 
 export default info;

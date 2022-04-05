@@ -2,11 +2,12 @@
   .chrome {
     @apply w-screen;
     display: grid;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: max-content 1fr min-content;
     grid-template-columns: repeat(2, 60vw) min-content;
     grid-template-areas:
       "header controls   palettes"
-      "graphs controls palettes";
+      "graphs controls palettes"
+      "pitch controls palettes";
     scroll-snap-type: x proximity;
     overflow-x: auto;
     overflow-y: hidden;
@@ -17,7 +18,8 @@
       grid-template-columns: minmax(16rem, 1fr) 4fr minmax(16rem, 1fr);
       grid-template-areas:
         "header   palettes  graphs"
-        "controls palettes  graphs";
+        "controls palettes  graphs"
+        "controls palettes  pitch";
     }
   }
 
@@ -39,6 +41,7 @@
   import OverlayKnobs from "./OverlayKnobs.svelte";
   import PaletteKnobs from "./PaletteKnobs.svelte";
   import Palettes from "./Palettes.svelte";
+  import Pitch from "./Pitch.svelte";
   import Plots from "./Plots.svelte";
   import ReferenceColorFieldGroup from "./ReferenceColorFieldGroup.svelte";
   import ShareDialog from "./ShareDialog.svelte";
@@ -63,6 +66,7 @@
   </div>
   <Palettes gridArea="palettes" />
   <Plots gridArea="graphs" />
+  <Pitch gridArea="pitch" />
 </main>
 
 {#if $shareDialog.open}

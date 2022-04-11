@@ -43,10 +43,10 @@
 </script>
 
 <div class="pitch" style="--grid-area: {gridArea};">
-  <h2>👋 Need expert help with colors?</h2>
+  <h2>Need professional help?</h2>
   <p>
     Hi, I'm <a href="{website}">Saneef</a>, an information designer. I can help
-    you create color palettes and systems.
+    you create accessible color systems for your products and brands.
   </p>
   <p class="pt-2">
     <a class="btn" href="{contactForm}">Book a call</a>

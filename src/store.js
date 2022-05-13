@@ -59,7 +59,7 @@ export const settings = writable(
       overlayContrast: false,
       overlayHex: true,
       refColorsRaw: "",
-      colorSpace: "hsluv",
+      colorSpace: "okhsl",
     },
     urlState.settings
   )

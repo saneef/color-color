@@ -10,8 +10,8 @@
   import RadioGroup from "./RadioGroup.svelte";
 
   const radios = [
-    { label: "HSLuv", value: "hsluv" },
     { label: "Okhsl", value: "okhsl" },
+    { label: "HSLuv", value: "hsluv" },
     { label: "HSL", value: "hsl" },
   ];
 </script>

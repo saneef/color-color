@@ -23,10 +23,12 @@
     labelledby="color-space"
   />
   <p class="note">
-    Learn how
-    <a href="https://www.hsluv.org/comparison/" target="_blank">
-      HSLuv differs from HSL
+    Learn about difference between
+    <a
+      href="https://bottosson.github.io/posts/colorpicker/#color-spaces-for-color-picking"
+      target="_blank"
+    >
+      HSL, HSLuv, and OKHSL.
     </a>
-    .
   </p>
 </ControlGroup>

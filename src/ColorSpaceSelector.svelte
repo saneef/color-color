@@ -11,7 +11,7 @@
 
   const radios = [
     { label: "HSLuv", value: "hsluv" },
-    { label: "OKHSL", value: "okhsl" },
+    { label: "Okhsl", value: "okhsl" },
     { label: "HSL", value: "hsl" },
   ];
 </script>
@@ -28,7 +28,7 @@
       href="https://bottosson.github.io/posts/colorpicker/#color-spaces-for-color-picking"
       target="_blank"
     >
-      HSL, HSLuv, and OKHSL.
+      HSL, HSLuv, and Okhsl.
     </a>
   </p>
 </ControlGroup>

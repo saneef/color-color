@@ -3,7 +3,7 @@ const siteUrl = "https://colorcolor.in";
 const info = {
   title: "color × color",
   description:
-    "Color-color is a tool to create accessible color systems for UIs. It uses HSLuv color space to create perceptually uniform colors.",
+    "Color-color is a tool to create accessible color systems for UIs. You can use Okhsl or HSLuv color spaces to create perceptually uniform colors.",
   siteUrl,
   imagePath: `${siteUrl}/screenshot.jpg`,
   domain: process.env.PLAUSIBLE_DOMAINS || "",

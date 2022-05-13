@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/42aa179f-b564-4251-85be-4bbfdfd501e5/deploy-status)](https://app.netlify.com/sites/color-color/deploys)
 
-Color-color is a tool to generate color shades. It uses [HSLuv](https://www.hsluv.org) color space by default. You can generate more than one set of shades, and compare side by side. Bring in your reference colors to tune-in the color schemes.
+Color-color is a tool to generate color shades. Supports [Okhsl](https://bottosson.github.io/posts/colorpicker/), [HSLuv](https://www.hsluv.org) and HSL color spaces. You can generate more than one set of shades, and compare side by side. Bring in your reference colors to tune-in the color schemes.
 
 [Designing accessible color systems](https://stripe.com/au/blog/accessible-color-systems) article by Stripe, and [Colorbox](https://www.colorbox.io) by Lyft Design inspired us.
 

@@ -11,6 +11,7 @@
 
   const radios = [
     { label: "HSLuv", value: "hsluv" },
+    { label: "OKHSL", value: "okhsl" },
     { label: "HSL", value: "hsl" },
   ];
 </script>
@@ -22,8 +23,10 @@
     labelledby="color-space"
   />
   <p class="note">
-    Learn how <a href="https://www.hsluv.org/comparison/" target="_blank">
+    Learn how
+    <a href="https://www.hsluv.org/comparison/" target="_blank">
       HSLuv differs from HSL
-    </a> .
+    </a>
+    .
   </p>
 </ControlGroup>

@@ -3,7 +3,7 @@
   export let variant = "square";
 </script>
 
-{#if variant === 'square'}
+{#if variant === "square"}
   <rect
     on:mousedown
     class="control-point-marker control-point-marker--square"

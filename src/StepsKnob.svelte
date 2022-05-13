@@ -10,5 +10,6 @@
     labelledby="steps-title"
     bind:value="{$paletteParams.steps}"
     min="3"
-    max="21" />
+    max="21"
+  />
 </ControlGroup>

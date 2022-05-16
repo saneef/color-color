@@ -77,41 +77,57 @@ function createPaletteParams() {
         params: [
           {
             hue: {
-              start: 230,
-              end: 254,
+              start: 16,
+              end: 27,
               ease: getBezierEasingByAlias("quadIn"),
             },
             sat: {
               start: 45,
-              end: 100,
+              end: 88,
               ease: getBezierEasingByAlias("quadOut"),
               rate: defaults.saturationRate,
             },
-            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
+            lig: {
+              start: 98.75,
+              end: 12,
+              ease: "0.4,0.64,0.6,0.91",
+            },
           },
           {
             hue: {
-              start: 278,
-              end: 290,
+              start: 150,
+              end: 139,
               ease: getBezierEasingByAlias("quadIn"),
             },
-            sat: {
-              start: 38,
-              end: 89,
-              ease: getBezierEasingByAlias("quadOut"),
-              rate: defaults.saturationRate,
-            },
-            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
-          },
-          {
-            hue: { start: 9, end: 16, ease: getBezierEasingByAlias("quadIn") },
             sat: {
               start: 44,
               end: 81,
               ease: getBezierEasingByAlias("quadOut"),
               rate: defaults.saturationRate,
             },
-            lig: { start: 99, end: 5, ease: getBezierEasingByAlias("quadOut") },
+            lig: {
+              start: 99,
+              end: 12,
+              ease: "0.51,0.93,0.89,1",
+            },
+          },
+          {
+            hue: {
+              start: 235,
+              end: 250,
+              ease: getBezierEasingByAlias("quadIn"),
+            },
+            sat: {
+              start: 44,
+              end: 81,
+              ease: getBezierEasingByAlias("quadOut"),
+              rate: 125,
+            },
+            lig: {
+              start: 99,
+              end: 12,
+              ease: getBezierEasingByAlias("quadOut"),
+            },
           },
         ],
       },

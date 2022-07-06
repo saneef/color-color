@@ -211,7 +211,7 @@
 
 <svelte:body
   on:keyup="{escapeHandler}"
-  on:mouseup|preventDefault="{service.send}"
+  on:mouseup="{service.send}"
   on:mousemove="{service.send}" />
 <div
   class="wrapper"

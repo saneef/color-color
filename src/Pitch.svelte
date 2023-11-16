@@ -38,7 +38,7 @@
 <script>
   export let gridArea;
 
-  const contactForm = "https://saneef.typeform.com/to/VVnL7ea8";
+  const contactForm = `mailto:corbels_canny.0g@icloud.com?subject=I%20need%20help%20with%20colours&body=Hey%20Saneef%2C%0A%0A`;
   const website = "https://saneef.com";
 </script>
 

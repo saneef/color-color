@@ -168,12 +168,18 @@ export const getAliasByBezierEasing = (value) => {
   return ease && ease.alias;
 };
 
+/**
+ * Converts a string Bezier definition to a tuple
+ *
+ * @param      {string}  str
+ * @return     {[number,number,number,number]}
+ */
 export const stringToCubicBezierParams = (str) => {
   const params = str.split(",");
   const numericParams = params.map((p) => +p.trim()).filter((n) => !isNaN(n));
 
   if (numericParams.length === 4) {
-    return numericParams;
+    return /** @type {[number,number,number,number]} */ (numericParams);
   }
 };
 

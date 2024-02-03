@@ -1,15 +1,15 @@
-import { writable, derived, readable } from "svelte/store";
+import BezierEasing from "bezier-easing";
 import chroma from "chroma-js";
-import { randomInt } from "./lib/math";
-import { getStatefulUrl, getStateFromUrl } from "./lib/url";
-import { hslToHex, hexToHsl } from "./lib/colors";
-import { jsonToSvg } from "./lib/svg";
+import { derived, readable, writable } from "svelte/store";
+import { hexToHsl, hslToHex } from "./lib/colors";
 import {
   eases,
   getBezierEasingByAlias,
   stringToCubicBezierParams,
 } from "./lib/eases";
-import BezierEasing from "bezier-easing";
+import { randomInt } from "./lib/math";
+import { jsonToSvg } from "./lib/svg";
+import { getStateFromUrl, getStatefulUrl } from "./lib/url";
 
 const defaults = {
   steps: 9,
@@ -197,7 +197,10 @@ export const palettes = derived(
     const steps = $paletteParams.steps;
     return $paletteParams.params.map((pal) => {
       const { hue, sat, lig } = pal;
-      const hUnit = (hue.end - hue.start) / steps;
+      const hueCrosses360 = hue.start > hue.end;
+      const hueEnd = hueCrosses360 ? 360 + hue.end : hue.end;
+
+      const hUnit = (hueEnd - hue.start) / steps;
       const sUnit = (sat.end - sat.start) / steps;
       const lUnit = (lig.end - lig.start) / steps;
 
@@ -206,7 +209,10 @@ export const palettes = derived(
       const ligEaseFn = BezierEasing(...stringToCubicBezierParams(lig.ease));
 
       const swatches = Array.from({ length: steps }).map((_, i) => {
-        const h = hue.start + easeSteps(hueEaseFn, i + 1, steps) * hUnit;
+        let h = hue.start + easeSteps(hueEaseFn, i + 1, steps) * hUnit;
+        if (hueCrosses360) {
+          h = h % 360;
+        }
 
         let s = sat.start + easeSteps(satEaseFn, i + 1, steps) * sUnit;
         s = Math.min(100, s * (sat.rate / 100));

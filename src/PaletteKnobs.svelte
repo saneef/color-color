@@ -43,7 +43,7 @@
     />
 
     <Checkbox
-      label="Interpolate over 0 to 360"
+      label="Interpolate across 360"
       bind:checked="{$paletteParams.params[current].hue.interpolateHueOver360}"
     />
   </ControlGroup>

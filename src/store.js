@@ -80,6 +80,7 @@ function createPaletteParams() {
               start: 16,
               end: 27,
               ease: getBezierEasingByAlias("quadIn"),
+              interpolateHueOver360: false,
             },
             sat: {
               start: 45,
@@ -98,6 +99,7 @@ function createPaletteParams() {
               start: 150,
               end: 139,
               ease: getBezierEasingByAlias("quadIn"),
+              interpolateHueOver360: false,
             },
             sat: {
               start: 44,
@@ -116,6 +118,7 @@ function createPaletteParams() {
               start: 235,
               end: 250,
               ease: getBezierEasingByAlias("quadIn"),
+              interpolateHueOver360: false,
             },
             sat: {
               start: 44,
@@ -197,8 +200,9 @@ export const palettes = derived(
     const steps = $paletteParams.steps;
     return $paletteParams.params.map((pal) => {
       const { hue, sat, lig } = pal;
-      const hueCrosses360 = hue.start > hue.end;
-      const hueEnd = hueCrosses360 ? 360 + hue.end : hue.end;
+      const interpolateHueOver360 =
+        hue.interpolateHueOver360 && hue.start > hue.end;
+      const hueEnd = interpolateHueOver360 ? 360 + hue.end : hue.end;
 
       const hUnit = (hueEnd - hue.start) / steps;
       const sUnit = (sat.end - sat.start) / steps;
@@ -210,7 +214,7 @@ export const palettes = derived(
 
       const swatches = Array.from({ length: steps }).map((_, i) => {
         let h = hue.start + easeSteps(hueEaseFn, i + 1, steps) * hUnit;
-        if (hueCrosses360) {
+        if (interpolateHueOver360) {
           h = h % 360;
         }
 

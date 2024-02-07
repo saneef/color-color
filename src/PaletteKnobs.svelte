@@ -5,6 +5,7 @@
 </style>
 
 <script>
+  import Checkbox from "./Checkbox.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
   import RangeField from "./RangeField.svelte";
@@ -39,6 +40,11 @@
     <EaseControl
       id="hue-ease"
       bind:value="{$paletteParams.params[current].hue.ease}"
+    />
+
+    <Checkbox
+      label="Interpolate over 0 to 360"
+      bind:checked="{$paletteParams.params[current].hue.interpolateHueOver360}"
     />
   </ControlGroup>
 

@@ -1,3 +1,9 @@
 trailingComma: "es5"
 svelteSortOrder: options-styles-scripts-markup
 svelteStrictMode: true
+plugins:
+  - prettier-plugin-svelte
+overrides:
+  - files:
+      - "*.svelte"
+    processor: svelte

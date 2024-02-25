@@ -37,18 +37,15 @@
 
 <script>
   export let gridArea;
-
-  const contactForm = `mailto:corbels_canny.0g@icloud.com?subject=I%20need%20help%20with%20colours&body=Hey%20Saneef%2C%0A%0A`;
-  const website = "https://saneef.com";
 </script>
 
 <div class="pitch" style="--grid-area: {gridArea};">
-  <h2>Need professional help?</h2>
+  <h2>Support color × color</h2>
   <p>
-    Hi, I'm <a href="{website}">Saneef</a>, an information designer. I can help
-    you create accessible color systems for your products and brands.
+    All contribution helps with hosting and other operational costs of this
+    valuable tool.
   </p>
   <p class="pt-2">
-    <a class="btn" href="{contactForm}">Book a call</a>
+    <a class="btn" href="https://ko-fi.com/N4N81KP2D" target="_blank">Donate</a>
   </p>
 </div>

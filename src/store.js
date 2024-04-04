@@ -177,6 +177,18 @@ function createPaletteParams() {
       return pp;
     });
 
+  const clone = () =>
+    update((pp) => {
+      if (pp.params.length < maxNumOfPalettes) {
+        const param = structuredClone(pp.params[pp.paletteIndex]);
+
+        pp.paletteIndex = pp.params.length;
+        pp.params = [...pp.params, param];
+      }
+
+      return pp;
+    });
+
   const checkAndSet = (obj) => {
     const { swatchIndex, steps } = obj;
 
@@ -187,7 +199,7 @@ function createPaletteParams() {
     set(obj);
   };
 
-  return { subscribe, set: checkAndSet, update, removeByIndex, add };
+  return { subscribe, set: checkAndSet, update, removeByIndex, add, clone };
 }
 export const paletteParams = createPaletteParams();
 

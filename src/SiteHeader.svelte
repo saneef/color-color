@@ -88,6 +88,13 @@
       Share
     </button>
     <button
+      on:click="{() => paletteParams.clone()}"
+      disabled="{!canAddMoreColors}"
+      title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}"
+    >
+      Clone color
+    </button>
+    <button
       on:click="{() => paletteParams.add()}"
       disabled="{!canAddMoreColors}"
       title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}"

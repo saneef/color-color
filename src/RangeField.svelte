@@ -66,11 +66,24 @@
   export let labelledby = null;
   export let value;
   export let step = 1;
+  export let locked = null;
+  export let difference = null;
+  export let locks = null;
+  export let min;
+  export let max;
 
   let shortValue = false;
 
   $: shortValue = step === 1;
-  $: valueText = shortValue ? value : value.toFixed(2);
+  function updateLocks() {
+    if (locked !== null) {
+      if (locked) {
+        let v = value - difference;
+        locks = v > max ? max : v < min ? min : v;
+        return;
+      }
+    }
+  }
 </script>
 
 <div class="root">
@@ -84,6 +97,9 @@
         id="{id}"
         step="{step}"
         bind:value
+        on:change="{updateLocks}"
+        min="{min}"
+        max="{max}"
         {...$$restProps}
       />
     </div>
@@ -93,7 +109,10 @@
       class="value"
       class:shortValue
       bind:value
+      on:change="{updateLocks}"
       step="{step}"
+      min="{min}"
+      max="{max}"
       {...$$restProps}
     />
   </div>

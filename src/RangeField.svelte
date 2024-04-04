@@ -8,7 +8,7 @@
   }
 
   .wrapper {
-    @apply flex items-center;
+    @apply flex items-center gap-2;
   }
 
   .input-wrapper {
@@ -52,11 +52,11 @@
   }
 
   .value {
-    @apply flex-none w-16 text-right;
+    @apply flex-none w-20 text-right;
   }
 
   .shortValue {
-    @apply w-10;
+    @apply w-12;
   }
 </style>
 
@@ -87,6 +87,14 @@
         {...$$restProps}
       />
     </div>
-    <div class="value" class:shortValue>{valueText}</div>
+    <input
+      type="number"
+      aria-labelledby="{labelledby}"
+      class="value"
+      class:shortValue
+      bind:value
+      step="{step}"
+      {...$$restProps}
+    />
   </div>
 </div>

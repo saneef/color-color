@@ -6,4 +6,5 @@ plugins:
 overrides:
   - files:
       - "*.svelte"
-    processor: svelte
+    options:
+      parser: svelte

@@ -1,6 +1,6 @@
 <style lang="postcss">
   .root {
-    @apply py-2;
+    @apply py-2 -mr-1;
   }
 
   .label {
@@ -52,11 +52,27 @@
   }
 
   .value {
-    @apply flex-none w-16 text-right;
+    width: 6rem;
+    padding-left: 0.5rem;
+  }
+
+  .value-text-input {
+    @apply bg-transparent px-1;
+
+    width: 100%;
+    text-align: right;
+  }
+
+  .value-text-input:hover {
+    @apply bg-gray-100;
+  }
+
+  .value-text-input:focus {
+    @apply bg-white;
   }
 
   .shortValue {
-    @apply w-10;
+    width: 3rem;
   }
 </style>
 
@@ -66,11 +82,49 @@
   export let labelledby = null;
   export let value;
   export let step = 1;
+  export let min;
+  export let max;
 
   let shortValue = false;
 
+  function isValueValid(num) {
+    if (typeof num === "number" && num >= min && num <= max) {
+      return true;
+    }
+    return false;
+  }
+
+  function parseTextValue(text) {
+    const value = +text;
+    if (isValueValid(value)) {
+      return value;
+    }
+  }
+
+  const handleTextValue = (e, resetInvalidValue = true) => {
+    const text = e.currentTarget.value;
+
+    const nextValue = parseTextValue(text);
+
+    if (nextValue !== undefined) {
+      value = nextValue;
+    } else if (resetInvalidValue) {
+      e.currentTarget.value = formatValue(value);
+    }
+  };
+
+  const onKeyEvent = (e) => {
+    if (e.key === "Enter") {
+      handleTextValue(e, false);
+    }
+  };
+
+  const formatValue = (value) => {
+    return shortValue ? value : value.toFixed(2);
+  };
+
   $: shortValue = step === 1;
-  $: valueText = shortValue ? value : value.toFixed(2);
+  $: valueText = formatValue(value);
 </script>
 
 <div class="root">
@@ -83,10 +137,22 @@
         class="input"
         id="{id}"
         step="{step}"
-        bind:value
+        bind:value="{value}"
+        min="{min}"
+        max="{max}"
         {...$$restProps}
       />
     </div>
-    <div class="value" class:shortValue>{valueText}</div>
+    <div class="value" class:shortValue="{shortValue}">
+      <input
+        class="value-text-input"
+        type="text"
+        inputmode="numeric"
+        pattern="\d*"
+        value="{valueText}"
+        on:keyup="{onKeyEvent}"
+        on:blur="{handleTextValue}"
+      />
+    </div>
   </div>
 </div>

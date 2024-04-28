@@ -54,6 +54,7 @@
   import chroma from "chroma-js";
   import { settings, nearestRefColors } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
+  import CopyOnClick from "./CopyOnClick.svelte";
 
   export let hexCode = "#000";
   export let fillHeight = false;
@@ -73,14 +74,18 @@
 
 <div
   class="swatch"
-  class:fillHeight
-  class:isLight
+  class:fillHeight="{fillHeight}"
+  class:isLight="{isLight}"
   style="background-color:{hexCode}"
 >
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>
   </a>
-  {#if $settings.overlayHex}<span class="hex-code">{hexCode}</span>{/if}
+  {#if $settings.overlayHex}
+    <span class="hex-code">
+      <CopyOnClick text="{hexCode}">{hexCode}</CopyOnClick>
+    </span>
+  {/if}
   {#if refColor}
     <div class="refColor">
       <TinySwatch color="{refColor}" />

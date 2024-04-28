@@ -70,10 +70,6 @@
   .value-text-input:focus {
     @apply bg-white;
   }
-
-  .shortValue {
-    width: 3rem;
-  }
 </style>
 
 <script>
@@ -84,8 +80,6 @@
   export let step = 1;
   export let min;
   export let max;
-
-  let shortValue = false;
 
   function isValueValid(num) {
     if (typeof num === "number" && num >= min && num <= max) {
@@ -120,10 +114,9 @@
   };
 
   const formatValue = (value) => {
-    return shortValue ? value : value.toFixed(2);
+    return step === 1 ? value : value.toFixed(2);
   };
 
-  $: shortValue = step === 1;
   $: valueText = formatValue(value);
 </script>
 
@@ -143,7 +136,7 @@
         {...$$restProps}
       />
     </div>
-    <div class="value" class:shortValue="{shortValue}">
+    <div class="value">
       <input
         class="value-text-input"
         type="text"

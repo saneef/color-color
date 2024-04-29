@@ -1,6 +1,6 @@
 <style lang="postcss">
   .swatch {
-    @apply relative flex flex-wrap justify-end items-start py-4 text-gray-300;
+    @apply relative flex flex-wrap justify-end items-start py-4 text-gray-200;
   }
 
   .click-area {
@@ -17,7 +17,7 @@
   }
 
   .isLight {
-    @apply text-gray-700;
+    @apply text-gray-800;
   }
 
   .fillHeight {

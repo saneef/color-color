@@ -48,14 +48,13 @@
     if (!lock) {
       lock = true;
       unlockAfterDelay();
-      console.log("locked");
+
       copyToClipboard(text);
     }
   };
 
   const unlockAfterDelay = (ms = 2500) => {
     setTimeout(() => {
-      console.log("unlocked");
       lock = false;
     }, ms);
   };

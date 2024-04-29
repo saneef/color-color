@@ -12,6 +12,10 @@
     flex-grow: 0;
   }
 
+  button [aria-hidden="true"] {
+    @apply inline-flex;
+  }
+
   button:hover,
   button:active,
   button:focus {
@@ -23,7 +27,7 @@
     @apply flex-auto text-gray-200 mr-auto;
   }
 
-  .button-remove {
+  .button-action {
     @apply flex-none text-3xl leading-none border-r;
   }
 
@@ -50,6 +54,7 @@
 
   export let active = false;
   export let removable = true;
+  export let clonable = true;
   export let index;
 
   const dispatch = createEventDispatcher();
@@ -60,6 +65,10 @@
 
   function onRemove(e) {
     dispatch("clickRemove", e);
+  }
+
+  function onClone(e) {
+    dispatch("clickClone", e);
   }
 </script>
 
@@ -73,10 +82,20 @@
     >
       <span class="status">{index}</span>
     </button>
+    {#if clonable}
+      <button class="button-action" on:click="{onClone}" title="Clone">
+        <span class="sr-only">Clone</span>
+        <span aria-hidden="true">
+          <Icon icon="clone" />
+        </span>
+      </button>
+    {/if}
     {#if removable}
-      <button class="button-remove" on:click="{onRemove}" title="Remove">
+      <button class="button-action" on:click="{onRemove}" title="Remove">
         <span class="sr-only">Remove</span>
-        <Icon icon="x" />
+        <span aria-hidden="true">
+          <Icon icon="x" />
+        </span>
       </button>
     {/if}
   </div>

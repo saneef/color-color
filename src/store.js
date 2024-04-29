@@ -1,6 +1,7 @@
 import BezierEasing from "bezier-easing";
 import chroma from "chroma-js";
 import { derived, readable, writable } from "svelte/store";
+import { insert } from "./lib/array";
 import { hexToHsl, hslToHex } from "./lib/colors";
 import {
   eases,
@@ -177,6 +178,14 @@ function createPaletteParams() {
       return pp;
     });
 
+  const cloneByIndex = (index) =>
+    update((pp) => {
+      if (pp.params.length < maxNumOfPalettes) {
+        const nextParams = structuredClone(pp.params[index]);
+        pp.params = insert(pp.params, index + 1, nextParams);
+      }
+      return pp;
+    });
   const checkAndSet = (obj) => {
     const { swatchIndex, steps } = obj;
 
@@ -187,7 +196,14 @@ function createPaletteParams() {
     set(obj);
   };
 
-  return { subscribe, set: checkAndSet, update, removeByIndex, add };
+  return {
+    subscribe,
+    set: checkAndSet,
+    update,
+    removeByIndex,
+    add,
+    cloneByIndex,
+  };
 }
 export const paletteParams = createPaletteParams();
 

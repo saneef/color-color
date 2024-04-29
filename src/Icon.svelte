@@ -1,6 +1,6 @@
 <style lang="postcss">
   .root {
-    @apply inline-block fill-current;
+    @apply inline-flex fill-current justify-center content-center;
   }
 
   .sm {
@@ -21,16 +21,22 @@
   export let size = "base";
 </script>
 
-<svg
-  class="root {size}"
-  title="{icon}"
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 20 20"
->
+<svg class="root {size}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  {#if icon}
+    <title>{icon}</title>
+  {/if}
   {#if icon === "chevron-small-down"}
     <path d="M6 8L10 12L14 8" stroke="currentColor" fill="none" stroke-width="2"
     ></path>
   {/if}
+
+  {#if icon === "clone"}
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="8" height="8"></rect>
+      <path d="M11 6V3H3V11H6"></path>
+    </g>
+  {/if}
+
   {#if icon === "x"}
     <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="2"
     ></path>

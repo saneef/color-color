@@ -63,6 +63,9 @@
     $paletteParams.paletteIndex = paletteIndex;
     $paletteParams.swatchIndex = swatchIndex;
   }
+
+  $: canAddMoreColors =
+    $paletteParams.params.length < $paletteParams.maxNumOfPalettes;
 </script>
 
 <div
@@ -79,6 +82,10 @@
       on:clickRemove="{() => {
         confirmAndDelete(j);
       }}"
+      on:clickClone="{() => {
+        paletteParams.cloneByIndex(j);
+      }}"
+      clonable="{canAddMoreColors}"
       removable="{$palettes.length > 1}"
     >
       {#each palette as color, i (i)}

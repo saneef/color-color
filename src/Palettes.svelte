@@ -47,7 +47,7 @@
 </style>
 
 <script>
-  import { paletteParams, palettes } from "./store";
+  import { paletteParams, palettes, nearestRefColors } from "./store";
   import Palette from "./Palette.svelte";
   import Swatch from "./Swatch.svelte";
 
@@ -97,6 +97,7 @@
           hexCode="{color.hex}"
           whiteContrast="{color.whiteContrast}"
           blackContrast="{color.blackContrast}"
+          refColor="{$nearestRefColors[color.hex]}"
           on:click="{(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);

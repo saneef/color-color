@@ -219,8 +219,8 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
 export const palettes = derived(
   [paletteParams, settings],
   ([$paletteParams, $settings]) => {
-    console.log($paletteParams, $settings);
     const steps = $paletteParams.steps;
+
     return $paletteParams.params.map((pal) => {
       const { hue, sat, lig } = pal;
       const interpolateHueOver360 =
@@ -246,10 +246,8 @@ export const palettes = derived(
 
         const l = lig.start + easeSteps(ligEaseFn, i + 1, steps) * lUnit;
 
-        const hex = hslToHex(h, s, l, $settings.colorSpace);
-
         const id = (i + 1) * (steps > 9 ? 10 : 100);
-
+        const hex = hslToHex(h, s, l, $settings.colorSpace);
         const chroma = getChroma(hex);
         const luminance = getLuminance(hex);
         const whiteContrast = wcgaContrast("#fff", hex);

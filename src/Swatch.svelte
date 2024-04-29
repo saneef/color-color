@@ -51,7 +51,7 @@
 </style>
 
 <script>
-  import { settings, nearestRefColors } from "./store.js";
+  import { settings } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
 
@@ -60,10 +60,7 @@
   export let isLight = false;
   export let whiteContrast = 0;
   export let blackContrast = 0;
-
-  let refColor;
-
-  $: refColor = $nearestRefColors[hexCode];
+  export let refColor = undefined;
 </script>
 
 <div

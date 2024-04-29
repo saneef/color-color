@@ -64,7 +64,7 @@
   }
 
   .value-text-input:hover {
-    @apply bg-gray-100;
+    @apply bg-gray-50;
   }
 
   .value-text-input:focus {
@@ -128,11 +128,11 @@
         type="range"
         aria-labelledby="{labelledby}"
         class="input"
-        id="{id}"
-        step="{step}"
-        bind:value="{value}"
-        min="{min}"
-        max="{max}"
+        {id}
+        {step}
+        bind:value
+        {min}
+        {max}
         {...$$restProps}
       />
     </div>

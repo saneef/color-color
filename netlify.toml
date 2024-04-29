@@ -1,6 +1,7 @@
-[context.master]
+[build]
+  framework = "#custom"
   publish = "dist/"
-  command = "npm run release"
+  command = "pnpm run deploy"
 
 [[redirects]]
   from = "/p.js"

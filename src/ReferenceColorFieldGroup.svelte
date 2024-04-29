@@ -20,13 +20,6 @@
   import TextField from "./TextField.svelte";
   import TinySwatch from "./TinySwatch.svelte";
   import { settings, refColors } from "./store";
-
-  const prettyHSL = ([h, s, l]) => {
-    const hText = parseFloat(h.toFixed(2));
-    const sText = parseFloat(s.toFixed(2));
-    const lText = parseFloat(l.toFixed(2));
-    return `${$settings.colorSpace}(${hText},${sText}%,${lText}%)`;
-  };
 </script>
 
 <ControlGroup title="Reference colors" titleId="ref-colors" noBorderTop>
@@ -44,7 +37,7 @@
         <li>
           <TinySwatch color="{c.hex}" />
           <code class="ref-color-code">{c.hex}</code>
-          <code class="ref-color-code">{prettyHSL(c.hsl)}</code>
+          <code class="ref-color-code">{c.string}</code>
         </li>
       {/each}
     </ul>

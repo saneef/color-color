@@ -39,6 +39,7 @@
     "autoprefixer": "^10.4.19",
     "bezier-easing": "^2.1.0",
     "chroma-js": "^2.4.2",
+    "colorjs.io": "github:color-js/color.js#4a962dd",
     "cssnano": "^7.0.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.2.0",

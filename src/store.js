@@ -2,12 +2,13 @@ import BezierEasing from "bezier-easing";
 import { derived, readable, writable } from "svelte/store";
 import { insert } from "./lib/array";
 import {
+  colorToString,
+  contrast,
+  createColor,
+  createColorByHSL,
   distance,
   getChroma,
   getLuminance,
-  hexToHsl,
-  hslToHex,
-  wcgaContrast,
 } from "./lib/colors";
 import {
   eases,
@@ -216,6 +217,11 @@ export const paletteParams = createPaletteParams();
 const easeSteps = (easeFn, currentStep, totalStep) =>
   easeFn(currentStep / totalStep) * currentStep;
 
+const staticColors = {
+  white: createColorByHSL(0, 1, 1),
+  black: createColorByHSL(0, 0, 0),
+};
+
 export const palettes = derived(
   [paletteParams, settings],
   ([$paletteParams, $settings]) => {
@@ -247,13 +253,16 @@ export const palettes = derived(
         const l = lig.start + easeSteps(ligEaseFn, i + 1, steps) * lUnit;
 
         const id = (i + 1) * (steps > 9 ? 10 : 100);
-        const hex = hslToHex(h, s, l, $settings.colorSpace);
-        const chroma = getChroma(hex);
-        const luminance = getLuminance(hex);
-        const whiteContrast = wcgaContrast("#fff", hex);
-        const blackContrast = wcgaContrast("#000", hex);
+        const _color = createColorByHSL(h, s, l, $settings.colorSpace);
+        const hex = colorToString(_color, "hex");
+        const chroma = getChroma(_color);
+        const luminance = getLuminance(_color);
+        const whiteContrast = contrast(_color, staticColors.white);
+        const blackContrast = contrast(_color, staticColors.black);
+        const string = colorToString(_color, undefined, $settings.colorSpace);
 
         return {
+          _color,
           id: id.toString(),
           h,
           s,
@@ -263,6 +272,7 @@ export const palettes = derived(
           luminance,
           whiteContrast,
           blackContrast,
+          string,
         };
       });
 
@@ -308,7 +318,14 @@ export const refColors = derived(settings, ($settings) => {
     .split(",")
     .map((s) => s.trim())
     .filter((s) => s.match(hexRe) !== null)
-    .map((hex) => ({ hex, hsl: hexToHsl(hex, $settings.colorSpace) }));
+    .map((hex) => {
+      const _color = createColor(hex);
+      return {
+        _color,
+        hex: colorToString(_color, "hex"),
+        string: colorToString(_color, undefined, $settings.colorSpace),
+      };
+    });
 });
 
 export const nearestRefColors = derived(
@@ -318,14 +335,14 @@ export const nearestRefColors = derived(
       return { ...acc, [hex]: {} };
     }, {});
 
-    $refColors.forEach(({ hex: rc }) => {
+    $refColors.forEach(({ _color: _rcColor, hex: rcHex }) => {
       $palettes.forEach((p) =>
         p.forEach((swatch) => {
-          const { hex } = swatch;
-          const dist = distance(rc, hex, "rgb");
-          if (refs[rc].hex === undefined || refs[rc].dist > dist) {
-            refs[rc].hex = hex;
-            refs[rc].dist = dist;
+          const { _color, hex } = swatch;
+          const dist = distance(_rcColor, _color);
+          if (refs[rcHex].hex === undefined || refs[rcHex].dist > dist) {
+            refs[rcHex].hex = hex;
+            refs[rcHex].dist = dist;
           }
         })
       );

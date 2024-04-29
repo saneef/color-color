@@ -29,6 +29,9 @@ importers:
       chroma-js:
         specifier: ^2.4.2
         version: 2.4.2
+      colorjs.io:
+        specifier: github:color-js/color.js#4a962dd
+        version: https://codeload.github.com/color-js/color.js/tar.gz/4a962dd
       cssnano:
         specifier: ^7.0.1
         version: 7.0.1(postcss@8.4.38)
@@ -61,17 +64,17 @@ importers:
         version: 2.2.19(autoprefixer@10.4.19(postcss@8.4.38))(postcss@8.4.38)
       vite-plugin-pwa:
         specifier: ^0.19.8
-        version: 0.19.8(vite@5.2.10(terser@5.30.4))(workbox-build@7.1.0)(workbox-window@7.1.0)
+        version: 0.19.8(vite@5.2.10(terser@5.31.0))(workbox-build@7.1.0)(workbox-window@7.1.0)
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.0
-        version: 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.30.4))
+        version: 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))
       '@types/chroma-js':
         specifier: ^2.4.4
         version: 2.4.4
       '@vitejs/plugin-legacy':
         specifier: ^5.3.2
-        version: 5.3.2(terser@5.30.4)(vite@5.2.10(terser@5.30.4))
+        version: 5.3.2(terser@5.31.0)(vite@5.2.10(terser@5.31.0))
       ava:
         specifier: ^6.1.2
         version: 6.1.2
@@ -101,10 +104,10 @@ importers:
         version: 4.2.15
       vite:
         specifier: 5.2.10
-        version: 5.2.10(terser@5.30.4)
+        version: 5.2.10(terser@5.31.0)
       vite-plugin-html:
         specifier: ^3.2.2
-        version: 3.2.2(vite@5.2.10(terser@5.30.4))
+        version: 3.2.2(vite@5.2.10(terser@5.31.0))
       workbox-build:
         specifier: ^7.1.0
         version: 7.1.0
@@ -1524,6 +1527,10 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
+  colorjs.io@https://codeload.github.com/color-js/color.js/tar.gz/4a962dd:
+    resolution: {tarball: https://codeload.github.com/color-js/color.js/tar.gz/4a962dd}
+    version: 0.5.0
+
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
@@ -1800,8 +1807,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.4.750:
-    resolution: {integrity: sha512-9ItEpeu15hW5m8jKdriL+BQrgwDTXEL9pn4SkillWFu73ZNNNQ2BKKLS+ZHv2vC9UkNhosAeyfxOf/5OSeTCPA==}
+  electron-to-chromium@1.4.751:
+    resolution: {integrity: sha512-2DEPi++qa89SMGRhufWTiLmzqyuGmNF3SK4+PQetW1JKiZdEpF4XQonJXJCzyuYSA6mauiMhbyVhqYAP45Hvfw==}
 
   emittery@1.0.3:
     resolution: {integrity: sha512-tJdCJitoy2lrC2ldJcqN4vkqJ00lT+tOWNT1hBJjO/3FDMJa5TTIiYGCKGkn/WfCyOzUMObeohbVTj00fhiLiA==}
@@ -3477,8 +3484,8 @@ packages:
     resolution: {integrity: sha512-G13vtMYPT/J8A4X2SjdtBTphZlrp1gKv6hZiOjw14RCWg6GbHuQBGtjlx75xLbYV/wEc0D7G5K4rxKP/cXk8Bw==}
     engines: {node: '>=10'}
 
-  terser@5.30.4:
-    resolution: {integrity: sha512-xRdd0v64a8mFK9bnsKVdoNP9GQIKUAaJPTaqEQDL4w/J8WaW4sWXXoMZ+6SimPkfT5bElreXf8m9HnmPc3E1BQ==}
+  terser@5.31.0:
+    resolution: {integrity: sha512-Q1JFAoUKE5IMfI4Z/lkE/E6+SwgzO+x4tq4v1AyBLRj8VSYvRO6A/rQrPg1yud4g0En9EKI1TvFRF2tQFcoUkg==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4704,7 +4711,7 @@ snapshots:
     dependencies:
       serialize-javascript: 6.0.2
       smob: 1.5.0
-      terser: 5.30.4
+      terser: 5.31.0
     optionalDependencies:
       rollup: 2.79.1
 
@@ -4880,26 +4887,26 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.11
 
-  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.30.4)))(svelte@4.2.15)(vite@5.2.10(terser@5.30.4))':
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0)))(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.30.4))
+      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))
       debug: 4.3.4
       svelte: 4.2.15
-      vite: 5.2.10(terser@5.30.4)
+      vite: 5.2.10(terser@5.31.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.30.4))':
+  '@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.30.4)))(svelte@4.2.15)(vite@5.2.10(terser@5.30.4))
+      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0)))(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.10
       svelte: 4.2.15
       svelte-hmr: 0.16.0(svelte@4.2.15)
-      vite: 5.2.10(terser@5.30.4)
-      vitefu: 0.2.5(vite@5.2.10(terser@5.30.4))
+      vite: 5.2.10(terser@5.31.0)
+      vitefu: 0.2.5(vite@5.2.10(terser@5.31.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -4937,7 +4944,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@vitejs/plugin-legacy@5.3.2(terser@5.30.4)(vite@5.2.10(terser@5.30.4))':
+  '@vitejs/plugin-legacy@5.3.2(terser@5.31.0)(vite@5.2.10(terser@5.31.0))':
     dependencies:
       '@babel/core': 7.24.4
       '@babel/preset-env': 7.24.4(@babel/core@7.24.4)
@@ -4947,8 +4954,8 @@ snapshots:
       magic-string: 0.30.10
       regenerator-runtime: 0.14.1
       systemjs: 6.15.1
-      terser: 5.30.4
-      vite: 5.2.10(terser@5.30.4)
+      terser: 5.31.0
+      vite: 5.2.10(terser@5.31.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -5187,7 +5194,7 @@ snapshots:
   browserslist@4.23.0:
     dependencies:
       caniuse-lite: 1.0.30001614
-      electron-to-chromium: 1.4.750
+      electron-to-chromium: 1.4.751
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
 
@@ -5318,6 +5325,8 @@ snapshots:
   colord@2.9.3: {}
 
   colorette@2.0.20: {}
+
+  colorjs.io@https://codeload.github.com/color-js/color.js/tar.gz/4a962dd: {}
 
   commander@2.20.3: {}
 
@@ -5621,7 +5630,7 @@ snapshots:
     dependencies:
       jake: 10.8.7
 
-  electron-to-chromium@1.4.750: {}
+  electron-to-chromium@1.4.751: {}
 
   emittery@1.0.3: {}
 
@@ -6081,7 +6090,7 @@ snapshots:
       he: 1.2.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.30.4
+      terser: 5.31.0
 
   html-tags@3.3.1: {}
 
@@ -7361,7 +7370,7 @@ snapshots:
       type-fest: 0.16.0
       unique-string: 2.0.0
 
-  terser@5.30.4:
+  terser@5.31.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
       acorn: 8.11.3
@@ -7475,7 +7484,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-plugin-html@3.2.2(vite@5.2.10(terser@5.30.4)):
+  vite-plugin-html@3.2.2(vite@5.2.10(terser@5.31.0)):
     dependencies:
       '@rollup/pluginutils': 4.2.1
       colorette: 2.0.20
@@ -7489,31 +7498,31 @@ snapshots:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: 5.2.10(terser@5.30.4)
+      vite: 5.2.10(terser@5.31.0)
 
-  vite-plugin-pwa@0.19.8(vite@5.2.10(terser@5.30.4))(workbox-build@7.1.0)(workbox-window@7.1.0):
+  vite-plugin-pwa@0.19.8(vite@5.2.10(terser@5.31.0))(workbox-build@7.1.0)(workbox-window@7.1.0):
     dependencies:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.10(terser@5.30.4)
+      vite: 5.2.10(terser@5.31.0)
       workbox-build: 7.1.0
       workbox-window: 7.1.0
     transitivePeerDependencies:
       - supports-color
 
-  vite@5.2.10(terser@5.30.4):
+  vite@5.2.10(terser@5.31.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.1
     optionalDependencies:
       fsevents: 2.3.3
-      terser: 5.30.4
+      terser: 5.31.0
 
-  vitefu@0.2.5(vite@5.2.10(terser@5.30.4)):
+  vitefu@0.2.5(vite@5.2.10(terser@5.31.0)):
     optionalDependencies:
-      vite: 5.2.10(terser@5.30.4)
+      vite: 5.2.10(terser@5.31.0)
 
   webidl-conversions@3.0.1: {}
 

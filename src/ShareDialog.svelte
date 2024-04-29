@@ -71,10 +71,10 @@
       ...params,
       css: (t, u) => `
         transform: translate(${u * -dx}px, ${u * -dy}px) scale(${lerp(
-        1 / dw,
-        1,
-        t
-      )}, ${lerp(1 / dh, 1, t)});
+          1 / dw,
+          1,
+          t
+        )}, ${lerp(1 / dh, 1, t)});
         opacity: ${clamp(0, t * 2, 1)}
       `,
     };
@@ -86,7 +86,7 @@
     <div class="header">
       <h2>Share</h2>
       <button title="Close" on:click="{closeModal}">
-        <Icon icon="cross" />
+        <Icon icon="x" />
       </button>
     </div>
     <div class="content">

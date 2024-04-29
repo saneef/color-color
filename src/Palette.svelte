@@ -76,7 +76,7 @@
     {#if removable}
       <button class="button-remove" on:click="{onRemove}" title="Remove">
         <span class="sr-only">Remove</span>
-        <Icon icon="cross" />
+        <Icon icon="x" />
       </button>
     {/if}
   </div>

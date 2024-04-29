@@ -54,19 +54,15 @@
   import { settings, nearestRefColors } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
-  import { getLuminance, wcgaContrast } from "./lib/colors";
 
   export let hexCode = "#000";
   export let fillHeight = false;
+  export let isLight = false;
+  export let whiteContrast = 0;
+  export let blackContrast = 0;
 
-  let isLight = false;
-  let whiteContrast = 0;
-  let blackContrast = 0;
   let refColor;
 
-  $: isLight = getLuminance(hexCode) > 0.55;
-  $: whiteContrast = $settings.overlayContrast && wcgaContrast("#fff", hexCode);
-  $: blackContrast = $settings.overlayContrast && wcgaContrast("#000", hexCode);
   $: refColor = $nearestRefColors[hexCode];
 </script>
 

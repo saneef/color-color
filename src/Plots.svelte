@@ -37,7 +37,6 @@
     palettes,
     config,
   } from "./store";
-  import { getChroma, getLuminance } from "./lib/colors";
 
   export let gridArea;
 
@@ -65,7 +64,7 @@
         yDomain="{[0, 1]}"
         data="{currentPalette.map((s) => ({
           x: s.id,
-          y: getLuminance(s.hex),
+          y: s.luminance,
           hex: s.hex,
         }))}"
       />
@@ -77,7 +76,7 @@
         yDomain="{[0, 150]}"
         data="{currentPalette.map((s) => ({
           x: s.id,
-          y: getChroma(s.hex),
+          y: s.chroma,
           hex: s.hex,
         }))}"
       />
@@ -101,7 +100,7 @@
         yDomain="{[0, 1]}"
         data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
-          y: getLuminance(s.hex),
+          y: s.luminance,
           hex: s.hex,
         }))}"
       />
@@ -113,7 +112,7 @@
         yDomain="{[0, 150]}"
         data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
-          y: getChroma(s.hex),
+          y: s.chroma,
           hex: s.hex,
         }))}"
       />

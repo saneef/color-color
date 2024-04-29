@@ -1,7 +1,14 @@
 import BezierEasing from "bezier-easing";
 import { derived, readable, writable } from "svelte/store";
 import { insert } from "./lib/array";
-import { distance, hexToHsl, hslToHex } from "./lib/colors";
+import {
+  distance,
+  getChroma,
+  getLuminance,
+  hexToHsl,
+  hslToHex,
+  wcgaContrast,
+} from "./lib/colors";
 import {
   eases,
   getBezierEasingByAlias,
@@ -212,6 +219,7 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
 export const palettes = derived(
   [paletteParams, settings],
   ([$paletteParams, $settings]) => {
+    console.log($paletteParams, $settings);
     const steps = $paletteParams.steps;
     return $paletteParams.params.map((pal) => {
       const { hue, sat, lig } = pal;
@@ -237,8 +245,15 @@ export const palettes = derived(
         s = Math.min(100, s * (sat.rate / 100));
 
         const l = lig.start + easeSteps(ligEaseFn, i + 1, steps) * lUnit;
+
         const hex = hslToHex(h, s, l, $settings.colorSpace);
+
         const id = (i + 1) * (steps > 9 ? 10 : 100);
+
+        const chroma = getChroma(hex);
+        const luminance = getLuminance(hex);
+        const whiteContrast = wcgaContrast("#fff", hex);
+        const blackContrast = wcgaContrast("#000", hex);
 
         return {
           id: id.toString(),
@@ -246,6 +261,10 @@ export const palettes = derived(
           s,
           l,
           hex,
+          chroma,
+          luminance,
+          whiteContrast,
+          blackContrast,
         };
       });
 

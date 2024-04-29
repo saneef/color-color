@@ -64,6 +64,8 @@
     $paletteParams.swatchIndex = swatchIndex;
   }
 
+  const isLightColor = (lum) => lum > 0.55;
+
   $: canAddMoreColors =
     $paletteParams.params.length < $paletteParams.maxNumOfPalettes;
 </script>
@@ -91,7 +93,10 @@
       {#each palette as color, i (i)}
         <Swatch
           fillHeight
+          isLight="{isLightColor(color.luminance)}"
           hexCode="{color.hex}"
+          whiteContrast="{color.whiteContrast}"
+          blackContrast="{color.blackContrast}"
           on:click="{(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);

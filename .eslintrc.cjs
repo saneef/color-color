@@ -1,26 +1,15 @@
+/** @type { import("eslint").Linter.Config } */
 module.exports = {
   root: true,
+  extends: ["eslint:recommended", "plugin:svelte/recommended", "prettier"],
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 2020,
+    extraFileExtensions: [".svelte"],
+  },
   env: {
     browser: true,
-    es6: true,
+    es2017: true,
     node: true,
-    jest: true,
   },
-  extends: "eslint:recommended",
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
-  parserOptions: {
-    ecmaVersion: 2019,
-    sourceType: "module",
-  },
-  plugins: ["svelte"],
-  overrides: [
-    {
-      files: ["*.svelte"],
-      parser: "svelte-eslint-parser",
-    },
-  ],
-  rules: {},
 };

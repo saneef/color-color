@@ -1,8 +1,7 @@
 import BezierEasing from "bezier-easing";
-import chroma from "chroma-js";
 import { derived, readable, writable } from "svelte/store";
 import { insert } from "./lib/array";
-import { hexToHsl, hslToHex } from "./lib/colors";
+import { distance, hexToHsl, hslToHex } from "./lib/colors";
 import {
   eases,
   getBezierEasingByAlias,
@@ -306,7 +305,7 @@ export const nearestRefColors = derived(
       $palettes.forEach((p) =>
         p.forEach((swatch) => {
           const { hex } = swatch;
-          const dist = chroma.distance(rc, hex, "rgb");
+          const dist = distance(rc, hex, "rgb");
           if (refs[rc].hex === undefined || refs[rc].dist > dist) {
             refs[rc].hex = hex;
             refs[rc].dist = dist;

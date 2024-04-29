@@ -51,10 +51,10 @@
 </style>
 
 <script>
-  import chroma from "chroma-js";
   import { settings, nearestRefColors } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
+  import { getLuminance, wcgaContrast } from "./lib/colors";
 
   export let hexCode = "#000";
   export let fillHeight = false;
@@ -64,19 +64,17 @@
   let blackContrast = 0;
   let refColor;
 
-  $: isLight = chroma(hexCode).luminance() > 0.55;
-  $: whiteContrast =
-    $settings.overlayContrast && chroma.contrast("#fff", hexCode);
-  $: blackContrast =
-    $settings.overlayContrast && chroma.contrast("#000", hexCode);
+  $: isLight = getLuminance(hexCode) > 0.55;
+  $: whiteContrast = $settings.overlayContrast && wcgaContrast("#fff", hexCode);
+  $: blackContrast = $settings.overlayContrast && wcgaContrast("#000", hexCode);
   $: refColor = $nearestRefColors[hexCode];
 </script>
 
 <div
   class="swatch"
-  class:fillHeight="{fillHeight}"
-  class:isLight="{isLight}"
-  style="background-color:{hexCode}"
+  class:fillHeight
+  class:isLight
+  style="background-color: {hexCode}"
 >
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>

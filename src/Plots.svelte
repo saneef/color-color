@@ -28,7 +28,6 @@
 </style>
 
 <script>
-  import chroma from "chroma-js";
   import ColorsPlot from "./ColorsPlot.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
@@ -38,6 +37,7 @@
     palettes,
     config,
   } from "./store";
+  import { getChroma, getLuminance } from "./lib/colors";
 
   export let gridArea;
 
@@ -50,11 +50,6 @@
   $: currentSwatchId =
     $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
   $: currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
-
-  const getChroma = (hex) => {
-    const [, c] = chroma(hex).lch();
-    return c;
-  };
 </script>
 
 <div class="plots" style="--grid-area: {gridArea};">
@@ -70,7 +65,7 @@
         yDomain="{[0, 1]}"
         data="{currentPalette.map((s) => ({
           x: s.id,
-          y: chroma(s.hex).luminance(),
+          y: getLuminance(s.hex),
           hex: s.hex,
         }))}"
       />
@@ -106,7 +101,7 @@
         yDomain="{[0, 1]}"
         data="{currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
-          y: chroma(s.hex).luminance(),
+          y: getLuminance(s.hex),
           hex: s.hex,
         }))}"
       />

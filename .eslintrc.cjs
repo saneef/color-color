@@ -15,11 +15,11 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: "module",
   },
-  plugins: ["svelte3"],
+  plugins: ["svelte"],
   overrides: [
     {
-      files: ["**/*.svelte"],
-      processor: "svelte3/svelte3",
+      files: ["*.svelte"],
+      parser: "svelte-eslint-parser",
     },
   ],
   rules: {},

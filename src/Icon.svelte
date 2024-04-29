@@ -18,12 +18,13 @@
 
 <script>
   export let icon;
+  export let title = undefined;
   export let size = "base";
 </script>
 
 <svg class="root {size}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-  {#if icon}
-    <title>{icon}</title>
+  {#if title}
+    <title>{title}</title>
   {/if}
   {#if icon === "chevron-small-down"}
     <path d="M6 8L10 12L14 8" stroke="currentColor" fill="none" stroke-width="2"

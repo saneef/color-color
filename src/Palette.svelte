@@ -12,10 +12,6 @@
     flex-grow: 0;
   }
 
-  button [aria-hidden="true"] {
-    @apply inline-flex;
-  }
-
   button:hover,
   button:active,
   button:focus {
@@ -85,17 +81,13 @@
     {#if clonable}
       <button class="button-action" on:click="{onClone}" title="Clone">
         <span class="sr-only">Clone</span>
-        <span aria-hidden="true">
-          <Icon icon="clone" />
-        </span>
+        <Icon icon="clone" title="Clone palette" />
       </button>
     {/if}
     {#if removable}
       <button class="button-action" on:click="{onRemove}" title="Remove">
         <span class="sr-only">Remove</span>
-        <span aria-hidden="true">
-          <Icon icon="x" />
-        </span>
+        <Icon icon="x" title="Remove palette" />
       </button>
     {/if}
   </div>

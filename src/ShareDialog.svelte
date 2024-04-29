@@ -85,8 +85,9 @@
   <div transition:fly="{{ duration: 400, easing: cubicOut }}" class="dialog">
     <div class="header">
       <h2>Share</h2>
-      <button title="Close" on:click="{closeModal}">
-        <Icon icon="x" />
+      <button on:click="{closeModal}">
+        <span class="sr-only">Close</span>
+        <Icon icon="x" title="Close" />
       </button>
     </div>
     <div class="content">

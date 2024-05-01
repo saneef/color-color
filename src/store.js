@@ -254,7 +254,7 @@ export const palettes = derived(
 
         const id = (i + 1) * (steps > 9 ? 10 : 100);
         const _color = createColorByHSL(h, s, l, $settings.colorSpace);
-        const hex = colorToString(_color, "hex");
+        const hex = colorToString(_color, "hex", "srgb");
         const chroma = getChroma(_color);
         const luminance = getLuminance(_color);
         const whiteContrast = contrast(_color, staticColors.white);

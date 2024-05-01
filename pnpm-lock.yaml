@@ -26,9 +26,6 @@ importers:
       bezier-easing:
         specifier: ^2.1.0
         version: 2.1.0
-      chroma-js:
-        specifier: ^2.4.2
-        version: 2.4.2
       colorjs.io:
         specifier: github:color-js/color.js#4a962dd
         version: https://codeload.github.com/color-js/color.js/tar.gz/4a962dd
@@ -44,9 +41,6 @@ importers:
       debounce:
         specifier: ^2.0.0
         version: 2.0.0
-      hsluv:
-        specifier: ^0.1.0
-        version: 0.1.0
       pako:
         specifier: ^2.1.0
         version: 2.1.0
@@ -69,9 +63,6 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.0
         version: 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))
-      '@types/chroma-js':
-        specifier: ^2.4.4
-        version: 2.4.4
       '@vitejs/plugin-legacy':
         specifier: ^5.3.2
         version: 5.3.2(terser@5.31.0)(vite@5.2.10(terser@5.31.0))
@@ -1172,9 +1163,6 @@ packages:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
 
-  '@types/chroma-js@2.4.4':
-    resolution: {integrity: sha512-/DTccpHTaKomqussrn+ciEvfW4k6NAHzNzs/sts1TCqg333qNxOhy8TNIoQCmbGG3Tl8KdEhkGAssb1n3mTXiQ==}
-
   '@types/estree@0.0.39':
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
 
@@ -1464,9 +1452,6 @@ packages:
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
-
-  chroma-js@2.4.2:
-    resolution: {integrity: sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==}
 
   chunkd@2.0.1:
     resolution: {integrity: sha512-7d58XsFmOq0j6el67Ug9mHf9ELUXsQXYJBkyxhH/k+6Ke0qXRnv0kbemx+Twc6fRJ07C49lcbdgm9FL1Ei/6SQ==}
@@ -2159,9 +2144,6 @@ packages:
 
   hsla-regex@1.0.0:
     resolution: {integrity: sha512-7Wn5GMLuHBjZCb2bTmnDOycho0p/7UVaAeqXZGbHrBCl6Yd/xDhQJAXe6Ga9AXJH2I5zY1dEdYw2u1UptnSBJA==}
-
-  hsluv@0.1.0:
-    resolution: {integrity: sha512-ERcanKLAszD2XN3Vh5r5Szkrv9q0oSTudmP0rkiKAGM/3NMc9FLmMZBB7TSqTaXJfSDBOreYTfjezCOYbRKqlw==}
 
   html-minifier-terser@6.1.0:
     resolution: {integrity: sha512-YXxSlJBZTP7RS3tWnQw74ooKa6L9b9i9QYXY21eUEvhZ3u9XLfv6OnFsQq6RxkhHygsaUMvYsZRV5rU/OVNZxw==}
@@ -4912,8 +4894,6 @@ snapshots:
 
   '@trysound/sax@0.2.0': {}
 
-  '@types/chroma-js@2.4.4': {}
-
   '@types/estree@0.0.39': {}
 
   '@types/estree@1.0.5': {}
@@ -5262,8 +5242,6 @@ snapshots:
       fsevents: 2.3.3
 
   chownr@2.0.0: {}
-
-  chroma-js@2.4.2: {}
 
   chunkd@2.0.1: {}
 
@@ -6079,8 +6057,6 @@ snapshots:
   hsl-regex@1.0.0: {}
 
   hsla-regex@1.0.0: {}
-
-  hsluv@0.1.0: {}
 
   html-minifier-terser@6.1.0:
     dependencies:

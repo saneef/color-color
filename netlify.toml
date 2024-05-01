@@ -1,7 +1,7 @@
 [build]
   framework = "#custom"
   publish = "dist/"
-  command = "pnpm run deploy"
+  command = "pnpm run release"
 
 [[redirects]]
   from = "/p.js"

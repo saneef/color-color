@@ -18,6 +18,7 @@ import {
 import { randomInt } from "./lib/math";
 import { jsonToSvg } from "./lib/svg";
 import { getStateFromUrl, getStatefulUrl } from "./lib/url";
+import { to as convert } from "colorjs.io/fn";
 
 const defaults = {
   steps: 9,
@@ -66,6 +67,7 @@ export const settings = writable(
     {
       overlayContrast: false,
       overlayHex: true,
+      overlayRgb: false,
       refColorsRaw: "",
       colorSpace: "okhsl",
     },
@@ -255,6 +257,9 @@ export const palettes = derived(
         const id = (i + 1) * (steps > 9 ? 10 : 100);
         const _color = createColorByHSL(h, s, l, $settings.colorSpace);
         const hex = colorToString(_color, "hex", "srgb");
+        const rgb = convert(_color, "srgb", { inGamut: true }).coords
+          .map(c => Math.floor(c * 255))
+          .join(", ");
         const chroma = getChroma(_color);
         const luminance = getLuminance(_color);
         const whiteContrast = contrast(_color, staticColors.white);
@@ -268,6 +273,7 @@ export const palettes = derived(
           s,
           l,
           hex,
+          rgb,
           chroma,
           luminance,
           whiteContrast,

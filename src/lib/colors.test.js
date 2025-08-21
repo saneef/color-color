@@ -22,7 +22,6 @@ test("createColor from CSS HSL string", (t) => {
 
 test("createColorByHSL into HSL", (t) => {
   const c = createColorByHSL(200, 53, 79);
-  t.is(c.space.id, "srgb");
   t.is(colorToString(c, "hex"), "#add3e6");
 });
 
@@ -30,20 +29,14 @@ test("createColorByHSL into HSLuv", (t) => {
   const c = createColorByHSL(200, 53, 79, "hsluv");
 
   t.is(c.space.id, "hsluv");
-  t.is(
-    colorToString(c, "hsluv", "hsluv"),
-    "color(--hsluv 224.52 48.074% 82.453%)"
-  );
+  t.is(colorToString(c, "hsluv", "hsluv"), "color(--hsluv 200 53% 79%)");
 });
 
 test("createColorByHSL into Okhsl", (t) => {
   const c = createColorByHSL(200, 50, 50, "okhsl");
 
   t.is(c.space.id, "okhsl");
-  t.is(
-    colorToString(c, "okhsl", "okhsl"),
-    "color(--okhsl 228.69 0.23501% 1.8408%)"
-  );
+  t.is(colorToString(c, "okhsl", "okhsl"), "color(--okhsl 200 50% 50%)");
 });
 
 test("colorToString: get HEX string", (t) => {

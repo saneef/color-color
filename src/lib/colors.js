@@ -14,6 +14,8 @@ import {
   serialize,
 } from "colorjs.io/fn";
 
+/** @import  {ColorTypes, Algorithms} from "colorjs.io/fn"  */
+
 ColorSpace.register(sRGB);
 ColorSpace.register(LCH);
 ColorSpace.register(HSL);
@@ -50,8 +52,14 @@ export function getLuminance(color) {
   return luminance(color);
 }
 
-export function contrast(color1, color2, algorithm = "WCAG21") {
-  return getContrast(color1, color2, algorithm);
+/**
+ * @param      {ColorTypes}  background                The color 1
+ * @param      {ColorTypes}  foreground                The color 2
+ * @param      {Algorithms}  [algorithm="WCAG21"]  The algorithm
+ * @return     {number}  { description_of_the_return_value }
+ */
+export function contrast(background, foreground, algorithm = "WCAG21") {
+  return getContrast(background, foreground, { algorithm });
 }
 
 export function distance(color1, color2, colorSpace = "srgb") {

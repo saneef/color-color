@@ -5,3 +5,4 @@
 .eslintcache
 .DS_Store
 .netlify
+.aliases.fish

@@ -100,6 +100,7 @@
           fillHeight
           isLight="{isLightColor(color.luminance)}"
           hexCode="{color.hex}"
+          rgbCode="{color.rgb}"
           whiteContrast="{color.whiteContrast}"
           blackContrast="{color.blackContrast}"
           refColor="{$nearestRefColors[color.hex]}"

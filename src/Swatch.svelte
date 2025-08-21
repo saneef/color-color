@@ -25,13 +25,21 @@
   }
 
   .hex-code,
-  .w-contrast,
-  .b-contrast,
+  .rgb-code,
   .refColor {
-    @apply px-4 font-mono;
+    @apply pl-4 font-mono;
   }
 
-  .hex-code,
+  .refColor {
+    @apply absolute bottom-0 right-0;
+  }
+
+  .w-contrast,
+  .b-contrast {
+    @apply pr-4;
+  }
+
+  .codes,
   .w-contrast,
   .b-contrast {
     @apply relative;
@@ -45,7 +53,7 @@
     @apply text-black;
   }
 
-  .hex-code {
+  .codes {
     @apply mr-auto;
   }
 </style>
@@ -56,6 +64,7 @@
   import CopyOnClick from "./CopyOnClick.svelte";
 
   export let hexCode = "#000";
+  export let rgbCode = "0, 0, 0";
   export let fillHeight = false;
   export let isLight = false;
   export let whiteContrast = 0;
@@ -72,18 +81,27 @@
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>
   </a>
-  {#if $settings.overlayHex}
-    <span class="hex-code">
-      <CopyOnClick text="{hexCode}">{hexCode}</CopyOnClick>
-    </span>
-  {/if}
+  <div class="codes">
+    {#if $settings.overlayHex}
+      <div class="hex-code">
+        <CopyOnClick text="{hexCode}">{hexCode}</CopyOnClick>
+      </div>
+    {/if}
+    {#if $settings.overlayRgb}
+      <div class="rgb-code">
+        <CopyOnClick text="{rgbCode}">{rgbCode}</CopyOnClick>
+      </div>
+    {/if}
+  </div>
   {#if refColor}
     <div class="refColor">
       <TinySwatch color="{refColor}" />
     </div>
   {/if}
-  {#if $settings.overlayContrast}
-    <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
-    <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
-  {/if}
+  <div>
+    {#if $settings.overlayContrast}
+      <div class="b-contrast">{blackContrast.toFixed(2)}b</div>
+      <div class="w-contrast">{whiteContrast.toFixed(2)}w</div>
+    {/if}
+  </div>
 </div>

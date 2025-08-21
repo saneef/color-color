@@ -1,6 +1,6 @@
 <style lang="postcss">
   .tiny-swatch {
-    @apply block w-6 h-6 rounded;
+    @apply block w-6 h-6 m-1 rounded;
     box-shadow: inset 0px -1px 0 rgba(0, 0, 0, 0.35),
       inset 0px 1px 0 0 rgba(255, 255, 255, 0.55);
   }

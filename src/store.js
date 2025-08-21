@@ -218,7 +218,7 @@ const easeSteps = (easeFn, currentStep, totalStep) =>
   easeFn(currentStep / totalStep) * currentStep;
 
 const staticColors = {
-  white: createColorByHSL(0, 1, 1),
+  white: createColorByHSL(0, 0, 100),
   black: createColorByHSL(0, 0, 0),
 };
 
@@ -257,8 +257,8 @@ export const palettes = derived(
         const hex = colorToString(_color, "hex", "srgb");
         const chroma = getChroma(_color);
         const luminance = getLuminance(_color);
-        const whiteContrast = contrast(_color, staticColors.white);
-        const blackContrast = contrast(_color, staticColors.black);
+        const whiteContrast = contrast(staticColors.white, _color);
+        const blackContrast = contrast(staticColors.black, _color);
         const string = colorToString(_color, undefined, $settings.colorSpace);
 
         return {

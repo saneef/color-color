@@ -323,7 +323,11 @@ export const refColors = derived(settings, ($settings) => {
       return {
         _color,
         hex: colorToString(_color, "hex"),
-        string: colorToString(_color, undefined, $settings.colorSpace),
+        string: colorToString(
+          _color,
+          $settings.colorSpace,
+          $settings.colorSpace
+        ),
       };
     });
 });

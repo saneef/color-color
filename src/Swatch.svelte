@@ -1,8 +1,20 @@
 <style lang="postcss">
   .swatch {
-    @apply relative flex flex-wrap justify-end items-start py-4 text-gray-200;
+    @apply relative text-white;
+    @apply p-2;
   }
 
+  .swatch > :not([hidden]) ~ :not([hidden]) {
+    @apply mt-2;
+  }
+
+  .isLight {
+    @apply text-black;
+  }
+
+  .fillHeight {
+    @apply flex-1;
+  }
   .click-area {
     color: inherit;
   }
@@ -16,25 +28,19 @@
     border: 2px solid;
   }
 
-  .isLight {
-    @apply text-gray-800;
+  .meta {
+    @apply flex flex-wrap justify-end items-start;
   }
 
-  .fillHeight {
-    @apply flex-1;
+  .contrast {
+    @apply flex gap-2;
   }
 
   .hex-code,
   .w-contrast,
   .b-contrast,
   .refColor {
-    @apply px-4 font-mono;
-  }
-
-  .hex-code,
-  .w-contrast,
-  .b-contrast {
-    @apply relative;
+    @apply font-mono;
   }
 
   .w-contrast {
@@ -47,6 +53,13 @@
 
   .hex-code {
     @apply mr-auto;
+  }
+
+  .dot {
+    @apply absolute left-2 bottom-2 w-4 h-4 bg-gray-900 rounded-full;
+  }
+  .refColor {
+    @apply absolute right-2 bottom-2;
   }
 </style>
 
@@ -61,6 +74,7 @@
   export let whiteContrast = 0;
   export let blackContrast = 0;
   export let refColor = undefined;
+  export let active = false;
 </script>
 
 <div
@@ -72,18 +86,25 @@
   <a class="click-area" href="#{hexCode}" on:click>
     <span class="sr-only">Select</span>
   </a>
+
   {#if $settings.overlayHex}
     <span class="hex-code">
       <CopyOnClick text="{hexCode}">{hexCode}</CopyOnClick>
     </span>
   {/if}
+
+  {#if $settings.overlayContrast}
+    <div class="contrast">
+      <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
+      <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
+    </div>
+  {/if}
+  {#if active}
+    <span class="dot" aria-hidden></span>
+  {/if}
   {#if refColor}
     <div class="refColor">
       <TinySwatch color="{refColor}" />
     </div>
-  {/if}
-  {#if $settings.overlayContrast}
-    <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
-    <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
   {/if}
 </div>

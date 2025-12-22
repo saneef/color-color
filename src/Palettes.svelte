@@ -69,6 +69,13 @@
     $paletteParams.swatchIndex = swatchIndex;
   }
 
+  function isActiveSwatch(paletteIndex, swatchIndex) {
+    return (
+      $paletteParams.paletteIndex === paletteIndex &&
+      $paletteParams.swatchIndex === swatchIndex
+    );
+  }
+
   const isLightColor = (lum) => lum > 0.55;
 
   $: canAddMoreColors =
@@ -103,6 +110,7 @@
           whiteContrast="{color.whiteContrast}"
           blackContrast="{color.blackContrast}"
           refColor="{$nearestRefColors[color.hex]}"
+          active="{isActiveSwatch(j, i)}"
           on:click="{(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);

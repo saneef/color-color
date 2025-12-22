@@ -67,6 +67,7 @@
   import { settings } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
+  import { isMinimumTextAAContrast } from "./lib/contrast.js";
 
   export let hexCode = "#000";
   export let fillHeight = false;
@@ -95,8 +96,12 @@
 
   {#if $settings.overlayContrast}
     <div class="contrast">
-      <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
-      <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
+      {#if isMinimumTextAAContrast(blackContrast)}
+        <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
+      {/if}
+      {#if isMinimumTextAAContrast(whiteContrast)}
+        <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
+      {/if}
     </div>
   {/if}
   {#if active}

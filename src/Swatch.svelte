@@ -4,10 +4,6 @@
     @apply p-2;
   }
 
-  .swatch > :not([hidden]) ~ :not([hidden]) {
-    @apply mt-2;
-  }
-
   .isLight {
     @apply text-black;
   }
@@ -28,12 +24,8 @@
     border: 2px solid;
   }
 
-  .meta {
-    @apply flex flex-wrap justify-end items-start;
-  }
-
   .contrast {
-    @apply flex gap-2;
+    @apply flex gap-2 mt-1;
   }
 
   .hex-code,
@@ -52,7 +44,8 @@
   }
 
   .hex-code {
-    @apply mr-auto;
+    @apply -ml-2 -mt-2;
+    @apply block;
   }
 
   .dot {

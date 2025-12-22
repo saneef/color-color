@@ -6,7 +6,7 @@
     position: relative;
     user-select: none;
 
-    @apply py-1 px-2 -mx-2 -my-1;
+    @apply py-2 px-3;
   }
 
   .copy-on-click:hover,

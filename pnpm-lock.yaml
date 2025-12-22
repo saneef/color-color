@@ -26,9 +26,6 @@ importers:
       bezier-easing:
         specifier: ^2.1.0
         version: 2.1.0
-      colorjs.io:
-        specifier: github:color-js/color.js#4a962dd
-        version: https://codeload.github.com/color-js/color.js/tar.gz/4a962dd
       cssnano:
         specifier: ^7.0.1
         version: 7.0.1(postcss@8.4.38)
@@ -63,12 +60,18 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.0
         version: 3.1.0(svelte@4.2.15)(vite@5.2.10(terser@5.31.0))
+      '@types/chroma-js':
+        specifier: ^3.1.2
+        version: 3.1.2
       '@vitejs/plugin-legacy':
         specifier: ^5.3.2
         version: 5.3.2(terser@5.31.0)(vite@5.2.10(terser@5.31.0))
       ava:
         specifier: ^6.1.2
         version: 6.1.2
+      colorjs.io:
+        specifier: 0.6.0-beta.2
+        version: 0.6.0-beta.2
       eslint:
         specifier: ^8.19.0
         version: 8.57.0
@@ -1163,6 +1166,9 @@ packages:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
 
+  '@types/chroma-js@3.1.2':
+    resolution: {integrity: sha512-YBTQqArPN8A0niHXCwrO1z5x++a+6l0mLBykncUpr23oIPW7L4h39s6gokdK/bDrPmSh8+TjMmrhBPnyiaWPmQ==}
+
   '@types/estree@0.0.39':
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
 
@@ -1512,9 +1518,8 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  colorjs.io@https://codeload.github.com/color-js/color.js/tar.gz/4a962dd:
-    resolution: {tarball: https://codeload.github.com/color-js/color.js/tar.gz/4a962dd}
-    version: 0.5.0
+  colorjs.io@0.6.0-beta.2:
+    resolution: {integrity: sha512-gRpdfhuaELBkhPlqpN4v5lzqj76weU79mHH2p7oPviaHPQsxuyrge9GQMAhGeUJe5nqsa8rLTCXzLGeepNI8aA==}
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -4894,6 +4899,8 @@ snapshots:
 
   '@trysound/sax@0.2.0': {}
 
+  '@types/chroma-js@3.1.2': {}
+
   '@types/estree@0.0.39': {}
 
   '@types/estree@1.0.5': {}
@@ -5304,7 +5311,7 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  colorjs.io@https://codeload.github.com/color-js/color.js/tar.gz/4a962dd: {}
+  colorjs.io@0.6.0-beta.2: {}
 
   commander@2.20.3: {}
 

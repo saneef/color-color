@@ -70,8 +70,8 @@ importers:
         specifier: ^6.1.2
         version: 6.1.2
       colorjs.io:
-        specifier: 0.6.0-beta.2
-        version: 0.6.0-beta.2
+        specifier: 0.6.0
+        version: 0.6.0
       eslint:
         specifier: ^8.19.0
         version: 8.57.0
@@ -1518,8 +1518,8 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  colorjs.io@0.6.0-beta.2:
-    resolution: {integrity: sha512-gRpdfhuaELBkhPlqpN4v5lzqj76weU79mHH2p7oPviaHPQsxuyrge9GQMAhGeUJe5nqsa8rLTCXzLGeepNI8aA==}
+  colorjs.io@0.6.0:
+    resolution: {integrity: sha512-NgaccdK0ajJ9DPfa5OrIFRfTm4XILboOuqKV6tu9UonREcve+RUilZR3cdo7BbG+xIHFbDv4CxTE4M2vsj7nqw==}
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -5311,7 +5311,7 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  colorjs.io@0.6.0-beta.2: {}
+  colorjs.io@0.6.0: {}
 
   commander@2.20.3: {}
 

@@ -2,13 +2,13 @@
   .swatch {
     @apply flex flex-col;
     @apply relative text-white;
-    @apply px-4 py-2;
+    @apply p-4;
     @apply text-sm;
     @apply font-mono;
   }
 
   .swatch__top {
-    @apply flex mb-auto pb-3;
+    @apply flex mb-auto pb-1;
   }
 
   .isLight {
@@ -47,25 +47,15 @@
     @apply -ml-2 -mb-2;
   }
 
-  .dot {
-    @inline-flex;
-    @apply w-8 h-8 rounded-full;
+  .marker {
     @apply mr-auto;
-  }
-
-  .dot--active {
-    @apply bg-gray-900;
-    outline: 1px solid rgb(255 255 255 / 0.5);
-  }
-
-  .isLight .dot--active {
-    outline: none;
   }
 </style>
 
 <script>
   import { settings } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
+  import SwatchMarker from "./SwatchMarker.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
   import {
     isMinimumTextAAContrast,
@@ -134,8 +124,9 @@
   </a>
 
   <div class="swatch__top">
-    <span class="dot" class:dot--active={active} aria-hidden="true"></span>
-
+    <div class="marker">
+      <SwatchMarker {active} inverted={!isLight}></SwatchMarker>
+    </div>
     {#if refColor}
       <TinySwatch color={refColor} />
     {/if}

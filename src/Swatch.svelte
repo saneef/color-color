@@ -83,7 +83,7 @@
 
   {#if $settings.overlayHex}
     <span class="hex-code">
-      <CopyOnClick text="{hexCode}">{hexCode}</CopyOnClick>
+      <CopyOnClick text={hexCode}>{hexCode}</CopyOnClick>
     </span>
   {/if}
 
@@ -98,11 +98,11 @@
     </div>
   {/if}
   {#if active}
-    <span class="dot" aria-hidden></span>
+    <span class="dot" aria-hidden="true"></span>
   {/if}
   {#if refColor}
     <div class="refColor">
-      <TinySwatch color="{refColor}" />
+      <TinySwatch color={refColor} />
     </div>
   {/if}
 </div>

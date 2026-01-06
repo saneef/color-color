@@ -56,7 +56,7 @@
   import Palette from "./Palette.svelte";
   import Swatch from "./Swatch.svelte";
 
-  export let gridArea;
+  let { gridArea } = $props();
 
   function confirmAndDelete(id) {
     if (window.confirm("Are you sure to delete it?")) {
@@ -78,8 +78,9 @@
 
   const isLightColor = (lum) => lum > 0.55;
 
-  $: canAddMoreColors =
-    $paletteParams.params.length < $paletteParams.maxNumOfPalettes;
+  let canAddMoreColors = $derived(
+    $paletteParams.params.length < $paletteParams.maxNumOfPalettes
+  );
 </script>
 
 <div
@@ -88,33 +89,33 @@
 >
   {#each $palettes as palette, j (j)}
     <Palette
-      active="{$paletteParams.paletteIndex === j}"
-      index="{j + 1}"
-      on:clickActivate="{() => {
+      active={$paletteParams.paletteIndex === j}
+      index={j + 1}
+      on:clickActivate={() => {
         $paletteParams.paletteIndex = j;
-      }}"
-      on:clickRemove="{() => {
+      }}
+      on:clickRemove={() => {
         confirmAndDelete(j);
-      }}"
-      on:clickClone="{() => {
+      }}
+      on:clickClone={() => {
         paletteParams.cloneByIndex(j);
-      }}"
-      clonable="{canAddMoreColors}"
-      removable="{$palettes.length > 1}"
+      }}
+      clonable={canAddMoreColors}
+      removable={$palettes.length > 1}
     >
       {#each palette as color, i (i)}
         <Swatch
           fillHeight
-          isLight="{isLightColor(color.luminance)}"
-          hexCode="{color.hex}"
-          whiteContrast="{color.whiteContrast}"
-          blackContrast="{color.blackContrast}"
-          refColor="{$nearestRefColors[color.hex]}"
-          active="{isActiveSwatch(j, i)}"
-          on:click="{(e) => {
+          isLight={isLightColor(color.luminance)}
+          hexCode={color.hex}
+          whiteContrast={color.whiteContrast}
+          blackContrast={color.blackContrast}
+          refColor={$nearestRefColors[color.hex]}
+          active={isActiveSwatch(j, i)}
+          click={(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);
-          }}"
+          }}
         />
       {/each}
     </Palette>
@@ -123,13 +124,13 @@
     <div class="ids__header">&nbsp;</div>
     {#each $palettes[0] as color, i (i)}
       <button
-        on:click="{() => {
+        onclick={() => {
           $paletteParams.swatchIndex = i;
-        }}"
+        }}
       >
         <span
           class="button-label"
-          class:button-label--active="{$paletteParams.swatchIndex === i}"
+          class:button-label--active={$paletteParams.swatchIndex === i}
         >
           {color.id}
         </span>

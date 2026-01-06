@@ -18,8 +18,8 @@
 
 <ControlGroup title="Color space" titleId="color-space">
   <RadioGroup
-    radios="{radios}"
-    bind:group="{$settings.colorSpace}"
+    {radios}
+    bind:group={$settings.colorSpace}
     labelledby="color-space"
   />
   <p class="note">

@@ -82,10 +82,10 @@
 </script>
 
 <div class="overlay">
-  <div transition:fly="{{ duration: 400, easing: cubicOut }}" class="dialog">
+  <div transition:fly={{ duration: 400, easing: cubicOut }} class="dialog">
     <div class="header">
       <h2>Share</h2>
-      <button on:click="{closeModal}">
+      <button onclick={closeModal}>
         <span class="sr-only">Close</span>
         <Icon icon="x" title="Close" />
       </button>
@@ -95,18 +95,18 @@
         id="share-url"
         label="URL"
         readonly="readonly"
-        value="{$shareState.url}"
-        on:click="{selectText}"
+        value={$shareState.url}
+        click={selectText}
       />
       <TextField
         multiline
         id="share-json"
         label="JSON"
         readonly="readonly"
-        value="{$shareState.json}"
-        on:click="{selectText}"
+        value={$shareState.json}
+        click={selectText}
       />
-      <DownloadAsSvg data="{$shareState.svg}" />
+      <DownloadAsSvg data={$shareState.svg} />
     </div>
   </div>
 </div>

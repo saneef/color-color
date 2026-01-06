@@ -44,11 +44,23 @@
   import { line as generateLine, curveCardinal } from "d3-shape";
   import { linspace } from "./lib/math.js";
 
-  export let data = [];
-  export let title;
-  export let subtitle = null;
-  export let yDomain = [0, 100];
-  export let yTickDivisions = 4;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [data]
+   * @property {any} title
+   * @property {any} [subtitle]
+   * @property {any} [yDomain]
+   * @property {number} [yTickDivisions]
+   */
+
+  /** @type {Props} */
+  let {
+    data = [],
+    title,
+    subtitle = null,
+    yDomain = [0, 100],
+    yTickDivisions = 4,
+  } = $props();
 
   const strokeWidth = 2;
   const r = 6;
@@ -62,16 +74,18 @@
   let innerWidth = width - 2 * margin.y;
   let innerHeight = height - 2 * margin.x;
 
-  $: xSteps = data.map((d) => d.x);
-  $: xScale = scalePoint().domain(xSteps).range([0, innerWidth]);
-  $: yScale = scaleLinear().domain(yDomain).range([innerHeight, 0]);
+  let xSteps = $derived(data.map((d) => d.x));
+  let xScale = $derived(scalePoint().domain(xSteps).range([0, innerWidth]));
+  let yScale = $derived(scaleLinear().domain(yDomain).range([innerHeight, 0]));
 
-  $: yTicks = linspace(yTickDivisions).map((v) => v * yDomain[1]);
-  $: lineGenerator = generateLine()
-    .x((d) => xScale(d.x))
-    .y((d) => yScale(d.y))
-    .curve(curveCardinal);
-  $: pathD = lineGenerator(data);
+  let yTicks = $derived(linspace(yTickDivisions).map((v) => v * yDomain[1]));
+  let lineGenerator = $derived(
+    generateLine()
+      .x((d) => xScale(d.x))
+      .y((d) => yScale(d.y))
+      .curve(curveCardinal)
+  );
+  let pathD = $derived(lineGenerator(data));
 </script>
 
 <div class="root">
@@ -86,11 +100,11 @@
         {height}"
         style="--circ-stroke-width: {strokeWidth}"
       >
-        <g transform="{`translate(${margin.x},${margin.y})`}">
+        <g transform={`translate(${margin.x},${margin.y})`}>
           <g class="axis y-axis">
             {#each yTicks as tick}
               <g transform="translate(0, {yScale(tick)})">
-                <line x1="{0}" x2="{innerWidth}"></line>
+                <line x1={0} x2={innerWidth}></line>
               </g>
             {/each}
           </g>
@@ -98,19 +112,19 @@
           <g class="axis x-axis">
             {#each data as s, i (i)}
               <g transform="translate({xScale(s.x)}, 0)">
-                <line y1="{0}" y2="{innerHeight}"></line>
+                <line y1={0} y2={innerHeight}></line>
               </g>
             {/each}
           </g>
 
-          <path class="line-path" d="{pathD}"></path>
+          <path class="line-path" d={pathD}></path>
           {#each data as s, i (i)}
             <circle
               class="swatch-marker"
-              r="{r}"
-              fill="{s.hex}"
-              cx="{xScale(s.x)}"
-              cy="{yScale(s.y)}"
+              {r}
+              fill={s.hex}
+              cx={xScale(s.x)}
+              cy={yScale(s.y)}
             >
               <title>{s.x} · {title}: {s.y.toFixed(2)}</title>
             </circle>

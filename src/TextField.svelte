@@ -25,33 +25,50 @@
 </style>
 
 <script>
-  export let id;
-  export let label = null;
-  export let legend = null;
-  export let labelledby = null;
-  export let value;
-  export let multiline = false;
+  /**
+   * @typedef {Object} Props
+   * @property {any} id
+   * @property {any} [label]
+   * @property {any} [legend]
+   * @property {any} [labelledby]
+   * @property {any} value
+   * @property {boolean} [multiline]
+   * @property {(event: MouseEvent) => void=} click
+   */
+
+  /** @type {Props & { [key: string]: any }} */
+  let {
+    id,
+    label = null,
+    legend = null,
+    labelledby = null,
+    value = $bindable(),
+    multiline = false,
+    click,
+    ...rest
+  } = $props();
 </script>
 
 <div class="control">
-  {#if label}<label class="label" for="{id}">{label}</label>{/if}
+  {#if label}<label class="label" for={id}>{label}</label>{/if}
   {#if multiline}
     <textarea
       class="input input--textarea"
-      id="{id}"
+      {id}
       bind:value
-      aria-labelledby="{labelledby}"
-      on:click
-      {...$$restProps}></textarea>
+      aria-labelledby={labelledby}
+      onclick={click}
+      {...rest}
+    ></textarea>
   {:else}
     <input
       class="input"
       type="text"
-      id="{id}"
+      {id}
       bind:value
-      aria-labelledby="{labelledby}"
-      on:click
-      {...$$restProps}
+      aria-labelledby={labelledby}
+      onclick={click}
+      {...rest}
     />
   {/if}
   {#if legend}

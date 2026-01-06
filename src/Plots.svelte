@@ -28,6 +28,8 @@
 </style>
 
 <script>
+  import { run } from "svelte/legacy";
+
   import ColorsPlot from "./ColorsPlot.svelte";
   import ControlGroup from "./ControlGroup.svelte";
   import PaletteSelector from "./PaletteSelector.svelte";
@@ -38,17 +40,23 @@
     config,
   } from "./store";
 
-  export let gridArea;
+  let { gridArea } = $props();
 
-  let currentPalette = [];
-  let currentSwatchId = "";
-  let currentSwatchSet = [];
+  let currentPalette = $state([]);
+  let currentSwatchId = $state("");
+  let currentSwatchSet = $state([]);
 
-  $: currentPalette = $palettes[$paletteParams.paletteIndex];
+  run(() => {
+    currentPalette = $palettes[$paletteParams.paletteIndex];
+  });
 
-  $: currentSwatchId =
-    $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
-  $: currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
+  run(() => {
+    currentSwatchId =
+      $swatchesGroupedById[$paletteParams.swatchIndex][0].swatchId;
+  });
+  run(() => {
+    currentSwatchSet = $swatchesGroupedById[$paletteParams.swatchIndex] || [];
+  });
 </script>
 
 <div class="plots" style="--grid-area: {gridArea};">
@@ -61,33 +69,33 @@
       <ColorsPlot
         title="Luminance"
         subtitle="How bright is it?"
-        yDomain="{[0, 1]}"
-        data="{currentPalette.map((s) => ({
+        yDomain={[0, 1]}
+        data={currentPalette.map((s) => ({
           x: s.id,
           y: s.luminance,
           hex: s.hex,
-        }))}"
+        }))}
       />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
         title="Chroma"
         subtitle="How colorful is it?"
-        yDomain="{[0, 150]}"
-        data="{currentPalette.map((s) => ({
+        yDomain={[0, 150]}
+        data={currentPalette.map((s) => ({
           x: s.id,
           y: s.chroma,
           hex: s.hex,
-        }))}"
+        }))}
       />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
         title="Hue"
         subtitle="What color is it?"
-        yDomain="{$config.limits.hue}"
-        yTickDivisions="{6}"
-        data="{currentPalette.map((s) => ({ x: s.id, y: s.h, hex: s.hex }))}"
+        yDomain={$config.limits.hue}
+        yTickDivisions={6}
+        data={currentPalette.map((s) => ({ x: s.id, y: s.h, hex: s.hex }))}
       />
     </ControlGroup>
   </div>
@@ -97,24 +105,24 @@
       <ColorsPlot
         title="Luminance"
         subtitle="How bright is it?"
-        yDomain="{[0, 1]}"
-        data="{currentSwatchSet.map((s) => ({
+        yDomain={[0, 1]}
+        data={currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.luminance,
           hex: s.hex,
-        }))}"
+        }))}
       />
     </ControlGroup>
     <ControlGroup>
       <ColorsPlot
         title="Chroma"
         subtitle="How colorful is it?"
-        yDomain="{[0, 150]}"
-        data="{currentSwatchSet.map((s) => ({
+        yDomain={[0, 150]}
+        data={currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.chroma,
           hex: s.hex,
-        }))}"
+        }))}
       />
     </ControlGroup>
 
@@ -122,13 +130,13 @@
       <ColorsPlot
         title="Hue"
         subtitle="What color is it?"
-        yDomain="{$config.limits.hue}"
-        yTickDivisions="{6}"
-        data="{currentSwatchSet.map((s) => ({
+        yDomain={$config.limits.hue}
+        yTickDivisions={6}
+        data={currentSwatchSet.map((s) => ({
           x: (s.paletteIndex + 1).toString(),
           y: s.h,
           hex: s.hex,
-        }))}"
+        }))}
       />
     </ControlGroup>
   </div>

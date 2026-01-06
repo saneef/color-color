@@ -26,7 +26,7 @@
   <TextField
     labelledby="ref-colors"
     id="ref-colors-input"
-    bind:value="{$settings.refColorsRaw}"
+    bind:value={$settings.refColorsRaw}
     legend="Comma seperated list of hex color codes."
     placeholder="#c0ffee, #be57ed, #7ea,..."
   />
@@ -35,7 +35,7 @@
     <ul class="ref-colors-list">
       {#each $refColors as c, i (i)}
         <li>
-          <TinySwatch color="{c.hex}" />
+          <TinySwatch color={c.hex} />
           <code class="ref-color-code">{c.hex}</code>
           <code class="ref-color-code">{c.string}</code>
         </li>

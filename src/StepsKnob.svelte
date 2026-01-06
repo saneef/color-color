@@ -8,7 +8,7 @@
   <RangeField
     id="steps-range"
     labelledby="steps-title"
-    bind:value="{$paletteParams.steps}"
+    bind:value={$paletteParams.steps}
     min="3"
     max="21"
   />

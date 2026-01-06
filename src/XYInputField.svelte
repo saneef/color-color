@@ -26,11 +26,7 @@
 
 <script>
   import { clamp } from "./lib/math.js";
-  export let id;
-  export let x;
-  export let y;
-  export let onXChange;
-  export let onYChange;
+  let { id, x, y, onXChange, onYChange, children } = $props();
 
   const handleXChange = (e) => {
     if (e.currentTarget.value) {
@@ -48,14 +44,14 @@
 </script>
 
 <div class="root">
-  <slot />
+  {@render children?.()}
   <div class="fieldset">
     <label class="label" for="{id}-x">x</label>
     <input
       id="{id}-x"
       type="number"
-      value="{x}"
-      on:input="{handleXChange}"
+      value={x}
+      oninput={handleXChange}
       step="0.01"
       min="0"
       max="1"
@@ -67,8 +63,8 @@
       id="{id}-y"
       type="number"
       step="0.01"
-      value="{y}"
-      on:input="{handleYChange}"
+      value={y}
+      oninput={handleYChange}
     />
   </div>
 </div>

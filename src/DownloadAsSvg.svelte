@@ -15,16 +15,22 @@
 </style>
 
 <script>
-  export let data = null;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [data]
+   */
+
+  /** @type {Props} */
+  let { data = null } = $props();
 
   let filename = "Palette from ColorColor.svg";
 
-  $: base64EncodedData = data ? window.btoa(data) : null;
+  let base64EncodedData = $derived(data ? window.btoa(data) : null);
 </script>
 
 {#if base64EncodedData}
   <div>
-    <a href="data:image/svg;base64,{base64EncodedData}" download="{filename}">
+    <a href="data:image/svg;base64,{base64EncodedData}" download={filename}>
       Download as SVG
     </a>
   </div>

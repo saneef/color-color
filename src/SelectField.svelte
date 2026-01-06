@@ -30,16 +30,23 @@
 
 <script>
   import Icon from "./Icon.svelte";
-  export let id = "";
-  export let label = "";
-  export let value;
+  /**
+   * @typedef {Object} Props
+   * @property {string} [id]
+   * @property {string} [label]
+   * @property {any} value
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { id = "", label = "", value = $bindable(), children } = $props();
 </script>
 
 <div class="control">
-  <label for="{id}">{label}</label>
+  <label for={id}>{label}</label>
   <div class="wrapper">
-    <select name="" id="{id}" bind:value>
-      <slot />
+    <select name="" {id} bind:value>
+      {@render children?.()}
     </select>
     <div class="icon">
       <Icon icon="chevron-small-down" />

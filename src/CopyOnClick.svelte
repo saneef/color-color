@@ -40,9 +40,9 @@
 
 <script>
   import { copyToClipboard } from "./lib/clipboard";
-  export let text;
+  let { text, children } = $props();
 
-  let lock = false;
+  let lock = $state(false);
 
   const handleClick = () => {
     if (!lock) {
@@ -62,12 +62,12 @@
 
 <button
   class="copy-on-click"
-  class:success="{lock}"
-  on:click="{handleClick}"
+  class:success={lock}
+  onclick={handleClick}
   title="Copy {text}"
 >
   <div class="content">
-    <slot />
+    {@render children?.()}
   </div>
   <span class="success-text">Copied!</span>
 </button>

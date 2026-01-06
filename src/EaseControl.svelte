@@ -8,32 +8,40 @@
 </style>
 
 <script>
+  import { preventDefault } from "svelte/legacy";
+
   import SelectField from "./SelectField.svelte";
   import EaseSelectOptions from "./EaseSelectOptions.svelte";
   import CubicBezierEditor from "./CubicBezierEditor.svelte";
   import { getAliasByBezierEasing } from "./lib/eases.js";
 
-  export let id;
-  export let value;
-  export let label = "Easing";
+  /**
+   * @typedef {Object} Props
+   * @property {any} id
+   * @property {any} value
+   * @property {string} [label]
+   */
+
+  /** @type {Props} */
+  let { id, value = $bindable(), label = "Easing" } = $props();
 
   let alias = getAliasByBezierEasing(value);
   // alias will be empty for 'Custom' curve
-  let showCurve = !alias;
+  let showCurve = $state(!alias);
 </script>
 
-<SelectField id="{id}" label="{label}" bind:value>
-  <EaseSelectOptions value="{value}" />
+<SelectField {id} {label} bind:value>
+  <EaseSelectOptions {value} />
 </SelectField>
 {#if showCurve}
   <div class="editor">
-    <CubicBezierEditor bind:params="{value}" />
+    <CubicBezierEditor bind:params={value} />
   </div>
 {/if}
 <a
   class="toggle"
   href="#toggle-curve"
-  on:click|preventDefault="{() => (showCurve = !showCurve)}"
+  onclick={preventDefault(() => (showCurve = !showCurve))}
   >{#if showCurve}
     ↑ Hide
   {:else}↓ Show{/if}

@@ -31,7 +31,7 @@
 <footer>
   <ul>
     <li class="full">
-      <a href="{getBaseUrl()}">color × color</a> by
+      <a href={getBaseUrl()}>color × color</a> by
       <a href="https://saneef.com">Saneef</a>
     </li>
     <li>

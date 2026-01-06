@@ -81,9 +81,9 @@
   } from "./lib/eases";
   import dragDropMachineCreator from "./machines/draggableMachine";
 
-  export let params;
+  let { params = $bindable() } = $props();
 
-  let plotEl;
+  let plotEl = $state();
 
   const tickDivisions = 4;
   const width = 300;
@@ -95,10 +95,10 @@
   const innerWidth = width - 2 * margin;
   const innerHeight = height - 2 * margin;
 
-  $: x1 = stringToCubicBezierParams(params)[0];
-  $: y1 = stringToCubicBezierParams(params)[1];
-  $: x2 = stringToCubicBezierParams(params)[2];
-  $: y2 = stringToCubicBezierParams(params)[3];
+  let x1 = $derived(stringToCubicBezierParams(params)[0]);
+  let y1 = $derived(stringToCubicBezierParams(params)[1]);
+  let x2 = $derived(stringToCubicBezierParams(params)[2]);
+  let y2 = $derived(stringToCubicBezierParams(params)[3]);
 
   const setParamsFromClientXY = (
     index,
@@ -170,16 +170,18 @@
   const xScale = scaleLinear().range([0, innerWidth]);
   const yScale = scaleLinear().range([innerHeight, 0]);
 
-  $: curvePathD = `M${margin},${innerHeight + margin} C${margin + xScale(x1)},${
-    margin + yScale(y1)
-  } ${margin + xScale(x2)},${margin + yScale(y2)} ${
-    margin + innerWidth
-  },${margin}`;
+  let curvePathD = $derived(
+    `M${margin},${innerHeight + margin} C${margin + xScale(x1)},${
+      margin + yScale(y1)
+    } ${margin + xScale(x2)},${margin + yScale(y2)} ${
+      margin + innerWidth
+    },${margin}`
+  );
 
-  $: controlX1 = margin + xScale(x1);
-  $: controlY1 = margin + yScale(y1);
-  $: controlX2 = margin + xScale(x2);
-  $: controlY2 = margin + yScale(y2);
+  let controlX1 = $derived(margin + xScale(x1));
+  let controlY1 = $derived(margin + yScale(y1));
+  let controlX2 = $derived(margin + xScale(x2));
+  let controlY2 = $derived(margin + yScale(y2));
 
   const onChangeValues = (index, value) => {
     const p = stringToCubicBezierParams(params);
@@ -210,60 +212,63 @@
 </script>
 
 <svelte:body
-  on:keyup="{escapeHandler}"
-  on:mouseup="{service.send}"
-  on:mousemove="{service.send}" />
+  onkeyup={escapeHandler}
+  onmouseup={service.send}
+  onmousemove={service.send}
+/>
 <div
   class="wrapper"
   style="--stroke-width-lg: {strokeWidth}px; --stroke-width: {strokeWidthSmall}px;"
 >
   <div
     class="plot"
-    bind:this="{plotEl}"
-    class:plot--dragging="{$service.value === 'dragging'}"
+    bind:this={plotEl}
+    class:plot--dragging={$service.value === "dragging"}
   >
     <svg viewBox="0 0 {width} {height}" fill="none">
-      <text x="{margin + r}" y="{r + 2 * margin}" class="legend">f(t)</text>
+      <text x={margin + r} y={r + 2 * margin} class="legend">f(t)</text>
       <text
-        x="{innerWidth + margin - 2 * r}"
-        y="{margin + innerHeight - r}"
+        x={innerWidth + margin - 2 * r}
+        y={margin + innerHeight - r}
         class="legend"
       >
         t
       </text>
-      <g transform="{`translate(${margin},${margin})`}">
+      <g transform={`translate(${margin},${margin})`}>
         <g class="axis">
           {#each ticks as tick}
             <g transform="translate(0, {yScale(tick)})">
-              <line x1="{0}" x2="{innerWidth}"></line>
+              <line x1={0} x2={innerWidth}></line>
             </g>
 
             <g transform="translate({xScale(tick)}, 0)">
-              <line y1="{0}" y2="{innerHeight}"></line>
+              <line y1={0} y2={innerHeight}></line>
             </g>
           {/each}
         </g>
       </g>
       <line
         class="control-point-line control-point-line-1"
-        x1="{margin}"
-        y1="{margin + innerHeight}"
-        x2="{controlX1}"
-        y2="{controlY1}"></line>
+        x1={margin}
+        y1={margin + innerHeight}
+        x2={controlX1}
+        y2={controlY1}
+      ></line>
       <line
         class="control-point-line control-point-line-2"
-        x1="{margin + innerWidth}"
-        y1="{margin}"
-        x2="{controlX2}"
-        y2="{controlY2}"></line>
-      <path class="curve" d="{curvePathD}"></path>
+        x1={margin + innerWidth}
+        y1={margin}
+        x2={controlX2}
+        y2={controlY2}
+      ></line>
+      <path class="curve" d={curvePathD}></path>
       <g
         class="control-point control-point--1"
         transform="translate({controlX1},{controlY1})"
       >
         <ControlPoint
-          on:mousedown="{handleMouseDownFn(1)}"
-          size="{r * 2}"
+          mousedown={handleMouseDownFn(1)}
+          size={r * 2}
           variant="circle"
         />
       </g>
@@ -271,17 +276,17 @@
         class="control-point control-point--2"
         transform="translate({controlX2},{controlY2})"
       >
-        <ControlPoint on:mousedown="{handleMouseDownFn(2)}" size="{r * 2}" />
+        <ControlPoint mousedown={handleMouseDownFn(2)} size={r * 2} />
       </g>
     </svg>
   </div>
   <div class="input-set">
     <XYInputField
       id="control-point-1"
-      x="{x1}"
-      onXChange="{(e) => onChangeValues(0, e)}"
-      y="{y1}"
-      onYChange="{(e) => onChangeValues(1, e)}"
+      x={x1}
+      onXChange={(e) => onChangeValues(0, e)}
+      y={y1}
+      onYChange={(e) => onChangeValues(1, e)}
     >
       <div>
         <svg class="control-point-icon" viewBox="0 0 24 24">
@@ -295,10 +300,10 @@
   <div class="input-set">
     <XYInputField
       id="control-point-2"
-      x="{x2}"
-      onXChange="{(e) => onChangeValues(2, e)}"
-      y="{y2}"
-      onYChange="{(e) => onChangeValues(3, e)}"
+      x={x2}
+      onXChange={(e) => onChangeValues(2, e)}
+      y={y2}
+      onYChange={(e) => onChangeValues(3, e)}
     >
       <div>
         <svg

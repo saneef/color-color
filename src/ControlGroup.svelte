@@ -13,14 +13,26 @@
 </style>
 
 <script>
-  export let title = null;
-  export let titleId = null;
-  export let noBorderTop = false;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [title]
+   * @property {any} [titleId]
+   * @property {boolean} [noBorderTop]
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let {
+    title = null,
+    titleId = null,
+    noBorderTop = false,
+    children,
+  } = $props();
 </script>
 
-<div class="control-group" class:control-group__no-border-top="{noBorderTop}">
+<div class="control-group" class:control-group__no-border-top={noBorderTop}>
   {#if title !== null}
-    <h2 id="{titleId}" class="control-group__title">{title}</h2>
+    <h2 id={titleId} class="control-group__title">{title}</h2>
   {/if}
-  <slot />
+  {@render children?.()}
 </div>

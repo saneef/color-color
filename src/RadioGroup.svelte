@@ -9,18 +9,24 @@
 </style>
 
 <script>
-  export let radios = [];
-  export let group = "";
-  export let labelledby = null;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [radios]
+   * @property {string} [group]
+   * @property {any} [labelledby]
+   */
+
+  /** @type {Props} */
+  let { radios = [], group = $bindable(""), labelledby = null } = $props();
 </script>
 
-<div aria-labelledby="{labelledby}">
+<div aria-labelledby={labelledby}>
   {#each radios as radio, i (i)}
-    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <!-- svelte-ignore a11y_label_has_associated_control -->
     <label>
       {radio.label}
       <div class="wrapper">
-        <input type="radio" bind:group value="{radio.value}" />
+        <input type="radio" bind:group value={radio.value} />
       </div>
     </label>
   {/each}

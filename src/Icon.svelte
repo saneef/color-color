@@ -17,9 +17,15 @@
 </style>
 
 <script>
-  export let icon;
-  export let title = undefined;
-  export let size = "base";
+  /**
+   * @typedef {Object} Props
+   * @property {any} icon
+   * @property {any} [title]
+   * @property {string} [size]
+   */
+
+  /** @type {Props} */
+  let { icon, title = undefined, size = "base" } = $props();
 </script>
 
 <svg class="root {size}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -73,13 +73,28 @@
 </style>
 
 <script>
-  export let id;
-  export let label = null;
-  export let labelledby = null;
-  export let value;
-  export let step = 1;
-  export let min;
-  export let max;
+  /**
+   * @typedef {Object} Props
+   * @property {any} id
+   * @property {any} [label]
+   * @property {any} [labelledby]
+   * @property {any} value
+   * @property {number} [step]
+   * @property {any} min
+   * @property {any} max
+   */
+
+  /** @type {Props & { [key: string]: any }} */
+  let {
+    id,
+    label = null,
+    labelledby = null,
+    value = $bindable(),
+    step = 1,
+    min,
+    max,
+    ...rest
+  } = $props();
 
   function isValueValid(num) {
     if (typeof num === "number" && num >= min && num <= max) {
@@ -117,23 +132,23 @@
     return step === 1 ? value : value.toFixed(2);
   };
 
-  $: valueText = formatValue(value);
+  let valueText = $derived(formatValue(value));
 </script>
 
 <div class="root">
-  {#if label}<label class="label" for="{id}">{label}</label>{/if}
+  {#if label}<label class="label" for={id}>{label}</label>{/if}
   <div class="wrapper">
     <div class="input-wrapper">
       <input
         type="range"
-        aria-labelledby="{labelledby}"
+        aria-labelledby={labelledby}
         class="input"
         {id}
         {step}
         bind:value
         {min}
         {max}
-        {...$$restProps}
+        {...rest}
       />
     </div>
     <div class="value">
@@ -142,9 +157,9 @@
         type="text"
         inputmode="numeric"
         pattern="\d*"
-        value="{valueText}"
-        on:keyup="{onKeyEvent}"
-        on:blur="{handleTextValue}"
+        value={valueText}
+        onkeyup={onKeyEvent}
+        onblur={handleTextValue}
       />
     </div>
   </div>

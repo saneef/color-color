@@ -5,6 +5,6 @@
 </script>
 
 <ControlGroup title="Overlay">
-  <Checkbox label="HEX code" bind:checked="{$settings.overlayHex}" />
-  <Checkbox label="WCAG Contrast" bind:checked="{$settings.overlayContrast}" />
+  <Checkbox label="HEX code" bind:checked={$settings.overlayHex} />
+  <Checkbox label="WCAG Contrast" bind:checked={$settings.overlayContrast} />
 </ControlGroup>

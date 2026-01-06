@@ -33,9 +33,13 @@
 </style>
 
 <script>
+  import { run, preventDefault } from "svelte/legacy";
+
   import { paletteParams } from "./store";
-  let paletteIndex = [];
-  $: paletteIndex = $paletteParams.params.map((_, i) => i);
+  let paletteIndex = $state([]);
+  run(() => {
+    paletteIndex = $paletteParams.params.map((_, i) => i);
+  });
 </script>
 
 <ul class="index">
@@ -43,11 +47,11 @@
     <li>
       <a
         class="index-marker"
-        class:index-marker--active="{$paletteParams.paletteIndex === i}"
+        class:index-marker--active={$paletteParams.paletteIndex === i}
         href="#{i + 1}"
-        on:click|preventDefault="{() => {
+        onclick={preventDefault(() => {
           $paletteParams.paletteIndex = i;
-        }}"
+        })}
       >
         {i + 1}
       </a>

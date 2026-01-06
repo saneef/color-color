@@ -66,10 +66,11 @@
 
 <script>
   import { paletteParams, shareDialog } from "./store";
-  export let gridArea;
+  let { gridArea } = $props();
 
-  $: canAddMoreColors =
-    $paletteParams.params.length < $paletteParams.maxNumOfPalettes;
+  let canAddMoreColors = $derived(
+    $paletteParams.params.length < $paletteParams.maxNumOfPalettes
+  );
 </script>
 
 <header class="header" style="--grid-area:{gridArea};">
@@ -78,19 +79,19 @@
   </h1>
   <div class="button-set">
     <button
-      class:button--hidden="{$shareDialog.open}"
-      on:click="{(e) => {
+      class:button--hidden={$shareDialog.open}
+      onclick={(e) => {
         const target = e.currentTarget;
         const rect = target.getBoundingClientRect();
         shareDialog.openWithTriggerRect(rect);
-      }}"
+      }}
     >
       Share
     </button>
     <button
-      on:click="{() => paletteParams.add()}"
-      disabled="{!canAddMoreColors}"
-      title="{!canAddMoreColors ? 'Supports only 6 sets at a time' : null}"
+      onclick={() => paletteParams.add()}
+      disabled={!canAddMoreColors}
+      title={!canAddMoreColors ? "Supports only 6 sets at a time" : null}
     >
       Add colors
     </button>

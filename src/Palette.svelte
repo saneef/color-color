@@ -48,10 +48,23 @@
   import { createEventDispatcher } from "svelte";
   import Icon from "./Icon.svelte";
 
-  export let active = false;
-  export let removable = true;
-  export let clonable = true;
-  export let index;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [active]
+   * @property {boolean} [removable]
+   * @property {boolean} [clonable]
+   * @property {any} index
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let {
+    active = false,
+    removable = true,
+    clonable = true,
+    index,
+    children,
+  } = $props();
 
   const dispatch = createEventDispatcher();
 
@@ -73,23 +86,23 @@
     <button
       class="button-activate"
       class:active
-      on:click="{onActivate}"
-      title="{active ? 'Active' : 'Activate'}"
+      onclick={onActivate}
+      title={active ? "Active" : "Activate"}
     >
       <span class="status">{index}</span>
     </button>
     {#if clonable}
-      <button class="button-action" on:click="{onClone}" title="Clone">
+      <button class="button-action" onclick={onClone} title="Clone">
         <span class="sr-only">Clone</span>
         <Icon icon="clone" title="Clone palette" />
       </button>
     {/if}
     {#if removable}
-      <button class="button-action" on:click="{onRemove}" title="Remove">
+      <button class="button-action" onclick={onRemove} title="Remove">
         <span class="sr-only">Remove</span>
         <Icon icon="x" title="Remove palette" />
       </button>
     {/if}
   </div>
-  <slot />
+  {@render children?.()}
 </div>

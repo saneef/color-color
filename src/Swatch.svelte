@@ -62,13 +62,29 @@
   import CopyOnClick from "./CopyOnClick.svelte";
   import { isMinimumTextAAContrast } from "./lib/contrast.js";
 
-  export let hexCode = "#000";
-  export let fillHeight = false;
-  export let isLight = false;
-  export let whiteContrast = 0;
-  export let blackContrast = 0;
-  export let refColor = undefined;
-  export let active = false;
+  /**
+   * @typedef {Object} Props
+   * @property {string} [hexCode]
+   * @property {boolean} [fillHeight]
+   * @property {boolean} [isLight]
+   * @property {number} [whiteContrast]
+   * @property {number} [blackContrast]
+   * @property {any} [refColor]
+   * @property {boolean} [active]
+   * @property {(event: MouseEvent) => void} click
+   */
+
+  /** @type {Props} */
+  let {
+    hexCode = "#000",
+    fillHeight = false,
+    isLight = false,
+    whiteContrast = 0,
+    blackContrast = 0,
+    refColor = undefined,
+    active = false,
+    click,
+  } = $props();
 </script>
 
 <div
@@ -77,7 +93,7 @@
   class:isLight
   style="background-color: {hexCode}"
 >
-  <a class="click-area" href="#{hexCode}" on:click>
+  <a class="click-area" href="#{hexCode}" onclick={click}>
     <span class="sr-only">Select</span>
   </a>
 

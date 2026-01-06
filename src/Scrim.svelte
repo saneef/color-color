@@ -12,6 +12,6 @@
 </script>
 
 <div
-  transition:fade="{{ delay: 0, duration: 400, easing: expoOut }}"
+  transition:fade={{ delay: 0, duration: 400, easing: expoOut }}
   class="scrim"
 ></div>

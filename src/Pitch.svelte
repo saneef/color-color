@@ -36,7 +36,7 @@
 </style>
 
 <script>
-  export let gridArea;
+  let { gridArea } = $props();
 </script>
 
 <div class="pitch" style="--grid-area: {gridArea};">

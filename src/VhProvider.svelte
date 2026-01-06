@@ -1,8 +1,10 @@
 <script>
+  import { run } from "svelte/legacy";
+
   // Based on https://www.bram.us/2020/05/06/100vh-in-safari-on-ios/
   import debounce from "debounce";
 
-  let vh;
+  let vh = $state();
 
   function setVhOnDocument(vh) {
     if (vh) {
@@ -16,7 +18,9 @@
     vh = window.innerHeight * 0.01;
   }, 200);
 
-  $: setVhOnDocument(vh);
+  run(() => {
+    setVhOnDocument(vh);
+  });
 </script>
 
-<svelte:window on:load="{getVh}" on:resize="{getVh}" />
+<svelte:window onload={getVh} onresize={getVh} />

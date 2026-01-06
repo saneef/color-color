@@ -236,7 +236,7 @@
       </text>
       <g transform={`translate(${margin},${margin})`}>
         <g class="axis">
-          {#each ticks as tick}
+          {#each ticks as tick, i (i)}
             <g transform="translate(0, {yScale(tick)})">
               <line x1={0} x2={innerWidth}></line>
             </g>

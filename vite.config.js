@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 
-import siteInfo from "./site-info.js";
+import siteInfo from "./src/lib/site-info.js";
 
 export default defineConfig({
   build: {
@@ -11,7 +11,9 @@ export default defineConfig({
   },
   plugins: [
     createHtmlPlugin({
-      inject: { data: { ...siteInfo } },
+      inject: {
+        data: { ...siteInfo, domain: process.env.PLAUSIBLE_DOMAINS || "" },
+      },
     }),
     svelte(),
     VitePWA({

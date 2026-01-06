@@ -47,12 +47,7 @@
 </style>
 
 <script>
-  import {
-    paletteParams,
-    palettes,
-    nearestRefColors,
-    refColors,
-  } from "./store";
+  import { paletteParams, palettes, nearestRefColors } from "./store";
   import Palette from "./Palette.svelte";
   import Swatch from "./Swatch.svelte";
 

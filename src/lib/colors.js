@@ -44,7 +44,7 @@ export function colorToString(color, format = "hex", colorSpace = "srgb") {
 
 export function getChroma(color) {
   const _c = convert(color, "lch");
-  const [_, c] = _c.coords;
+  const [, c] = _c.coords;
   return c;
 }
 

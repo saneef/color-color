@@ -102,7 +102,7 @@
       >
         <g transform={`translate(${margin.x},${margin.y})`}>
           <g class="axis y-axis">
-            {#each yTicks as tick}
+            {#each yTicks as tick, i (i)}
               <g transform="translate(0, {yScale(tick)})">
                 <line x1={0} x2={innerWidth}></line>
               </g>

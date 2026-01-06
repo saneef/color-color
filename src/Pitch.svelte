@@ -36,11 +36,12 @@
 </style>
 
 <script>
+  import siteInfo from "./lib/site-info";
   let { gridArea } = $props();
 </script>
 
 <div class="pitch" style="--grid-area: {gridArea};">
-  <h2>Support color × color</h2>
+  <h2>Support {siteInfo.title}</h2>
   <p>
     All contribution helps with hosting and other operational costs of this
     valuable tool.

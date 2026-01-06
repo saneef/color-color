@@ -26,12 +26,13 @@
 <script>
   import Icon from "./Icon.svelte";
   import { getBaseUrl } from "./lib/url";
+  import siteInfo from "./lib/site-info";
 </script>
 
 <footer>
   <ul>
     <li class="full">
-      <a href={getBaseUrl()}>color × color</a> by
+      <a href={getBaseUrl()}>{siteInfo.title}</a> by
       <a href="https://saneef.com">Saneef</a>
     </li>
     <li>

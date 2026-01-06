@@ -43,7 +43,7 @@
 </script>
 
 <ul class="index">
-  {#each paletteIndex as pi, i (i)}
+  {#each paletteIndex as i (i)}
     <li>
       <a
         class="index-marker"

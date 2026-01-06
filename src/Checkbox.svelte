@@ -12,7 +12,6 @@
   let { checked = $bindable(), label } = $props();
 </script>
 
-<!-- svelte-ignore a11y_label_has_associated_control -->
 <label>
   {label}
   <div class="wrapper"><input type="checkbox" bind:checked /></div>

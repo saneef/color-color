@@ -1,8 +1,8 @@
-import pako from "pako";
 import {
-  encodeUrl as base64Encode,
   decode as base64Decode,
+  encodeUrl as base64Encode,
 } from "@borderless/base64";
+import pako from "pako";
 
 export const getBaseUrl = () => {
   const getUrl = window.location;
@@ -42,7 +42,7 @@ const deserializeState = (string) => {
     const binaryData = base64Decode(string);
 
     data = pako.inflate(binaryData, { to: "string" });
-  } catch (e) {
+  } catch {
     console.log("Unable extract state from URL");
   }
 

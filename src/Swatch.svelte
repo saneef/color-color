@@ -60,6 +60,11 @@
 
   .dot--active {
     @apply bg-gray-900;
+    outline: 1px solid rgb(255 255 255 / 0.5);
+  }
+
+  .isLight .dot--active {
+    outline: none;
   }
 </style>
 

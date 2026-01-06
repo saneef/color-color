@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@borderless/base64": "^1.0.1",
-    "@sentry/browser": "^7.112.2",
-    "@sentry/cli": "^2.31.0",
+    "@sentry/browser": "^10.32.1",
+    "@sentry/cli": "^3.0.1",
     "@xstate/fsm": "^2.1.0",
     "autoprefixer": "^10.4.19",
     "bezier-easing": "^2.1.0",

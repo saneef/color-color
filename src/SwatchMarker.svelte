@@ -1,7 +1,7 @@
 <style lang="postcss">
   .marker {
     @apply inline-flex;
-    @apply w-8 h-8 rounded-full;
+    @apply w-7 h-7 rounded-full;
     @apply border-2 border-transparent;
   }
 

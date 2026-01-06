@@ -68,6 +68,7 @@ export const settings = writable(
       overlayHex: true,
       refColorsRaw: "",
       colorSpace: "okhsl",
+      contrastWith: "active",
     },
     urlState.settings
   )
@@ -257,8 +258,6 @@ export const palettes = derived(
         const hex = colorToString(_color, "hex", "srgb");
         const chroma = getChroma(_color);
         const luminance = getLuminance(_color);
-        const whiteContrast = contrast(staticColors.white, _color);
-        const blackContrast = contrast(staticColors.black, _color);
         const string = colorToString(_color, undefined, $settings.colorSpace);
 
         return {
@@ -270,8 +269,6 @@ export const palettes = derived(
           hex,
           chroma,
           luminance,
-          whiteContrast,
-          blackContrast,
           string,
         };
       });
@@ -362,6 +359,27 @@ export const nearestRefColors = derived(
     }, {});
 
     return matchedSwatches;
+  }
+);
+
+export const paletteContrasts = derived(
+  [paletteParams, palettes],
+  ([$paletteParams, $palettes]) => {
+    const { paletteIndex, swatchIndex } = $paletteParams;
+    const selectedSwatch = $palettes[paletteIndex][swatchIndex];
+
+    return $palettes.map((swatches) =>
+      swatches.map(({ _color }) => {
+        const white = contrast(staticColors.white, _color);
+        const black = contrast(staticColors.black, _color);
+        const active = contrast(selectedSwatch._color, _color);
+        return [
+          ["white", "white", white],
+          ["black", "black", black],
+          ["active", selectedSwatch.hex, active],
+        ];
+      })
+    );
   }
 );
 

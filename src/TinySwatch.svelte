@@ -7,7 +7,7 @@
   }
 
   .tiny-swatch--small {
-    @apply w-4 h-4;
+    @apply w-5 h-5;
   }
 </style>
 

@@ -47,7 +47,12 @@
 </style>
 
 <script>
-  import { paletteParams, palettes, nearestRefColors } from "./store";
+  import {
+    paletteParams,
+    palettes,
+    nearestRefColors,
+    paletteContrasts,
+  } from "./store";
   import Palette from "./Palette.svelte";
   import Swatch from "./Swatch.svelte";
 
@@ -103,14 +108,13 @@
           fillHeight
           isLight={isLightColor(color.luminance)}
           hexCode={color.hex}
-          whiteContrast={color.whiteContrast}
-          blackContrast={color.blackContrast}
           refColor={$nearestRefColors[color.hex]}
           active={isActiveSwatch(j, i)}
           click={(e) => {
             e.preventDefault();
             setCurrentIndices(j, i);
           }}
+          contrasts={$paletteContrasts[j][i]}
         />
       {/each}
     </Palette>

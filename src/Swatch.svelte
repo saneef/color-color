@@ -33,18 +33,13 @@
   }
 
   .contrasts {
-    @apply inline-flex gap-3 items-center;
+    @apply inline-flex gap-4 items-center;
   }
   .contrast {
-    @apply inline-flex gap-1 items-center;
+    @apply inline-flex gap-2 items-center;
   }
-
-  .contrast--white {
-    @apply text-white;
-  }
-
-  .contrast--black {
-    @apply text-black;
+  .contrast--bad .contrast__value {
+    @apply line-through;
   }
 
   .hex-code {
@@ -82,11 +77,10 @@
    * @property {string} [hexCode]
    * @property {boolean} [fillHeight]
    * @property {boolean} [isLight]
-   * @property {number} [whiteContrast]
-   * @property {number} [blackContrast]
    * @property {any} [refColor]
    * @property {boolean} [active]
    * @property {(event: MouseEvent) => void} click
+   * @property {Array<[string, string, number]>} contrasts
    */
 
   /** @type {Props} */
@@ -94,28 +88,37 @@
     hexCode = "#000",
     fillHeight = false,
     isLight = false,
-    whiteContrast = 0,
-    blackContrast = 0,
     refColor = undefined,
     active = false,
     click,
+    contrasts,
   } = $props();
 
-  const contrasts = $derived.by(
-    /** @type () => [[string, number]] */
+  const contrastsSwatches = $derived.by(
+    /** @type () => Array<[string, number, string]> */
     () => {
       if (!$settings.overlayContrast) return [];
 
-      return [
-        ["white", whiteContrast],
-        ["black", blackContrast],
-      ]
-        .filter(([, contrast]) => isMinimumTextAAContrast(contrast))
-        .map(([c, contrast]) => [
-          c,
-          contrast,
-          isMinimumTextAAAContrast(contrast),
-        ]);
+      const filteredContrasts = contrasts.filter(([key, , contrast]) => {
+        if ($settings.contrastWith === "bw") {
+          return (
+            ["black", "white"].includes(key) &&
+            isMinimumTextAAContrast(contrast)
+          );
+        }
+
+        return !["black", "white"].includes(key);
+      });
+
+      return filteredContrasts.map(([, hex, contrast]) => [
+        /** @type {string} */ (hex),
+        /** @type {number} */ (contrast),
+        isMinimumTextAAAContrast(contrast)
+          ? "AAA"
+          : isMinimumTextAAContrast(contrast)
+            ? "AA"
+            : undefined,
+      ]);
     }
   );
 </script>
@@ -140,10 +143,16 @@
 
   {#if $settings.overlayContrast}
     <div class="contrasts">
-      {#each contrasts as [color, contrast, isAAA], index (index)}
-        <span class={["contrast", `contrast--${color}`]}>
+      {#each contrastsSwatches as [color, contrast, grade], index (index)}
+        <span
+          class="contrast"
+          class:contrast--bad={grade === undefined}
+          style:color
+        >
           <TinySwatch {color} size="small" />
-          {`${contrast.toFixed(2)}${isAAA ? "AAA" : ""}`}
+          <span class="contrast__value">
+            {`${contrast.toFixed(2)} ${grade != undefined ? grade : ""}`}
+          </span>
         </span>
       {/each}
     </div>

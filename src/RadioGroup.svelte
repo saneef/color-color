@@ -13,11 +13,17 @@
    * @typedef {Object} Props
    * @property {any} [radios]
    * @property {string} [group]
+   * @property {boolean} [disabled]
    * @property {any} [labelledby]
    */
 
   /** @type {Props} */
-  let { radios = [], group = $bindable(""), labelledby = null } = $props();
+  let {
+    radios = [],
+    group = $bindable(""),
+    disabled = false,
+    labelledby = null,
+  } = $props();
 </script>
 
 <div aria-labelledby={labelledby}>
@@ -25,7 +31,7 @@
     <label>
       {radio.label}
       <div class="wrapper">
-        <input type="radio" bind:group value={radio.value} />
+        <input type="radio" bind:group value={radio.value} {disabled} />
       </div>
     </label>
   {/each}

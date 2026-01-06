@@ -35,7 +35,7 @@
     <ul class="ref-colors-list">
       {#each $refColors as c, i (i)}
         <li>
-          <TinySwatch color={c.hex} />
+          <TinySwatch color={c.hex} size="small" />
           <code class="ref-color-code">{c.hex}</code>
           <code class="ref-color-code">{c.string}</code>
         </li>

@@ -1,7 +1,14 @@
 <style lang="postcss">
   .swatch {
+    @apply flex flex-col;
     @apply relative text-white;
     @apply p-2;
+    @apply text-sm;
+    @apply font-mono;
+  }
+
+  .swatch__top {
+    @apply flex mb-auto pb-3;
   }
 
   .isLight {
@@ -11,6 +18,7 @@
   .fillHeight {
     @apply flex-1;
   }
+
   .click-area {
     color: inherit;
   }
@@ -24,35 +32,33 @@
     border: 2px solid;
   }
 
+  .contrasts {
+    @apply inline-flex gap-3 items-center;
+  }
   .contrast {
-    @apply flex gap-2 mt-1;
+    @apply inline-flex gap-1 items-center;
   }
 
-  .hex-code,
-  .w-contrast,
-  .b-contrast,
-  .refColor {
-    @apply font-mono;
-  }
-
-  .w-contrast {
+  .contrast--white {
     @apply text-white;
   }
 
-  .b-contrast {
+  .contrast--black {
     @apply text-black;
   }
 
   .hex-code {
-    @apply -ml-2 -mt-2;
     @apply block;
+    @apply -ml-2 -mb-2;
   }
 
   .dot {
-    @apply absolute left-2 bottom-2 w-4 h-4 bg-gray-900 rounded-full;
+    @apply w-6 h-6 rounded-full;
+    @apply mr-auto;
   }
-  .refColor {
-    @apply absolute right-2 bottom-2;
+
+  .dot--active {
+    @apply bg-gray-900;
   }
 </style>
 
@@ -60,7 +66,10 @@
   import { settings } from "./store.js";
   import TinySwatch from "./TinySwatch.svelte";
   import CopyOnClick from "./CopyOnClick.svelte";
-  import { isMinimumTextAAContrast } from "./lib/contrast.js";
+  import {
+    isMinimumTextAAContrast,
+    isMinimumTextAAAContrast,
+  } from "./lib/contrast.js";
 
   /**
    * @typedef {Object} Props
@@ -85,40 +94,60 @@
     active = false,
     click,
   } = $props();
+
+  const contrasts = $derived.by(
+    /** @type () => [[string, number]] */
+    () => {
+      if (!$settings.overlayContrast) return [];
+
+      return [
+        ["white", whiteContrast],
+        ["black", blackContrast],
+      ]
+        .filter(([, contrast]) => isMinimumTextAAContrast(contrast))
+        .map(([c, contrast]) => [
+          c,
+          contrast,
+          isMinimumTextAAAContrast(contrast),
+        ]);
+    }
+  );
 </script>
 
 <div
   class="swatch"
   class:fillHeight
   class:isLight
-  style="background-color: {hexCode}"
+  style:background-color={hexCode}
 >
   <a class="click-area" href="#{hexCode}" onclick={click}>
     <span class="sr-only">Select</span>
   </a>
 
+  <div class="swatch__top">
+    <span class="dot" class:dot--active={active} aria-hidden="true"></span>
+
+    {#if refColor}
+      <div class="refColor">
+        <TinySwatch color={refColor} />
+      </div>
+    {/if}
+  </div>
+
+  {#if $settings.overlayContrast}
+    <div class="contrasts">
+      {#each contrasts as [color, contrast, isAAA], index (index)}
+        <span class={["contrast", `contrast--${color}`]}>
+          <TinySwatch {color} size="small" />
+          {`${contrast.toFixed(2)}${isAAA ? "AAA" : ""}`}
+        </span>
+      {/each}
+    </div>
+  {/if}
+
   {#if $settings.overlayHex}
     <span class="hex-code">
       <CopyOnClick text={hexCode}>{hexCode}</CopyOnClick>
     </span>
-  {/if}
-
-  {#if $settings.overlayContrast}
-    <div class="contrast">
-      {#if isMinimumTextAAContrast(blackContrast)}
-        <span class="b-contrast">{blackContrast.toFixed(2)}b</span>
-      {/if}
-      {#if isMinimumTextAAContrast(whiteContrast)}
-        <span class="w-contrast">{whiteContrast.toFixed(2)}w</span>
-      {/if}
-    </div>
-  {/if}
-  {#if active}
-    <span class="dot" aria-hidden="true"></span>
-  {/if}
-  {#if refColor}
-    <div class="refColor">
-      <TinySwatch color={refColor} />
-    </div>
   {/if}
 </div>

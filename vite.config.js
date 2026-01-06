@@ -1,5 +1,4 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import legacy from "@vitejs/plugin-legacy";
 import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
@@ -23,9 +22,6 @@ export default defineConfig({
         background_color: "#e5e7eb",
         theme_color: "#111827",
       },
-    }),
-    legacy({
-      targets: ["defaults", "not IE 11"],
     }),
   ],
 });

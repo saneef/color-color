@@ -2,7 +2,7 @@
   .swatch {
     @apply flex flex-col;
     @apply relative text-white;
-    @apply p-2;
+    @apply px-4 py-2;
     @apply text-sm;
     @apply font-mono;
   }
@@ -53,7 +53,8 @@
   }
 
   .dot {
-    @apply w-6 h-6 rounded-full;
+    @inline-flex;
+    @apply w-8 h-8 rounded-full;
     @apply mr-auto;
   }
 
@@ -128,9 +129,7 @@
     <span class="dot" class:dot--active={active} aria-hidden="true"></span>
 
     {#if refColor}
-      <div class="refColor">
-        <TinySwatch color={refColor} />
-      </div>
+      <TinySwatch color={refColor} />
     {/if}
   </div>
 

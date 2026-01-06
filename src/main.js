@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/browser";
-import App from "./App.svelte";
 import { registerSW } from "virtual:pwa-register";
+import App from "./App.svelte";
 
 if (process.env.NODE_ENV === "production" && process.env.SENTRY_DSN) {
   Sentry.init({

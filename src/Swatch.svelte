@@ -8,7 +8,7 @@
   }
 
   .swatch__top {
-    @apply flex mb-auto pb-1;
+    @apply flex mb-auto;
   }
 
   .isLight {
@@ -33,6 +33,7 @@
   }
 
   .contrasts {
+    @apply mt-1;
     @apply inline-flex gap-4 items-center;
   }
   .contrast {
@@ -48,7 +49,7 @@
   }
 
   .marker {
-    @apply mr-auto;
+    @apply flex mr-auto;
   }
 </style>
 
@@ -142,7 +143,7 @@
         >
           <TinySwatch {color} size="small" />
           <span class="contrast__value">
-            {`${contrast.toFixed(2)} ${grade != undefined ? grade : ""}`}
+            {`${contrast.toFixed(2)} ${grade ?? ""}`}
           </span>
         </span>
       {/each}

@@ -8,6 +8,7 @@ const dragDropMachineCreator = (options) =>
       states: {
         idle: {
           on: {
+            // touchdown and mousedown is handled by a proxy function
             mousedown: {
               actions: "assignPoint",
               target: "dragging",
@@ -15,18 +16,17 @@ const dragDropMachineCreator = (options) =>
           },
         },
         dragging: {
-          // after: {
-          //   TIMEOUT: {
-          //     target: "idle",
-          //     actions: "resetPosition",
-          //   },
-          // },
           on: {
             mousemove: {
               actions: "assignDelta",
-              internal: false,
+            },
+            touchmove: {
+              actions: "assignDelta",
             },
             mouseup: {
+              target: "idle",
+            },
+            touchend: {
               target: "idle",
             },
             "keyup.escape": {

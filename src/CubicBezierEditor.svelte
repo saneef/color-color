@@ -4,6 +4,8 @@
     @apply grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr max-content;
+    touch-action: none;
+    user-select: none;
   }
 
   .plot {
@@ -130,8 +132,8 @@
     actions: {
       assignPoint: assign({
         controlIndex: (context, event) => event.controlIndex,
-        px: (context, event) => event.clientX,
-        py: (context, event) => event.clientY,
+        px: (context, event) => (event.touches?.[0] ?? event).clientX,
+        py: (context, event) => (event.touches?.[0] ?? event).clientY,
         wrapperX: () => plotEl.getBoundingClientRect().left,
         wrapperY: () => plotEl.getBoundingClientRect().top,
         wrapperWidth: () => plotEl.getBoundingClientRect().width,
@@ -151,17 +153,14 @@
       assignDelta: (context, event) => {
         setParamsFromClientXY(
           context.controlIndex,
-          event.clientX,
-          event.clientY,
+          (event.touches?.[0] ?? event).clientX,
+          (event.touches?.[0] ?? event).clientY,
           context.wrapperX,
           context.wrapperY,
           context.wrapperWidth,
           context.wrapperHeight
         );
       },
-    },
-    delays: {
-      TIMEOUT: 2000,
     },
   });
   const service = interpret(draggableMachine).start();
@@ -200,10 +199,13 @@
 
     const target = e.currentTarget;
     const { width, height } = target.getBoundingClientRect();
+
+    const posObject = e.type === "touchstart" ? e.touches[0] : e;
+
     service.send({
       type: "mousedown",
-      clientX: e.clientX,
-      clientY: e.clientY,
+      clientX: posObject.clientX,
+      clientY: posObject.clientY,
       clientWidth: width,
       clientHeight: height,
       controlIndex: index,
@@ -215,6 +217,8 @@
   onkeyup={escapeHandler}
   onmouseup={service.send}
   onmousemove={service.send}
+  ontouchmove={service.send}
+  ontouchend={service.send}
 />
 <div
   class="wrapper"

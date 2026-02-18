@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     createHtmlPlugin({
       inject: {
-        data: { ...siteInfo, domain: process.env.PLAUSIBLE_DOMAINS || "" },
+        data: { ...siteInfo },
       },
     }),
     svelte(),
